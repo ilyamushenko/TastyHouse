@@ -42,12 +42,12 @@ INSERT INTO "TypeDish" (title) VALUES ('Закуски'); /* 2 */
 
 /* Вставка блюд */
 /* Ингредиенты, рецепт, масса, время - поставил кавычки как заглушку, можете вставлять туда что вам нужно */
-INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Цезарь с курицей', 250.9, '', '', '', 1, '');
-INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Салат с креветками', 200, '', '', '', 1, '');
-INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Салат из авокадо с семгой', 100, '', '', '', 1, '');
-INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Волованы с салатом из тунца', 350.71, '', '', '', 2, '');
-INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Свекольная закуска с сельдью', 280.7, '', '', '', 2, '');
-INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Маринованный сыр фета с оливками', 345.8, '', '', '', 2, '');
+INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Цезарь с курицей', 250.9, '', '', '', 1, '40');
+INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Салат с креветками', 200, '', '', '', 1, '50');
+INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Салат из авокадо с семгой', 100, '', '', '', 1, '30');
+INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Волованы с салатом из тунца', 350.71, '', '', '', 2, '20');
+INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Свекольная закуска с сельдью', 280.7, '', '', '', 2, '10');
+INSERT INTO "Dishes" (name, price, ingredient, recipe, mass, type_dish, preparing_time) VALUES ('Маринованный сыр фета с оливками', 345.8, '', '', '', 2, '15');
 
 /* Вставка для таблицы связи блюдо-заказ */
 /* NULL здесь как заглушка - вставляйте что считаете нужным */

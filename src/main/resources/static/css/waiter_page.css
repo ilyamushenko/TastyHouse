@@ -1,0 +1,34 @@
+.title
+{
+    font-size: 60px;
+    font-family: Mistral, serif;
+    color: white;
+}
+
+.navbar, .footer
+{
+    background: #3F9384;
+}
+
+.footer-content
+{
+    font-size: 18px;
+    font-family: Times, serif;
+    color: white;
+}
+
+.tasty-house
+{
+    height: 100px;
+    width: 100px;
+}
+
+u.user
+{
+    color: white;
+}
+
+a
+{
+    cursor: pointer;
+}
