@@ -1,13 +1,16 @@
-{{> ScriptsAndStyles}}
-    <link rel="stylesheet" type="text/css" href="/css/waiter_page_orders.css"/>
-{{> Navigation}}
+<#import "parts/Common.ftl" as c>
 
+<@c.scripts_and_styles title="Заказы у столика">
+    <link rel="stylesheet" type="text/css" href="/css/waiter_page_orders.css"/>
+</@c.scripts_and_styles>
+
+<@c.nav_and_footer>
 <header class="header">
     <div class="overlay">
         <div class="container">
             <div class="table mt-5">
                 <div class="table_title text-center">
-                    <font class="table_name">Столик 1</font>
+                    <font class="table_name">Столик ${tableNumber}</font>
                 </div>
                 <div class="row align-items-center ml-2 mt-4 mr-2">
                     <div class="col-2">
@@ -24,6 +27,7 @@
                             <label class="form-check-label ml-2" for="defaultCheck1">Отнесено</label>
                         </div>
                     </div>
+
                     <div class="col-2">
                         <img src="/img/krevetki.jpg" class="img-fluid">
                     </div>
@@ -66,5 +70,4 @@
         </div>
     </div>
 </header>
-
-{{> Footer}}
+</@c.nav_and_footer>

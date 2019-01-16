@@ -96,7 +96,3 @@ ALTER TABLE "Dishes" ADD CONSTRAINT "Dishes_fk0" FOREIGN KEY ("type_dish") REFER
 
 ALTER TABLE "DishesFromOrder" ADD CONSTRAINT "DishesFromOrder_fk0" FOREIGN KEY ("order_id") REFERENCES "Orders"("id");
 ALTER TABLE "DishesFromOrder" ADD CONSTRAINT "DishesFromOrder_fk1" FOREIGN KEY ("dish_id") REFERENCES "Dishes"("id");
-
-
-
-
