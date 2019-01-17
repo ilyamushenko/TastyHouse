@@ -1,26 +1,26 @@
-﻿ALTER TABLE "staff" DROP CONSTRAINT IF EXISTS "fkslcqhfm3vyktb99sf1819mtly";
+﻿DROP TABLE IF EXISTS "statuses_orders";
 
-ALTER TABLE "orders" DROP CONSTRAINT IF EXISTS "fk3j4cberxjut2arquh1ox3jf06";
+DROP TABLE IF EXISTS "staff_orders_set";
 
-ALTER TABLE "orders" DROP CONSTRAINT IF EXISTS "fk4ery255787xl56k025fyxrqe9";
+DROP TABLE IF EXISTS "type_dish_dishes";
 
-ALTER TABLE "dishes" DROP CONSTRAINT IF EXISTS "fk5c13px7nbqy2yx8n5f212rgs7";
+DROP TABLE IF EXISTS "role_staff_persons";
 
-ALTER TABLE "dishes_from_order" DROP CONSTRAINT IF EXISTS "fk77p12o4qhyq9xxbpg0kybobjs";
+DROP TABLE IF EXISTS "dishes_from_order_dishes_set";
 
-ALTER TABLE "dishes_from_order" DROP CONSTRAINT IF EXISTS "fkpj5bhnfamlhqb72qbjk4wlvjn";
-
-DROP TABLE IF EXISTS "staff";
-
-DROP TABLE IF EXISTS "orders";
+DROP TABLE IF EXISTS "dishes_from_order_orders_set";
 
 DROP TABLE IF EXISTS "dishes";
 
-DROP TABLE IF EXISTS "dishes_from_order";
+DROP TABLE IF EXISTS "orders";
+
+DROP TABLE IF EXISTS "staff";
+
+DROP TABLE IF EXISTS "role_staff";
 
 DROP TABLE IF EXISTS "statuses";
 
 DROP TABLE IF EXISTS "type_dish";
 
-DROP TABLE IF EXISTS "role_staff";
+DROP TABLE IF EXISTS "dishes_from_order";
 

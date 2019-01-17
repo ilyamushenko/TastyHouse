@@ -13,10 +13,10 @@
                 <font class="choose_table">Cтолики:</font>
             </div>
         </div>
-        <#list orders?keys as key>
+        <#list orders as key, value>
             <div class="row mb-4">
                 <div class="col-1"></div>
-                <#list orders?api.get(key) as order>
+                <#list value as order>
                     <#if order?is_first>
                         <div class="rounded-circle col-1 no_one_here text-center">
                             <font class="number_of_table">${order.tableNumber}</font>

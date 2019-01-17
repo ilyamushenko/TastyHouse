@@ -17,11 +17,11 @@ public class Orders {
     private Long tableNumber;
     @Column(name = "dateOrders", nullable = false)
     private Timestamp dateOrders;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private DishesFromOrder dishesFromOrder;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Statuses statuses;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Staff staff;
 
     public Orders() {

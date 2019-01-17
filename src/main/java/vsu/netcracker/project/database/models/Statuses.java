@@ -13,7 +13,8 @@ public class Statuses {
     private Long id;
     @Column(nullable = false, name = "title")
     private String title;
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private Set<Orders> orders = new HashSet<Orders>(); // ToDo - может другой контейнер???
 
     public Statuses() {

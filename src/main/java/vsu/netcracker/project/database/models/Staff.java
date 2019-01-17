@@ -2,6 +2,7 @@ package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Staff")
@@ -21,8 +22,11 @@ public class Staff {
     private String password;
     @Column(nullable = false, name = "login")
     private String login;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private RoleStaff roleStaff;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Set<Orders> ordersSet;
 
     public Staff() {
 
@@ -102,6 +106,14 @@ public class Staff {
 
     public void setRoleStaff(RoleStaff roleStaff) {
         this.roleStaff = roleStaff;
+    }
+
+    public Set<Orders> getOrdersSet() {
+        return ordersSet;
+    }
+
+    public void setOrdersSet(Set<Orders> ordersSet) {
+        this.ordersSet = ordersSet;
     }
 
     @Override

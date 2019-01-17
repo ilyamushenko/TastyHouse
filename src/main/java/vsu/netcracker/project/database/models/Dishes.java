@@ -21,9 +21,9 @@ public class Dishes {
     private String mass;
     @Column(name = "preparingTime", nullable = false)
     private String preparingTime;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private TypeDish typeDish;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private DishesFromOrder dishesFromOrder;
 
     public Dishes() {

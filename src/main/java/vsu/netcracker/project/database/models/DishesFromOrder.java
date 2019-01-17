@@ -16,9 +16,11 @@ public class DishesFromOrder {
     private Time realTime;
     @Column(name = "status", nullable = false)
     private String status;
-    @OneToMany(mappedBy = "dishesFromOrder", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private Set<Orders> ordersSet = new HashSet<>();
-    @OneToMany(mappedBy = "dishesFromOrder", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private Set<Dishes> dishesSet = new HashSet<>();
 
     public DishesFromOrder() {
@@ -61,6 +63,14 @@ public class DishesFromOrder {
 
     public void setOrdersSet(Set<Orders> ordersSet) {
         this.ordersSet = ordersSet;
+    }
+
+    public Set<Dishes> getDishesSet() {
+        return dishesSet;
+    }
+
+    public void setDishesSet(Set<Dishes> dishesSet) {
+        this.dishesSet = dishesSet;
     }
 
     @Override

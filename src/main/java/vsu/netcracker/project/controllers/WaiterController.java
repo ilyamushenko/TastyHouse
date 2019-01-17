@@ -26,7 +26,10 @@ public class WaiterController {
 
     @RequestMapping(path = "/orders/{tableNumber}")
     public String showOrdersOnTable(@PathVariable Long tableNumber, Map<String, Object> model) {
-        model.put("tableNumber", tableNumber);
+        Orders order = ordersDAO.findByTableNumber(tableNumber);
+        long percentOfReady = Utils.getPercentageOfReady(order);
+        model.put("order", order);
+        model.put("percentOfReady", percentOfReady);
         return "WaiterOrdersOnTable";
     }
 

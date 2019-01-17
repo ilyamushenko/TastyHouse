@@ -13,7 +13,8 @@ public class RoleStaff {
     private Long id;
     @Column(nullable = false, name = "title")
     private String title;
-    @OneToMany(mappedBy = "roleStaff", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private Set<Staff> persons = new HashSet<Staff>(); // ToDo - может другой контейнер???
 
     public RoleStaff() {

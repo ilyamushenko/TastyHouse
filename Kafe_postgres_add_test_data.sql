@@ -1,5 +1,34 @@
 ﻿/* Вставка тестовых данных */
 
+/* Вставка для таблицы связи блюдо-заказ */
+/* NULL здесь как заглушка - вставляйте что считаете нужным */
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
+INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
+
 /* Вставка статусов */
 INSERT INTO "statuses" (title) VALUES ('Зарезервирован'); /* 1 */
 INSERT INTO "statuses" (title) VALUES ('Свободен'); /* 2 */
@@ -44,36 +73,3 @@ INSERT INTO "type_dish" (title) VALUES ('Закуски'); /* 2 */
 /* Ингредиенты, рецепт, масса, время - поставил кавычки как заглушку, можете вставлять туда что вам нужно */
 INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time) VALUES ('Цезарь с курицей', 250.9, '', '', '', '40');
 INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time) VALUES ('Салат с креветками', 200, '', '', '', '50');
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time) VALUES ('Салат из авокадо с семгой', 100, '', '', '', '30');
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time) VALUES ('Волованы с салатом из тунца', 350.71, '', '', '', '20');
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time) VALUES ('Свекольная закуска с сельдью', 280.7, '', '', '', '10');
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time) VALUES ('Маринованный сыр фета с оливками', 345.8, '', '', '', '15');
-
-/* Вставка для таблицы связи блюдо-заказ */
-/* NULL здесь как заглушка - вставляйте что считаете нужным */
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'В ожидании');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готовится');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');
-INSERT INTO "dishes_from_order" (real_time, status) VALUES (NULL, 'Готово');

@@ -13,7 +13,8 @@ public class TypeDish {
     private Long id;
     @Column(nullable = false, name = "title")
     private String title;
-    @OneToMany(mappedBy = "typeDish", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private Set<Dishes> dishes = new HashSet<Dishes>(); // ToDo - может другой контейнер???
 
     public TypeDish() {
