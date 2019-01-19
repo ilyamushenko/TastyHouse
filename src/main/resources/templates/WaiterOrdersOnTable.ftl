@@ -21,8 +21,8 @@
                         <div class="col-4">
                             <p>
                                 <b>${dish.name}</b>
-                                <br><font class="status-of-dish">Статус: ${order.dishesFromOrder.status}</font>
-                                <#switch order.dishesFromOrder.status>
+                                <br><font class="status-of-dish">Статус: ${order.dishesFromOrder[dish?index].status}</font>
+                                <#switch order.dishesFromOrder[dish?index].status>
                                     <#case "В ожидании">
                                         <i class="far fa-clock"></i>
                                         <#break>

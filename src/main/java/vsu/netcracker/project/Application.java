@@ -6,7 +6,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 /*  ToDo:
-    Правильно ли я смаппил многие ко многим между заказами и блюдом???
     1. Прикрутить Vue.js к страничкам
     2. Вместо шаблонизатора передавать и получать данные как-то по другому
     3. Спросить у ребят по поводу 2 доп. полей: URL изображения для блюда и вида оплаты

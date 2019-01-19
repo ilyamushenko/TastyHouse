@@ -2,6 +2,7 @@ package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "Orders")
@@ -17,9 +18,9 @@ public class Orders {
     private Long tableNumber;
     @Column(name = "dateOrders", nullable = false)
     private Timestamp dateOrders;
-    @ManyToOne
-    @JoinColumn(name = "dishes_from_order_id")
-    private DishesFromOrder dishesFromOrder;
+    @OneToMany
+    @JoinColumn(name = "orders_id", insertable = false, updatable = false)
+    private List<DishesFromOrder> dishesFromOrder;
     @ManyToOne
     @JoinColumn(name = "statuses_id")
     private Statuses statuses;
@@ -31,7 +32,7 @@ public class Orders {
 
     }
 
-    public Orders(String type, Long tableNumber, Timestamp dateOrders, DishesFromOrder dishesFromOrder, Statuses statuses) {
+    public Orders(String type, Long tableNumber, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, Statuses statuses) {
         this.type = type;
         this.tableNumber = tableNumber;
         this.dateOrders = dateOrders;
@@ -79,11 +80,11 @@ public class Orders {
         this.dateOrders = dateOrders;
     }
 
-    public DishesFromOrder getDishesFromOrder() {
+    public List<DishesFromOrder> getDishesFromOrder() {
         return dishesFromOrder;
     }
 
-    public void setDishesFromOrder(DishesFromOrder dishesFromOrder) {
+    public void setDishesFromOrder(List<DishesFromOrder> dishesFromOrder) {
         this.dishesFromOrder = dishesFromOrder;
     }
 

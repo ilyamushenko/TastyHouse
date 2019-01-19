@@ -2,6 +2,7 @@ package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.List;
 
 @Entity
 @Table(name = "Dishes")
@@ -25,15 +26,15 @@ public class Dishes {
     @ManyToOne
     @JoinColumn(name = "type_dish_id")
     private TypeDish typeDish;
-    @ManyToOne
-    @JoinColumn(name = "dishes_from_order_id")
-    private DishesFromOrder dishesFromOrder;
+    @OneToMany
+    @JoinColumn(name = "dishes_id", insertable = false, updatable = false)
+    private List<DishesFromOrder> dishesFromOrder;
 
     public Dishes() {
 
     }
 
-    public Dishes(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, DishesFromOrder dishesFromOrder) {
+    public Dishes(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder) {
         this.name = name;
         this.price = price;
         this.ingredient = ingredient;
@@ -108,11 +109,11 @@ public class Dishes {
         this.typeDish = typeDish;
     }
 
-    public DishesFromOrder getDishesFromOrder() {
+    public List<DishesFromOrder> getDishesFromOrder() {
         return dishesFromOrder;
     }
 
-    public void setDishesFromOrder(DishesFromOrder dishesFromOrder) {
+    public void setDishesFromOrder(List<DishesFromOrder> dishesFromOrder) {
         this.dishesFromOrder = dishesFromOrder;
     }
 

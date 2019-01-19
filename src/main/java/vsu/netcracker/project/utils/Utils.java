@@ -1,16 +1,34 @@
 package vsu.netcracker.project.utils;
 
 import vsu.netcracker.project.database.models.Dishes;
+import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Orders;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Utils {
-    public static Map<Integer, List<?>> convertListToMap(List<?> list, int step) {
-        Map<Integer, List<?>> map = new LinkedHashMap<>();
+    public static Map<Integer, List<Orders>> convertListToMap(List<Orders> list, int step) {
+        Map<Integer, List<Orders>> map = new LinkedHashMap<>();
+        for (int i = 0; i < list.size(); i += step) {
+            if (i + step < list.size())
+                map.put(i + 1, list.subList(i, i + step));
+            else
+                map.put(i + 1, list.subList(i, list.size()));
+        }
+        return map;
+    }
+
+    public static Map<Integer, List<Dishes>> convertListToMap(Orders order, int step) {
+        Map<Integer, List<Dishes>> map = new LinkedHashMap<>();
+        List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
+        List<Dishes> list = new ArrayList<>();
+        for (DishesFromOrder dishFromOrder : dishesFromOrder) {
+            list.add(dishFromOrder.getDishesSet());
+        }
         for (int i = 0; i < list.size(); i += step) {
             if (i + step < list.size())
                 map.put(i + 1, list.subList(i, i + step));
@@ -31,18 +49,18 @@ public class Utils {
 
     public static Float getTotalPriceOfDishes(Orders order) {
         Float sum = 0.0f;
-        List<Dishes> dishes = order.getDishesFromOrder().getDishesSet();
-        for (Dishes dish : dishes) {
-            sum += dish.getPrice();
+        List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
+        for (DishesFromOrder dishFromOrder : dishesFromOrder) {
+            sum += dishFromOrder.getDishesSet().getPrice();
         }
         return sum;
     }
 
     private static long getTotalTimeOfCooking(Orders order) {
         long orderTotalTimeSeconds = 0;
-        List<Dishes> dishes = order.getDishesFromOrder().getDishesSet();
-        for (Dishes dish : dishes) {
-            orderTotalTimeSeconds += dish.getPreparingTime().toLocalTime().toSecondOfDay();
+        List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
+        for (DishesFromOrder dishFromOrder : dishesFromOrder) {
+            orderTotalTimeSeconds += dishFromOrder.getDishesSet().getPreparingTime().toLocalTime().toSecondOfDay();
         }
         return orderTotalTimeSeconds;
     }

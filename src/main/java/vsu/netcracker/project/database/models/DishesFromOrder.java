@@ -15,22 +15,22 @@ public class DishesFromOrder {
     private Time realTime;
     @Column(name = "status", nullable = false)
     private String status;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "dishes_from_order_id", insertable = false, updatable = false)
-    private List<Orders> ordersSet;
-    @OneToMany
+    private Orders order;
+    @ManyToOne
     @JoinColumn(name = "dishes_from_order_id", insertable = false, updatable = false)
-    private List<Dishes> dishesSet;
+    private Dishes dish;
 
     public DishesFromOrder() {
 
     }
 
-    public DishesFromOrder(Time realTime, String status, List<Orders> ordersSet, List<Dishes> dishesSet) {
+    public DishesFromOrder(Time realTime, String status, Orders order, Dishes dish) {
         this.realTime = realTime;
         this.status = status;
-        this.ordersSet = ordersSet;
-        this.dishesSet = dishesSet;
+        this.order = order;
+        this.dish = dish;
     }
 
     public Long getId() {
@@ -57,20 +57,20 @@ public class DishesFromOrder {
         this.status = status;
     }
 
-    public List<Orders> getOrdersSet() {
-        return ordersSet;
+    public Orders getOrdersSet() {
+        return order;
     }
 
-    public void setOrdersSet(List<Orders> ordersSet) {
-        this.ordersSet = ordersSet;
+    public void setOrdersSet(Orders order) {
+        this.order = order;
     }
 
-    public List<Dishes> getDishesSet() {
-        return dishesSet;
+    public Dishes getDishesSet() {
+        return dish;
     }
 
-    public void setDishesSet(List<Dishes> dishesSet) {
-        this.dishesSet = dishesSet;
+    public void setDishesSet(Dishes dish) {
+        this.dish = dish;
     }
 
     @Override
