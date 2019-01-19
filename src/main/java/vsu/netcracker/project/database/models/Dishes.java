@@ -1,13 +1,14 @@
 package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.sql.Time;
 
 @Entity
 @Table(name = "Dishes")
 public class Dishes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "dishes_id")
     private Long id;
     @Column(name = "name", nullable = false) // есть еще @NotNull
     private String name;
@@ -20,17 +21,19 @@ public class Dishes {
     @Column(name = "mass", nullable = false)
     private String mass;
     @Column(name = "preparingTime", nullable = false)
-    private String preparingTime;
+    private Time preparingTime;
     @ManyToOne
+    @JoinColumn(name = "type_dish_id")
     private TypeDish typeDish;
     @ManyToOne
+    @JoinColumn(name = "dishes_from_order_id")
     private DishesFromOrder dishesFromOrder;
 
     public Dishes() {
 
     }
 
-    public Dishes(String name, Float price, String ingredient, String recipe, String mass, String preparingTime, TypeDish typeDish, DishesFromOrder dishesFromOrder) {
+    public Dishes(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, DishesFromOrder dishesFromOrder) {
         this.name = name;
         this.price = price;
         this.ingredient = ingredient;
@@ -89,11 +92,11 @@ public class Dishes {
         this.mass = mass;
     }
 
-    public String getPreparingTime() {
+    public Time getPreparingTime() {
         return preparingTime;
     }
 
-    public void setPreparingTime(String preparingTime) {
+    public void setPreparingTime(Time preparingTime) {
         this.preparingTime = preparingTime;
     }
 
@@ -127,10 +130,5 @@ public class Dishes {
                 getPreparingTime().equals(dishes.getPreparingTime()) &&
                 getTypeDish().equals(dishes.getTypeDish()) &&
                 getDishesFromOrder().equals(dishes.getDishesFromOrder());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getPrice(), getIngredient(), getRecipe(), getMass(), getPreparingTime(), getTypeDish(), getDishesFromOrder());
     }
 }

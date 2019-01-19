@@ -1,6 +1,7 @@
 package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,6 +10,7 @@ import java.util.Set;
 public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "staff_id")
     private Long id;
     @Column(nullable = false, name = "lastName")
     private String lastName;
@@ -23,10 +25,11 @@ public class Staff {
     @Column(nullable = false, name = "login")
     private String login;
     @ManyToOne
+    @JoinColumn(name = "role_staff_id")
     private RoleStaff roleStaff;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Set<Orders> ordersSet;
+    @OneToMany
+    @JoinColumn(name = "staff_id", insertable = false, updatable = false)
+    private List<Orders> ordersSet;
 
     public Staff() {
 
@@ -41,8 +44,6 @@ public class Staff {
         this.login = login;
         this.roleStaff = roleStaff;
     }
-
-    // ToDo - какая связь между Orders и Staff???
 
     public Long getId() {
         return id;
@@ -108,11 +109,11 @@ public class Staff {
         this.roleStaff = roleStaff;
     }
 
-    public Set<Orders> getOrdersSet() {
+    public List<Orders> getOrdersSet() {
         return ordersSet;
     }
 
-    public void setOrdersSet(Set<Orders> ordersSet) {
+    public void setOrdersSet(List<Orders> ordersSet) {
         this.ordersSet = ordersSet;
     }
 

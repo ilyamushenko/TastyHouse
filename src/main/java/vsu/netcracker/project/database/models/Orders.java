@@ -2,13 +2,13 @@ package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Orders")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "orders_id")
     private Long id;
     @Column(name = "type", nullable = false)
     private String type;
@@ -18,10 +18,13 @@ public class Orders {
     @Column(name = "dateOrders", nullable = false)
     private Timestamp dateOrders;
     @ManyToOne
+    @JoinColumn(name = "dishes_from_order_id")
     private DishesFromOrder dishesFromOrder;
     @ManyToOne
+    @JoinColumn(name = "statuses_id")
     private Statuses statuses;
     @ManyToOne
+    @JoinColumn(name = "staff_id")
     private Staff staff;
 
     public Orders() {
@@ -103,10 +106,5 @@ public class Orders {
                 getDateOrders().equals(orders.getDateOrders()) &&
                 getDishesFromOrder().equals(orders.getDishesFromOrder()) &&
                 getStatuses().equals(orders.getStatuses());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getType(), getTableNumber(), getDateOrders(), getDishesFromOrder(), getStatuses());
     }
 }

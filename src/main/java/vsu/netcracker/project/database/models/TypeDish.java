@@ -2,7 +2,7 @@ package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.Objects;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -10,18 +10,19 @@ import java.util.Set;
 public class TypeDish {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "type_dish_id")
     private Long id;
     @Column(nullable = false, name = "title")
     private String title;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Set<Dishes> dishes = new HashSet<Dishes>(); // ToDo - может другой контейнер???
+    @OneToMany
+    @JoinColumn(name = "type_dish_id", insertable = false, updatable = false)
+    private List<Dishes> dishes;
 
     public TypeDish() {
 
     }
 
-    public TypeDish(String title, Set<Dishes> dishes) {
+    public TypeDish(String title, List<Dishes> dishes) {
         this.title = title;
         this.dishes = dishes;
     }
@@ -42,11 +43,11 @@ public class TypeDish {
         this.title = title;
     }
 
-    public Set<Dishes> getDishes() {
+    public List<Dishes> getDishes() {
         return dishes;
     }
 
-    public void setDishes(Set<Dishes> dishes) {
+    public void setDishes(List<Dishes> dishes) {
         this.dishes = dishes;
     }
 
@@ -58,10 +59,5 @@ public class TypeDish {
         return getId().equals(typeDish.getId()) &&
                 getTitle().equals(typeDish.getTitle()) &&
                 getDishes().equals(typeDish.getDishes());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getDishes());
     }
 }

@@ -1,11 +1,11 @@
 package vsu.netcracker.project.configurations;
 
 import com.google.common.collect.ImmutableList;
+import lombok.NonNull;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import lombok.NonNull;
 import ro.isdc.wro.config.jmx.ConfigConstants;
 import ro.isdc.wro.http.ConfigurableWroFilter;
 import ro.isdc.wro.model.resource.processor.factory.ConfigurableProcessorsFactory;
@@ -17,6 +17,10 @@ import java.util.stream.Stream;
 
 @Configuration
 public class Wro4jConfiguration {
+    private static final List<String> OTHER_WRO_PROPS = ImmutableList.of(
+            ConfigurableProcessorsFactory.PARAM_PRE_PROCESSORS,
+            ConfigurableProcessorsFactory.PARAM_POST_PROCESSORS);
+
     @Bean
     public FilterRegistrationBean webResourceOptimizer(Environment env) {
         FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -51,8 +55,4 @@ public class Wro4jConfiguration {
             props.put(name, value);
         }
     }
-
-    private static final List<String> OTHER_WRO_PROPS = ImmutableList.of(
-            ConfigurableProcessorsFactory.PARAM_PRE_PROCESSORS,
-            ConfigurableProcessorsFactory.PARAM_POST_PROCESSORS);
 }

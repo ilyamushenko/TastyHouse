@@ -1,27 +1,26 @@
 package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "RoleStaff")
 public class RoleStaff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_staff_id")
     private Long id;
     @Column(nullable = false, name = "title")
     private String title;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Set<Staff> persons = new HashSet<Staff>(); // ToDo - может другой контейнер???
+    @OneToMany
+    @JoinColumn(name = "role_staff_id", updatable = false, insertable = false)
+    private List<Staff> persons;
 
     public RoleStaff() {
 
     }
 
-    public RoleStaff(String title, Set<Staff> persons) {
+    public RoleStaff(String title, List<Staff> persons) {
         this.title = title;
         this.persons = persons;
     }
@@ -42,11 +41,11 @@ public class RoleStaff {
         this.title = title;
     }
 
-    public Set<Staff> getPersons() {
+    public List<Staff> getPersons() {
         return persons;
     }
 
-    public void setPersons(Set<Staff> persons) {
+    public void setPersons(List<Staff> persons) {
         this.persons = persons;
     }
 

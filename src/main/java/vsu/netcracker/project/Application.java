@@ -5,8 +5,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-// ToDo - http://spring.io/blog/2014/03/07/deploying-spring-boot-applications - здесь информация
-//  про deploy через jar (надеюсь это то что нужно, в главе embedded web server development)
+/*  ToDo:
+    Правильно ли я смаппил многие ко многим между заказами и блюдом???
+    1. Прикрутить Vue.js к страничкам
+    2. Вместо шаблонизатора передавать и получать данные как-то по другому
+    3. Спросить у ребят по поводу 2 доп. полей: URL изображения для блюда и вида оплаты
+
+    Второстепенные задачи:
+    4. Генерация через wro4j
+    5. Можно еще страницы, обрабатывающие ошибки сделать
+*/
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
