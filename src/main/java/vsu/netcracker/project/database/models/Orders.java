@@ -3,6 +3,7 @@ package vsu.netcracker.project.database.models;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Orders")
@@ -115,8 +116,25 @@ public class Orders {
         return getId().equals(orders.getId()) &&
                 getType().equals(orders.getType()) &&
                 getTableNumber().equals(orders.getTableNumber()) &&
-                getDateOrders().equals(orders.getDateOrders()) &&
-                getDishesFromOrder().equals(orders.getDishesFromOrder()) &&
-                getStatuses().equals(orders.getStatuses());
+                getDateOrders().equals(orders.getDateOrders());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getType(), getTableNumber(), getDateOrders());
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", tableNumber=" + tableNumber +
+                ", dateOrders=" + dateOrders +
+                ", typePayment=" + typePayment +
+                ", dishesFromOrder=" + dishesFromOrder +
+                ", statuses=" + statuses +
+                ", staff=" + staff +
+                '}';
     }
 }

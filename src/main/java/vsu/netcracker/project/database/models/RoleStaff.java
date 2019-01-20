@@ -1,7 +1,8 @@
 package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "RoleStaff")
@@ -55,12 +56,20 @@ public class RoleStaff {
         if (o == null || getClass() != o.getClass()) return false;
         RoleStaff roleStaff = (RoleStaff) o;
         return getId().equals(roleStaff.getId()) &&
-                getTitle().equals(roleStaff.getTitle()) &&
-                getPersons().equals(roleStaff.getPersons());
+                getTitle().equals(roleStaff.getTitle());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getPersons());
+        return Objects.hash(getId(), getTitle());
+    }
+
+    @Override
+    public String toString() {
+        return "RoleStaff{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", persons=" + persons +
+                '}';
     }
 }

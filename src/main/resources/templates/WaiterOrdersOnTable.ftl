@@ -35,8 +35,8 @@
                                 </#switch>
                             </p>
                             <div class="form-check bring_dish">
-                                <input class="form-check-input increase_size" type="checkbox" value="" id="defaultCheck1">
-                                <label class="form-check-label ml-2" for="defaultCheck1">Отнесено</label>
+                                <input class="form-check-input increase_size" type="checkbox" value="" id="defaultCheck${dish?index + key + 1}">
+                                <label class="form-check-label ml-2" for="defaultCheck${dish?index + key + 1}">Отнесено</label>
                             </div>
                         </div>
                     </#list>

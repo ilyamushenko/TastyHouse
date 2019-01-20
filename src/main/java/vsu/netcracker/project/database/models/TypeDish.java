@@ -3,6 +3,7 @@ package vsu.netcracker.project.database.models;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -57,7 +58,20 @@ public class TypeDish {
         if (o == null || getClass() != o.getClass()) return false;
         TypeDish typeDish = (TypeDish) o;
         return getId().equals(typeDish.getId()) &&
-                getTitle().equals(typeDish.getTitle()) &&
-                getDishes().equals(typeDish.getDishes());
+                getTitle().equals(typeDish.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle());
+    }
+
+    @Override
+    public String toString() {
+        return "TypeDish{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", dishes=" + dishes +
+                '}';
     }
 }

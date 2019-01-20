@@ -79,8 +79,23 @@ public class DishesFromOrder {
         if (o == null || getClass() != o.getClass()) return false;
         DishesFromOrder that = (DishesFromOrder) o;
         return getId().equals(that.getId()) &&
-                Objects.equals(getRealTime(), that.getRealTime()) &&
-                getStatus().equals(that.getStatus()) &&
-                getOrdersSet().equals(that.getOrdersSet());
+                getRealTime().equals(that.getRealTime()) &&
+                getStatus().equals(that.getStatus());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getRealTime(), getStatus());
+    }
+
+    @Override
+    public String toString() {
+        return "DishesFromOrder{" +
+                "id=" + id +
+                ", realTime=" + realTime +
+                ", status='" + status + '\'' +
+                ", order=" + order +
+                ", dish=" + dish +
+                '}';
     }
 }

@@ -3,6 +3,7 @@ package vsu.netcracker.project.database.models;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Dishes")
@@ -31,9 +32,11 @@ public class Dishes {
     @OneToMany
     @JoinColumn(name = "dishes_id", insertable = false, updatable = false)
     private List<DishesFromOrder> dishesFromOrder;
+
     public Dishes() {
 
     }
+
     public Dishes(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder) {
         this.name = name;
         this.price = price;
@@ -137,7 +140,27 @@ public class Dishes {
                 getRecipe().equals(dishes.getRecipe()) &&
                 getMass().equals(dishes.getMass()) &&
                 getPreparingTime().equals(dishes.getPreparingTime()) &&
-                getTypeDish().equals(dishes.getTypeDish()) &&
-                getDishesFromOrder().equals(dishes.getDishesFromOrder());
+                getImgUrl().equals(dishes.getImgUrl());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getPrice(), getIngredient(), getRecipe(), getMass(), getPreparingTime(), getImgUrl());
+    }
+
+    @Override
+    public String toString() {
+        return "Dishes{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredient='" + ingredient + '\'' +
+                ", recipe='" + recipe + '\'' +
+                ", mass='" + mass + '\'' +
+                ", preparingTime=" + preparingTime +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", typeDish=" + typeDish +
+                ", dishesFromOrder=" + dishesFromOrder +
+                '}';
     }
 }

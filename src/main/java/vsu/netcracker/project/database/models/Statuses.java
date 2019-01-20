@@ -58,12 +58,20 @@ public class Statuses {
         if (o == null || getClass() != o.getClass()) return false;
         Statuses statuses = (Statuses) o;
         return getId().equals(statuses.getId()) &&
-                getTitle().equals(statuses.getTitle()) &&
-                getOrders().equals(statuses.getOrders());
+                getTitle().equals(statuses.getTitle());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getOrders());
+        return Objects.hash(getId(), getTitle());
+    }
+
+    @Override
+    public String toString() {
+        return "Statuses{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", orders=" + orders +
+                '}';
     }
 }

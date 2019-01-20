@@ -128,12 +128,26 @@ public class Staff {
                 getPhone().equals(staff.getPhone()) &&
                 getEmail().equals(staff.getEmail()) &&
                 getPassword().equals(staff.getPassword()) &&
-                getLogin().equals(staff.getLogin()) &&
-                getRoleStaff().equals(staff.getRoleStaff());
+                getLogin().equals(staff.getLogin());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getLastName(), getFirstName(), getPhone(), getEmail(), getPassword(), getLogin(), getRoleStaff());
+        return Objects.hash(getId(), getLastName(), getFirstName(), getPhone(), getEmail(), getPassword(), getLogin());
+    }
+
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", login='" + login + '\'' +
+                ", roleStaff=" + roleStaff +
+                ", ordersSet=" + ordersSet +
+                '}';
     }
 }

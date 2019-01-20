@@ -2,6 +2,7 @@ package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "TypePayment")
@@ -47,5 +48,19 @@ public class TypePayment {
 
     public void setOrders(List<Orders> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TypePayment that = (TypePayment) o;
+        return getId().equals(that.getId()) &&
+                getTitle().equals(that.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle());
     }
 }
