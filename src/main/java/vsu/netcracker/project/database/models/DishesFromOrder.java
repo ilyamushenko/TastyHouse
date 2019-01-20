@@ -2,7 +2,7 @@ package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "DishesFromOrder")

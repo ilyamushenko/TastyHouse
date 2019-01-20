@@ -18,11 +18,11 @@
                 <div class="col-1"></div>
                 <#list value as order>
                     <#if order?is_first>
-                        <div class="rounded-circle col-1 ${order.statuses.title} text-center">
+                        <div class="rounded-circle col-1 ${order.statuses.title} text-center" onclick="window.location.href = '/orders/${order.tableNumber}'">
                             <font class="number_of_table">${order.tableNumber}</font>
                         </div>
                     <#else>
-                        <div class="rounded-circle col-1 ${order.statuses.title} offset-2 text-center">
+                        <div class="rounded-circle col-1 ${order.statuses.title} offset-2 text-center" onclick="window.location.href = '/orders/${order.tableNumber}'">
                             <font class="number_of_table">${order.tableNumber}</font>
                         </div>
                     </#if>

@@ -16,7 +16,7 @@
                     <div class="row align-items-center ml-2 mt-4 mr-2">
                     <#list value as dish>
                         <div class="col-2">
-                            <img src="/img/cezar.jpg" class="img-fluid">
+                            <img src="${dish.imgUrl}" class="img-fluid">
                         </div>
                         <div class="col-4">
                             <p>
@@ -62,7 +62,7 @@
                         <font class="order_info">Итого: ${totalPrice} ₽</font>
                     </div>
                     <div class="col">
-                        <font class="order_info">Оплата: По карте</font>
+                        <font class="order_info">Оплата: ${order.typePayment.title}</font>
                     </div>
                 </div>
             </div>

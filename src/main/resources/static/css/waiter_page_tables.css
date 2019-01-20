@@ -12,18 +12,21 @@ div.no_one_here
 {
     border: 2px solid #3F9384;
     background: grey;
+    cursor: pointer;
 }
 
 div.in_process_of_cooking
 {
     border: 2px solid #3F9384;
     background: #3F9384;
+    cursor: pointer;
 }
 
 div.dish_is_ready
 {
     border: 2px solid #3F9384;
     background: red;
+    cursor: pointer;
 }
 
 @media (min-width: 576px)

@@ -18,6 +18,9 @@ public class Orders {
     private Long tableNumber;
     @Column(name = "dateOrders", nullable = false)
     private Timestamp dateOrders;
+    @ManyToOne
+    @JoinColumn(name = "type_payment_id")
+    private TypePayment typePayment;
     @OneToMany
     @JoinColumn(name = "orders_id", insertable = false, updatable = false)
     private List<DishesFromOrder> dishesFromOrder;
@@ -38,6 +41,14 @@ public class Orders {
         this.dateOrders = dateOrders;
         this.dishesFromOrder = dishesFromOrder;
         this.statuses = statuses;
+    }
+
+    public TypePayment getTypePayment() {
+        return typePayment;
+    }
+
+    public void setTypePayment(TypePayment typePayment) {
+        this.typePayment = typePayment;
     }
 
     public Staff getStaff() {

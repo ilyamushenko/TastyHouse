@@ -14,7 +14,6 @@ import java.util.Map;
 
 @Controller
 public class WaiterController {
-
     @Autowired
     private OrdersDAO ordersDAO;
 
@@ -24,7 +23,6 @@ public class WaiterController {
         Map<Integer, List<Dishes>> mapDishes = Utils.convertListToMap(order, 2);
         long percentOfReady = Utils.getPercentageOfReady(order);
         Float totalPriceOfDishes = Utils.getTotalPriceOfDishes(order);
-        System.out.println(order.getDishesFromOrder());
         model.put("order", order);
         model.put("dishes", mapDishes);
         model.put("percentOfReady", percentOfReady);

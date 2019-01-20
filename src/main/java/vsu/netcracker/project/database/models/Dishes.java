@@ -23,17 +23,17 @@ public class Dishes {
     private String mass;
     @Column(name = "preparingTime", nullable = false)
     private Time preparingTime;
+    @Column(name = "img_url", nullable = false)
+    private String imgUrl;
     @ManyToOne
     @JoinColumn(name = "type_dish_id")
     private TypeDish typeDish;
     @OneToMany
     @JoinColumn(name = "dishes_id", insertable = false, updatable = false)
     private List<DishesFromOrder> dishesFromOrder;
-
     public Dishes() {
 
     }
-
     public Dishes(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder) {
         this.name = name;
         this.price = price;
@@ -43,6 +43,14 @@ public class Dishes {
         this.preparingTime = preparingTime;
         this.typeDish = typeDish;
         this.dishesFromOrder = dishesFromOrder;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 
     public Long getId() {
