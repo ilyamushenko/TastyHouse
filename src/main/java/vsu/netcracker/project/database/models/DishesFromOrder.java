@@ -87,15 +87,4 @@ public class DishesFromOrder {
     public int hashCode() {
         return Objects.hash(getId(), getRealTime(), getStatus());
     }
-
-    @Override
-    public String toString() {
-        return "DishesFromOrder{" +
-                "id=" + id +
-                ", realTime=" + realTime +
-                ", status='" + status + '\'' +
-                ", order=" + order +
-                ", dish=" + dish +
-                '}';
-    }
 }

@@ -123,18 +123,4 @@ public class Orders {
     public int hashCode() {
         return Objects.hash(getId(), getType(), getTableNumber(), getDateOrders());
     }
-
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", tableNumber=" + tableNumber +
-                ", dateOrders=" + dateOrders +
-                ", typePayment=" + typePayment +
-                ", dishesFromOrder=" + dishesFromOrder +
-                ", statuses=" + statuses +
-                ", staff=" + staff +
-                '}';
-    }
 }

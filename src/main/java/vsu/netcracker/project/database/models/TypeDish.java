@@ -65,13 +65,4 @@ public class TypeDish {
     public int hashCode() {
         return Objects.hash(getId(), getTitle());
     }
-
-    @Override
-    public String toString() {
-        return "TypeDish{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", dishes=" + dishes +
-                '}';
-    }
 }

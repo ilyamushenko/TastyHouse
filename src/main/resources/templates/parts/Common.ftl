@@ -38,7 +38,7 @@
 
 <#nested>
 
-<footer class="footer fixed-bottom">
+<footer class="footer">
     <div class="container">
         <font class="footer-content">@2018 TastyHouse</font>
     </div>
@@ -46,7 +46,6 @@
 <script src="/js/libs/jquery_js/jquery-3.3.1.min.js"></script>
 <script src="/js/libs/popper_js/popper.min.js"></script>
 <script src="/js/libs/bootstrap_js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/change_footer_location.js"></script>
 </body>
 </html>
 </#macro>

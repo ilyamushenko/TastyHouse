@@ -147,20 +147,4 @@ public class Dishes {
     public int hashCode() {
         return Objects.hash(getId(), getName(), getPrice(), getIngredient(), getRecipe(), getMass(), getPreparingTime(), getImgUrl());
     }
-
-    @Override
-    public String toString() {
-        return "Dishes{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", ingredient='" + ingredient + '\'' +
-                ", recipe='" + recipe + '\'' +
-                ", mass='" + mass + '\'' +
-                ", preparingTime=" + preparingTime +
-                ", imgUrl='" + imgUrl + '\'' +
-                ", typeDish=" + typeDish +
-                ", dishesFromOrder=" + dishesFromOrder +
-                '}';
-    }
 }
