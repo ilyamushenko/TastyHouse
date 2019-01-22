@@ -11,7 +11,7 @@ public class RoleStaff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_staff_id")
     private Long id;
-    @Column(nullable = false, name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
     @OneToMany
     @JoinColumn(name = "role_staff_id", updatable = false, insertable = false)

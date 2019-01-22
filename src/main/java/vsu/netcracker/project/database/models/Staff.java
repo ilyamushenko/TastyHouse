@@ -3,7 +3,6 @@ package vsu.netcracker.project.database.models;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "Staff")
@@ -12,17 +11,17 @@ public class Staff {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id")
     private Long id;
-    @Column(nullable = false, name = "lastName")
+    @Column(name = "lastName", nullable = false)
     private String lastName;
-    @Column(nullable = false, name = "firstName")
+    @Column(name = "firstName", nullable = false)
     private String firstName;
-    @Column(nullable = false, name = "phone")
+    @Column(name = "phone", nullable = false)
     private String phone;
-    @Column(nullable = false, name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
-    @Column(nullable = false, name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
-    @Column(nullable = false, name = "login")
+    @Column(name = "login", nullable = false)
     private String login;
     @ManyToOne
     @JoinColumn(name = "role_staff_id")

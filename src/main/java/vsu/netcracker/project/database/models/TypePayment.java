@@ -11,7 +11,7 @@ public class TypePayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_payment_id")
     private Long id;
-    @Column(nullable = false, name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
     @OneToMany
     @JoinColumn(name = "type_payment_id", insertable = false, updatable = false)

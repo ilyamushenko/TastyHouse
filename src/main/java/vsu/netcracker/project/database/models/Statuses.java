@@ -1,10 +1,8 @@
 package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "Statuses")
@@ -13,7 +11,7 @@ public class Statuses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "statuses_id")
     private Long id;
-    @Column(nullable = false, name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
     @OneToMany
     @JoinColumn(name = "statuses_id", updatable = false, insertable = false)

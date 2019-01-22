@@ -1,10 +1,8 @@
 package vsu.netcracker.project.database.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "TypeDish")
@@ -13,7 +11,7 @@ public class TypeDish {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_dish_id")
     private Long id;
-    @Column(nullable = false, name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
     @OneToMany
     @JoinColumn(name = "type_dish_id", insertable = false, updatable = false)

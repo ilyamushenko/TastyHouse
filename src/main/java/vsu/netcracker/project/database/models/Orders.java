@@ -14,7 +14,6 @@ public class Orders {
     private Long id;
     @Column(name = "type", nullable = false)
     private String type;
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // ???
     @Column(name = "tableNumber", nullable = false)
     private Long tableNumber;
     @Column(name = "dateOrders", nullable = false)
