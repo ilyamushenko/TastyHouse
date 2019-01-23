@@ -1,5 +1,7 @@
 package vsu.netcracker.project.database.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public class RoleStaff {
     @Column(name = "title", nullable = false)
     private String title;
     @OneToMany
+    @JsonBackReference
     @JoinColumn(name = "role_staff_id", updatable = false, insertable = false)
     private List<Staff> persons;
 

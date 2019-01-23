@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Utils {
-    public static Map<Integer, List<Orders>> convertListToMap(List<Orders> list, int step) {
-        Map<Integer, List<Orders>> map = new LinkedHashMap<>();
+    public static LinkedHashMap<Integer, List<Orders>> convertListToMap(List<Orders> list, int step) {
+        LinkedHashMap<Integer, List<Orders>> map = new LinkedHashMap<>();
         for (int i = 0; i < list.size(); i += step) {
             if (i + step < list.size())
                 map.put(i, list.subList(i, i + step));
@@ -22,8 +22,8 @@ public class Utils {
         return map;
     }
 
-    public static Map<Integer, List<Dishes>> convertListToMap(Orders order, int step) {
-        Map<Integer, List<Dishes>> map = new LinkedHashMap<>();
+    public static LinkedHashMap<Integer, List<Dishes>> convertListToMap(Orders order, int step) {
+        LinkedHashMap<Integer, List<Dishes>> map = new LinkedHashMap<>();
         List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
         List<Dishes> list = new ArrayList<>();
         for (DishesFromOrder dishFromOrder : dishesFromOrder) {

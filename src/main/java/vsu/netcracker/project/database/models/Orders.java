@@ -1,5 +1,8 @@
 package vsu.netcracker.project.database.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -19,15 +22,19 @@ public class Orders {
     @Column(name = "dateOrders", nullable = false)
     private Timestamp dateOrders;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "type_payment_id")
     private TypePayment typePayment;
     @OneToMany
+    @JsonBackReference
     @JoinColumn(name = "orders_id", insertable = false, updatable = false)
     private List<DishesFromOrder> dishesFromOrder;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "statuses_id")
     private Statuses statuses;
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "staff_id")
     private Staff staff;
 

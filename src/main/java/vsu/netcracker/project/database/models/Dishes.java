@@ -1,5 +1,8 @@
 package vsu.netcracker.project.database.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.List;
@@ -27,9 +30,11 @@ public class Dishes {
     @Column(name = "img_url", nullable = false)
     private String imgUrl;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "type_dish_id")
     private TypeDish typeDish;
     @OneToMany
+    @JsonBackReference
     @JoinColumn(name = "dishes_id", insertable = false, updatable = false)
     private List<DishesFromOrder> dishesFromOrder;
 

@@ -1,5 +1,7 @@
 package vsu.netcracker.project.database.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public class Statuses {
     @Column(name = "title", nullable = false)
     private String title;
     @OneToMany
+    @JsonBackReference
     @JoinColumn(name = "statuses_id", updatable = false, insertable = false)
     private List<Orders> orders;
 

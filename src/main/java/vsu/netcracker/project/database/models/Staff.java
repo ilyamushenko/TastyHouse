@@ -1,5 +1,7 @@
 package vsu.netcracker.project.database.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -24,9 +26,11 @@ public class Staff {
     @Column(name = "login", nullable = false)
     private String login;
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "role_staff_id")
     private RoleStaff roleStaff;
     @OneToMany
+    @JsonManagedReference
     @JoinColumn(name = "staff_id", insertable = false, updatable = false)
     private List<Orders> ordersSet;
 
