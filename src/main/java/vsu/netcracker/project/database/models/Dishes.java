@@ -19,9 +19,9 @@ public class Dishes {
     private String name;
     @Column(name = "price", nullable = false)
     private Float price;
-    @Column(name = "ingredient", nullable = false)
+    @Column(name = "ingredient", nullable = false, columnDefinition = "text")
     private String ingredient;
-    @Column(name = "recipe", nullable = false)
+    @Column(name = "recipe", nullable = false, columnDefinition = "text")
     private String recipe;
     @Column(name = "mass", nullable = false)
     private String mass;
