@@ -26,7 +26,7 @@ public class WaiterController {
         long percentOfReady = Utils.getPercentageOfReady(order);
         Float totalPriceOfDishes = Utils.getTotalPriceOfDishes(order);
         List<Object> list;
-        list = Arrays.asList(mapDishes, order, percentOfReady, totalPriceOfDishes);
+        list = Arrays.asList(mapDishes, order, percentOfReady, totalPriceOfDishes, order.getDishesFromOrder());
         return list;
     }
 
