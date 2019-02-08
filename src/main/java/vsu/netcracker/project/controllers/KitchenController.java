@@ -1,5 +1,6 @@
 package vsu.netcracker.project.controllers;
 
+import org.hibernate.Session;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,10 @@ import vsu.netcracker.project.database.dao.OrdersDAO;
 import vsu.netcracker.project.database.models.Dishes;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Orders;
+import vsu.netcracker.project.utils.HibernateUtil;
 import vsu.netcracker.project.utils.Utils;
 
+import java.sql.Time;
 import java.util.*;
 
 
@@ -71,4 +74,30 @@ order.getDishesFromOrder()
 
         return dishesFromOrdersKithen;
     }
+
+    // ToDo - у меня тут мысли возникают: а как найти нужное блюдо, если 2 одинаковых будет в заказе? (ну только если по id, но как его получить?)
+
+    /* @PostMapping("/status-change")
+    public void changeStatus(@RequestBody Map<String, Object> json) {
+        /* передаем блюдо и заказ, к которому он относится (или нет смысла передавать заказ?) - меняем статус блюда
+         в заказе - меняем статус заказа
+        try (Session session = HibernateUtil.getSession()) {
+            session.beginTransaction();
+            String status = (String) json.values().toArray()[0];
+            for (DishesFromOrder dishFromOrder : order.getDishesFromOrder()) {
+                if (dishFromOrder.getDishesSet().getName().equals(name)) {
+                    dish = dishFromOrder.getDishesSet();
+                    break;
+                }
+            }
+            Time realTime = dish.getPreparingTime();
+            DishesFromOrder dishesFromOrder = new DishesFromOrder(realTime, "В ожидании",
+                    session.load(Orders.class, Objects.requireNonNull(order).getId()),
+                    session.load(Dishes.class, dish.getId()));
+            session.delete(dishesFromOrder);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    } */
 }

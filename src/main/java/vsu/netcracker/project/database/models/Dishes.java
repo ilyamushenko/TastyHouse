@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "Dishes")
@@ -131,25 +130,5 @@ public class Dishes {
 
     public void setDishesFromOrder(List<DishesFromOrder> dishesFromOrder) {
         this.dishesFromOrder = dishesFromOrder;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Dishes dishes = (Dishes) o;
-        return getId().equals(dishes.getId()) &&
-                getName().equals(dishes.getName()) &&
-                getPrice().equals(dishes.getPrice()) &&
-                getIngredient().equals(dishes.getIngredient()) &&
-                getRecipe().equals(dishes.getRecipe()) &&
-                getMass().equals(dishes.getMass()) &&
-                getPreparingTime().equals(dishes.getPreparingTime()) &&
-                getImgUrl().equals(dishes.getImgUrl());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getPrice(), getIngredient(), getRecipe(), getMass(), getPreparingTime(), getImgUrl());
     }
 }

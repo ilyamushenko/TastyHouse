@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.sql.Time;
-import java.util.Objects;
+
+// ToDo - я тут подумал: надо применить аннотацию @Formula для расчета процента для прогесс бара у официанта (ну попробовать по крайней мере)
 
 @Entity
 @Table(name = "DishesFromOrder")
@@ -75,20 +76,5 @@ public class DishesFromOrder {
 
     public void setDishesSet(Dishes dish) {
         this.dish = dish;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DishesFromOrder that = (DishesFromOrder) o;
-        return getId().equals(that.getId()) &&
-                getRealTime().equals(that.getRealTime()) &&
-                getStatus().equals(that.getStatus());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getRealTime(), getStatus());
     }
 }

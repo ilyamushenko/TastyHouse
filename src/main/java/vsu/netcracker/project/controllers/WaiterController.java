@@ -10,6 +10,7 @@ import vsu.netcracker.project.utils.Utils;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -37,6 +38,14 @@ public class WaiterController {
         mapOrders = Utils.convertListToMap(orders, 4);
         return mapOrders;
     }
+
+    /*
+    ToDo - сделать запросы к бд с кухни, меню и админа (ниже описание)
+    Вопрос: а откуда мне узнать с какого столика все это?
+    При нажатии на "Купить" блюдо должно добавиться в заказ, при отжатии - удалиться из него
+    На кухне при нажатии "Взять" и "Готово" блюдо меняет свой статус в заказе и статус всего заказа меняется
+    У админа пока не смотрел
+    */
 }
 
 
