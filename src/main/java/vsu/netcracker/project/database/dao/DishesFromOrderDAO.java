@@ -3,6 +3,7 @@ package vsu.netcracker.project.database.dao;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import vsu.netcracker.project.database.models.DishesFromOrder;
+import vsu.netcracker.project.database.models.Orders;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -12,4 +13,5 @@ import java.util.List;
 public interface DishesFromOrderDAO extends CrudRepository<DishesFromOrder, Long> {
 
     List<DishesFromOrder> findAll();
+    DishesFromOrder findDishesFromOrderByOrder(Orders order);
 }

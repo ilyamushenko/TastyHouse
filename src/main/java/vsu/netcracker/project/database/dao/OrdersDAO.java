@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import vsu.netcracker.project.database.models.Orders;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Transactional
@@ -12,6 +13,8 @@ import java.util.List;
 public interface OrdersDAO extends CrudRepository<Orders, Long> {
 
     Orders findByTableNumber(Long tableNumber);
+
+    List<Orders> findByDateOrdersBetween(Timestamp dateOrders, Timestamp dateOrders2);
 
     List<Orders> findAll();
 }

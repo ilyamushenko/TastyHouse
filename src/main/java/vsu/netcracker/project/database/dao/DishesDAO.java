@@ -12,6 +12,6 @@ import java.util.List;
 public interface DishesDAO extends CrudRepository<Dishes, Long> {
 
     List<Dishes> findByName(String name);
-
+    Dishes findById(long id);
     List<Dishes> findAll();
 }
