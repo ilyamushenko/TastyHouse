@@ -48,6 +48,8 @@ INSERT INTO orders (table_number, date_orders, type, staff_id, statuses_id, type
 INSERT INTO orders (table_number, date_orders, type, staff_id, statuses_id, type_payment_id) VALUES (16, TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 2, 2);
 INSERT INTO orders (table_number, date_orders, type, staff_id, statuses_id, type_payment_id) VALUES (17, TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 5, 1);
 INSERT INTO orders (table_number, date_orders, type, staff_id, statuses_id, type_payment_id) VALUES (18, TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 6, 2);
+INSERT INTO orders (table_number, date_orders, type, staff_id, statuses_id, type_payment_id) VALUES (19, TIMESTAMP '2018-07-23 18:15:00', 'На месте', 1, 2, 1);
+
 
 /* Вставка типов блюд */
 INSERT INTO type_dish (title) VALUES ('Салаты'); /* 1 */
@@ -229,3 +231,4 @@ INSERT INTO dishes_from_order (real_time, status, orders_id, dishes_id) VALUES (
 INSERT INTO dishes_from_order (real_time, status, orders_id, dishes_id) VALUES (TIME '00:40:00', 'Готовится', 3, 8);
 INSERT INTO dishes_from_order (real_time, status, orders_id, dishes_id) VALUES (TIME '02:00:00', 'Готовится', 3, 9);
 INSERT INTO dishes_from_order (real_time, status, orders_id, dishes_id) VALUES (TIME '01:10:00', 'Готово', 3, 10);
+INSERT INTO dishes_from_order (real_time, status, orders_id, dishes_id) VALUES (TIME '00:18:00', 'Готово', 3, 4);a
