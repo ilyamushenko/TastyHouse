@@ -9,9 +9,9 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface OrdersDAO extends CrudRepository<Orders, Long> {
+public interface OrdersDAO extends CrudRepository<Orders, Integer> {
 
-    Orders findByTableNumber(Long tableNumber);
+    Orders findByTableNumber(Integer tableNumber);
 
     List<Orders> findAll();
 }

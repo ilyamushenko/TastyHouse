@@ -1,39 +1,42 @@
 package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.criterion.Order;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Statuses")
-public class Statuses {
+@Table(name = "statuses")
+public class Statuses implements Serializable {
+
+    private static final long serialVersionUID = 4L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "statuses_id")
-    private Long id;
+    private Integer id;
     @Column(name = "title", nullable = false)
     private String title;
-    @OneToMany
+    @OneToMany(mappedBy = "statuses", cascade = CascadeType.ALL)
     @JsonBackReference
-    @JoinColumn(name = "statuses_id", updatable = false, insertable = false)
     private List<Orders> orders;
 
     public Statuses() {
 
     }
 
-    public Statuses(String title, List<Orders> orders) {
+    public Statuses(String title) {
         this.title = title;
-        this.orders = orders;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

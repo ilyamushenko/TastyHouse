@@ -9,9 +9,9 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface DishesDAO extends CrudRepository<Dishes, Long> {
+public interface DishesDAO extends CrudRepository<Dishes, Integer> {
 
-    List<Dishes> findByName(String name);
+    Dishes findByName(String name);
 
     List<Dishes> findAll();
 }

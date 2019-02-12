@@ -1,27 +1,17 @@
 package vsu.netcracker.project.controllers;
 
-import org.hibernate.Session;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.dao.DishesDAO;
 import vsu.netcracker.project.database.dao.DishesFromOrderDAO;
 import vsu.netcracker.project.database.dao.OrdersDAO;
-import vsu.netcracker.project.database.models.Dishes;
+import vsu.netcracker.project.database.dao.StatusesDAO;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Orders;
-import vsu.netcracker.project.utils.HibernateUtil;
+import vsu.netcracker.project.database.models.Statuses;
 import vsu.netcracker.project.utils.Utils;
 
-import java.sql.Time;
-import java.util.*;
-
-
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -32,18 +22,18 @@ import java.util.Map;
 public class KitchenController {
 
     @Autowired
-    private DishesDAO dishesDAO;
-    @Autowired
     private OrdersDAO ordersDAO;
     @Autowired
     private DishesFromOrderDAO dishesFromOrderDAO;
+    @Autowired
+    private StatusesDAO statusesDAO;
 
     @GetMapping
     public List<DishesFromOrder> showTables() {
         List<Orders> orders = ordersDAO.findAll();
         List<DishesFromOrder> dishesFromOrders = dishesFromOrderDAO.findAll();
         List<DishesFromOrder> dishesFromOrdersKithen = new ArrayList<>();
-        for (DishesFromOrder dishesFromOrder: dishesFromOrders
+        for (DishesFromOrder dishesFromOrder : dishesFromOrders
         ) {
             if (dishesFromOrder.getStatus().equals("В ожидании"))
                 dishesFromOrdersKithen.add(dishesFromOrder);
@@ -63,7 +53,7 @@ order.getDishesFromOrder()
         /*
         for (DishesFromOrder dishesFromOrder: dishesFromOrders
         ) {
-            if (dishesFromOrder.getOrdersSet().equals(orders_kitchen))
+            if (dishesFromOrder.getOrder().equals(orders_kitchen))
                 orders_kitchen.add(order);
         }*/
         //Map<Integer, List<Dishes>> mapOrders;
@@ -75,29 +65,33 @@ order.getDishesFromOrder()
         return dishesFromOrdersKithen;
     }
 
-    // ToDo - у меня тут мысли возникают: а как найти нужное блюдо, если 2 одинаковых будет в заказе? (ну только если по id, но как его получить?)
-
-    /* @PostMapping("/status-change")
+    // ToDo - по хорошему надо менять этот метод с учетом добавленных кнопок
+    @PostMapping("/status-change") // пока не работает
     public void changeStatus(@RequestBody Map<String, Object> json) {
-        /* передаем блюдо и заказ, к которому он относится (или нет смысла передавать заказ?) - меняем статус блюда
-         в заказе - меняем статус заказа
-        try (Session session = HibernateUtil.getSession()) {
-            session.beginTransaction();
-            String status = (String) json.values().toArray()[0];
-            for (DishesFromOrder dishFromOrder : order.getDishesFromOrder()) {
-                if (dishFromOrder.getDishesSet().getName().equals(name)) {
-                    dish = dishFromOrder.getDishesSet();
+        String status = (String) json.values().toArray()[0];
+        String name = (String) json.values().toArray()[1];
+        Integer tableNumber = (Integer) json.values().toArray()[2];
+        Orders order = ordersDAO.findByTableNumber(tableNumber);
+        for (DishesFromOrder dishFromOrder : order.getDishesFromOrder()) {
+            if (dishFromOrder.getDish().getName().equals(name)) {
+                if (!dishFromOrder.getStatus().equals("Готово")) {
+                    dishFromOrder.setStatus(status);
+                    dishesFromOrderDAO.save(dishFromOrder);
                     break;
                 }
             }
-            Time realTime = dish.getPreparingTime();
-            DishesFromOrder dishesFromOrder = new DishesFromOrder(realTime, "В ожидании",
-                    session.load(Orders.class, Objects.requireNonNull(order).getId()),
-                    session.load(Dishes.class, dish.getId()));
-            session.delete(dishesFromOrder);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-    } */
+        Statuses statuses = statusesDAO.findByTitle("no_one_here");
+        if (status.equals("Готово") && order.getDishesFromOrder().stream().anyMatch(s -> s.getStatus().equals("Готово"))) {
+            statuses = statusesDAO.findByTitle("dish_is_ready");
+        }
+        else if (status.equals("Готовится") && order.getDishesFromOrder().stream().anyMatch(s -> s.getStatus().equals("Готовится"))) {
+            statuses = statusesDAO.findByTitle("in_process_of_cooking");
+        }
+        else if (status.equals("В ожидании") && order.getDishesFromOrder().stream().allMatch(s -> s.getStatus().equals("В ожидании"))) {
+            statuses = statusesDAO.findByTitle("no_one_here");
+        }
+        order.setStatuses(statuses);
+        ordersDAO.save(order);
+    }
 }

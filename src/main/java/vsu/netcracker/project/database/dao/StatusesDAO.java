@@ -9,7 +9,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface StatusesDAO extends CrudRepository<Statuses, Long> {
+public interface StatusesDAO extends CrudRepository<Statuses, Integer> {
 
     Statuses findByTitle(String title);
 

@@ -3,21 +3,24 @@ package vsu.netcracker.project.database.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TypePayment")
-public class TypePayment {
+@Table(name = "type_payment")
+public class TypePayment implements Serializable {
+
+    private static final long serialVersionUID = 4L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_payment_id")
-    private Long id;
+    private Integer id;
     @Column(name = "title", nullable = false)
     private String title;
-    @OneToMany
+    @OneToMany(mappedBy = "typePayment", cascade = CascadeType.ALL)
     @JsonBackReference
-    @JoinColumn(name = "type_payment_id", insertable = false, updatable = false)
     private List<Orders> orders;
 
     public TypePayment() {
@@ -29,11 +32,11 @@ public class TypePayment {
         this.orders = orders;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

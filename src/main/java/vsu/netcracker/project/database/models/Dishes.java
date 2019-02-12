@@ -4,16 +4,20 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
 
 @Entity
-@Table(name = "Dishes")
-public class Dishes {
+@Table(name = "dishes")
+public class Dishes implements Serializable {
+
+    private static final long serialVersionUID = 4L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dishes_id")
-    private Long id;
+    private Integer id;
     @Column(name = "name", nullable = false) // есть еще @NotNull
     private String name;
     @Column(name = "price", nullable = false)
@@ -24,7 +28,7 @@ public class Dishes {
     private String recipe;
     @Column(name = "mass", nullable = false)
     private String mass;
-    @Column(name = "preparingTime", nullable = false)
+    @Column(name = "preparing_time", nullable = false)
     private Time preparingTime;
     @Column(name = "img_url", nullable = false)
     private String imgUrl;
@@ -32,9 +36,8 @@ public class Dishes {
     @JsonManagedReference
     @JoinColumn(name = "type_dish_id")
     private TypeDish typeDish;
-    @OneToMany
+    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
     @JsonBackReference
-    @JoinColumn(name = "dishes_id", insertable = false, updatable = false)
     private List<DishesFromOrder> dishesFromOrder;
 
     public Dishes() {
@@ -60,11 +63,11 @@ public class Dishes {
         this.imgUrl = imgUrl;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

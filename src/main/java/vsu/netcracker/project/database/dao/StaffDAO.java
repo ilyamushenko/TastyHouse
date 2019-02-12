@@ -9,7 +9,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface StaffDAO extends CrudRepository<Staff, Long> {
+public interface StaffDAO extends CrudRepository<Staff, Integer> {
 
     Staff findByEmail(String email);
 

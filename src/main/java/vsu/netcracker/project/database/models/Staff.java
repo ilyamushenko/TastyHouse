@@ -3,19 +3,23 @@ package vsu.netcracker.project.database.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Staff")
-public class Staff {
+@Table(name = "staff")
+public class Staff implements Serializable {
+
+    private static final long serialVersionUID = 4L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id")
-    private Long id;
-    @Column(name = "lastName", nullable = false)
+    private Integer id;
+    @Column(name = "last_name", nullable = false)
     private String lastName;
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     private String firstName;
     @Column(name = "phone", nullable = false)
     private String phone;
@@ -29,9 +33,8 @@ public class Staff {
     @JsonManagedReference
     @JoinColumn(name = "role_staff_id")
     private RoleStaff roleStaff;
-    @OneToMany
+    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
     @JsonManagedReference
-    @JoinColumn(name = "staff_id", insertable = false, updatable = false)
     private List<Orders> ordersSet;
 
     public Staff() {
@@ -48,11 +51,11 @@ public class Staff {
         this.roleStaff = roleStaff;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -3,6 +3,7 @@ package vsu.netcracker.project.utils;
 import vsu.netcracker.project.database.models.Dishes;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Orders;
+import vsu.netcracker.project.database.models.Statuses;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class Utils {
         List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
         List<Dishes> list = new ArrayList<>();
         for (DishesFromOrder dishFromOrder : dishesFromOrder) {
-            list.add(dishFromOrder.getDishesSet());
+            list.add(dishFromOrder.getDish());
         }
         for (int i = 0; i < list.size(); i += step) {
             if (i + step < list.size())
@@ -38,6 +39,8 @@ public class Utils {
         }
         return map;
     }
+
+    // ToDo - сделать правильный подсчет времени для прогресс бара у официанта
 
     public static long getPercentageOfReady(Orders order) {
         Timestamp nowTimestamp = new Timestamp(System.currentTimeMillis());
@@ -52,7 +55,7 @@ public class Utils {
         Float sum = 0.0f;
         List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
         for (DishesFromOrder dishFromOrder : dishesFromOrder) {
-            sum += dishFromOrder.getDishesSet().getPrice();
+            sum += dishFromOrder.getDish().getPrice();
         }
         return sum;
     }
@@ -61,7 +64,7 @@ public class Utils {
         long orderTotalTimeSeconds = 0;
         List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
         for (DishesFromOrder dishFromOrder : dishesFromOrder) {
-            orderTotalTimeSeconds += dishFromOrder.getDishesSet().getPreparingTime().toLocalTime().toSecondOfDay();
+            orderTotalTimeSeconds += dishFromOrder.getDish().getPreparingTime().toLocalTime().toSecondOfDay();
         }
         return orderTotalTimeSeconds;
     }

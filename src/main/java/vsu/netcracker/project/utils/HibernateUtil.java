@@ -15,10 +15,9 @@ public class HibernateUtil {
     static {
         try {
             Properties prop= new Properties();
-            prop.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost:5432/TastyHouse");
+            prop.setProperty("hibernate.connection.url", "jdbc:postgresql:TastyHouse");
             prop.setProperty("hibernate.connection.username", "postgres");
             prop.setProperty("hibernate.connection.password", "0000");
-            prop.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
 
             concreteSessionFactory = new Configuration().addProperties(prop)
                     .addAnnotatedClass(DishesFromOrder.class)

@@ -5,10 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-/*  ToDo:
-    1. Прикрутить Vue.js к страничкам
-    2. Подправить подсчет времени в прогресс баре
-*/
+// ToDo - добавить в приложение логирование и java doc (по возможности и желанию)
 
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {

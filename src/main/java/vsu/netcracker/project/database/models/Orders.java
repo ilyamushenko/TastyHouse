@@ -4,30 +4,33 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Orders")
-public class Orders {
+@Table(name = "orders")
+public class Orders implements Serializable {
+
+    private static final long serialVersionUID = 4L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orders_id")
-    private Long id;
+    private Integer id;
     @Column(name = "type", nullable = false)
     private String type;
-    @Column(name = "tableNumber", nullable = false)
-    private Long tableNumber;
-    @Column(name = "dateOrders", nullable = false)
+    @Column(name = "table_number", nullable = false)
+    private Integer tableNumber;
+    @Column(name = "date_orders", nullable = false)
     private Timestamp dateOrders;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "type_payment_id")
     private TypePayment typePayment;
-    @OneToMany
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonBackReference
-    @JoinColumn(name = "orders_id", insertable = false, updatable = false)
     private List<DishesFromOrder> dishesFromOrder;
     @ManyToOne
     @JsonManagedReference
@@ -42,7 +45,7 @@ public class Orders {
 
     }
 
-    public Orders(String type, Long tableNumber, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, Statuses statuses) {
+    public Orders(String type, Integer tableNumber, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, Statuses statuses) {
         this.type = type;
         this.tableNumber = tableNumber;
         this.dateOrders = dateOrders;
@@ -66,11 +69,11 @@ public class Orders {
         this.staff = staff;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -82,11 +85,11 @@ public class Orders {
         this.type = type;
     }
 
-    public Long getTableNumber() {
+    public Integer getTableNumber() {
         return tableNumber;
     }
 
-    public void setTableNumber(Long tableNumber) {
+    public void setTableNumber(Integer tableNumber) {
         this.tableNumber = tableNumber;
     }
 

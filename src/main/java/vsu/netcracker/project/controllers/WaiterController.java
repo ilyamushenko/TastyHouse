@@ -21,7 +21,7 @@ public class WaiterController {
     private OrdersDAO ordersDAO;
 
     @GetMapping("/orders/{tableNumber}")
-    public List<Object> showOrdersOnTable(@PathVariable Long tableNumber) {
+    public List<Object> showOrdersOnTable(@PathVariable Integer tableNumber) {
         Orders order = ordersDAO.findByTableNumber(tableNumber);
         Map<Integer, List<Dishes>> mapDishes = Utils.convertListToMap(order, 2);
         long percentOfReady = Utils.getPercentageOfReady(order);

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface RoleStaffDAO extends CrudRepository<RoleStaff, Long> {
+public interface RoleStaffDAO extends CrudRepository<RoleStaff, Integer> {
 
     RoleStaff findByTitle(String title);
 

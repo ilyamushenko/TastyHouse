@@ -9,7 +9,7 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface TypeDishDAO extends CrudRepository<TypeDish, Long> {
+public interface TypeDishDAO extends CrudRepository<TypeDish, Integer> {
 
     TypeDish findByTitle(String title);
 
