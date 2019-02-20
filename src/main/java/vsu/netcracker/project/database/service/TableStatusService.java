@@ -12,5 +12,7 @@ public interface TableStatusService {
 
     TableStatus editStatus(TableStatus status);
 
+    TableStatus findByTitle(String title);
+
     List<TableStatus> findAll();
 }

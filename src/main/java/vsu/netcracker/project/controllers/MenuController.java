@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -34,6 +35,8 @@ public class MenuController {
     @Autowired
     private DishStatusService dishStatusService;
 
+    private List<Dishes> cart = new ArrayList<>();
+
     @GetMapping("menu/{dishType}")
     public List<Dishes> showTables(@PathVariable String dishType) {
         List<Dishes> dishes = dishesService.findAll();
@@ -47,7 +50,6 @@ public class MenuController {
         return selectedDish;
     }
 
-    // ToDo - изменить этот метод с учетом добавленных кнопок
     // ToDo - как достать номер столика, с которого заказал посетитель? И если он захочет вдруг пересесть на другой?
     @PostMapping("/buy")
     public void buyDish(@RequestBody Map<String, Object> json) {
@@ -65,7 +67,6 @@ public class MenuController {
         dishesFromOrderService.addDishFromOrder(dishesFromOrder);
     }
 
-    // ToDo - изменить этот метод с учетом добавленных кнопок
     @PostMapping("/remove")
     public void removeDish(@RequestBody Map<String, Object> json) {
         Integer id = (Integer) json.values().toArray()[0];
@@ -81,6 +82,23 @@ public class MenuController {
         order.getDishesFromOrder().remove(dishesFromOrder);
         dish.getDishesFromOrder().remove(dishesFromOrder);
         dishesFromOrderService.delete(Objects.requireNonNull(dishesFromOrder).getId());
-        // ToDo - вроде все удаляет, но почему-то появляются "мертвые" кортежи
+    }
+
+    @PostMapping("/add")
+    public void addDishToCart(@RequestBody Map<String, Object> json) {
+        Integer dishId = (Integer) json.values().toArray()[0];
+        Dishes dish = dishesService.getById(dishId);
+        cart.add(dish);
+    }
+
+    @PostMapping("/delete")
+    public void deleteDishFromCart(@RequestBody Map<String, Object> json) {
+        Integer dishId = (Integer) json.values().toArray()[0];
+        for (Dishes d : cart) {
+            if (d.getId().equals(dishId)) {
+                cart.remove(d);
+                break;
+            }
+        }
     }
 }

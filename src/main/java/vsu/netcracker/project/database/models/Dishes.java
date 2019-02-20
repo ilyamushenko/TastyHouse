@@ -33,6 +33,8 @@ public class Dishes implements Serializable {
     private Time preparingTime;
     @Column(name = "img_url", nullable = false)
     private String imgUrl;
+    @Column(name = "description", nullable = false)
+    private String description;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "type_dish_id")
@@ -62,6 +64,14 @@ public class Dishes implements Serializable {
         this.preparingTime = preparingTime;
         this.typeDish = typeDish;
         this.dishesFromOrder = dishesFromOrder;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Staff> getStaffList() {

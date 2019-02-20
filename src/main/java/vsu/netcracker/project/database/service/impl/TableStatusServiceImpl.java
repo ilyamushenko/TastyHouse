@@ -30,6 +30,11 @@ public class TableStatusServiceImpl implements TableStatusService {
     }
 
     @Override
+    public TableStatus findByTitle(String title) {
+        return tableStatusDAO.findByTitle(title);
+    }
+
+    @Override
     public List<TableStatus> findAll() {
         return tableStatusDAO.findAll();
     }

@@ -7,8 +7,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 // ToDo - добавить в приложение логирование и java doc (по возможности и желанию)
 
-// ToDo - исправить везде фронтенд и контроллеры!!!!
-
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {

@@ -90,8 +90,8 @@ INSERT INTO type_dish (title) VALUES ('Рыба и морепродукты'); /
 /* Вставка блюд */
 /* Ингредиенты, рецепт, масса, время - поставил кавычки как заглушку, можете вставлять туда что вам нужно */ 
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Цезарь с курицей', 250.9,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Цезарь с курицей', '', 250.9,
 'Чеснок луковица-2 г <br>
 Салат Романо-35 г <br>
 Помидоры-45 г <br>
@@ -110,8 +110,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 7. На крупной терке натираем “Пармезан”.',
  '200 г.', TIME '00:40:00', '/img/cezar.jpg', 1);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Салат с креветками', 200,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Салат с креветками', '', 200,
 'Очищенные вареные креветки 150 г <br>
 Помидоры 1 штука <br>
 Оливковое масло по вкусу <br>
@@ -121,8 +121,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 2. Все, вместе с креветками, смешайте. Добавьте соль по вкусу и заправьте оливковым маслом.',
  '250 г.', TIME '00:50:00', '/img/krevetki.jpg', 1);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Салат с красной рыбой', 150,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Салат с красной рыбой', '', 150,
 'Слабосоленая семга 50 г <br>
 Сметана по вкусу <br>
 Перепелиное яйцо 3 штуки <br>
@@ -136,8 +136,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 5. Добавьте соль, укроп и зеленый лук.',
 '200', TIME '00:25:00', '/img/salat-s-krasnoj-ryboj.jpg', 1);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Бутерброды с красной икрой и сыром', 100,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Бутерброды с красной икрой и сыром', '', 100,
 'Батон 2 куска <br>
 Икра красная 20 г <br>
 Зелень укропа  5 г <br>
@@ -149,8 +149,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 4.Украсить каждый бутерброд веточкой укропа.',
 '100 г', TIME '00:10:00', '/img/buterbrody-s-krasnoj-ikroj-i-syrom.jpg', 2);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Новогодний десерт "Радость обезьянки"', 200,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Новогодний десерт "Радость обезьянки"', '', 200,
 'Сливочное мороженое 200 гр.<br>
 Молоко	200 мл.<br>
 Бананы	2 шт.<br>
@@ -163,8 +163,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 5. Присыпать шоколадом и убрать в холод до подачи.',
 '250 мл', TIME '00:10:00', '/img/novogodnij-desert-radost-obezyanki.jpg', 4);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Тирамису', 300,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Тирамису', '', 300,
 'Яйцо куриное 0,5 штуки <br>
 Сыр маскарпоне 50 г <br>
 Печенье савоярди 7,5 штуки <br>
@@ -182,7 +182,7 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 8. Затем — оставшееся пропитанное печенье.',
 '200 г', TIME '00:15:00', '/img/tiramisu.jpg', 4);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES ('Курица с картошкой «Праздничная»', 200,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES ('Курица с картошкой «Праздничная»', '', 200,
 'Курица 0,4 кг  <br>
 Картофель 1,5 штуки <br>
 Чеснок 1,5 зубчика <br>
@@ -196,8 +196,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 5. Запекать в духовке при 200 градусах до готовности курицы.',
 '350 г', TIME '01:00:00', '/img/kurica-s-kartoshkoj-prazdnichnaya.jpg', 3);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Мини-пиццы', 100,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Мини-пиццы', '', 100,
 'Чиабатта 0,5 штуки <br>
 Сыр 100 г <br>
 Бекон 100 г <br>
@@ -217,8 +217,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 9. Выпекать при температуре 200–220 градусов 10–15 минут. ',
 '400 г', TIME '00:30:00', '/img/mini-piccy.jpg', 3);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Минтай в духовке', 150,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Минтай в духовке', '', 150,
 'Лук репчатый 0,5 штуки <br>
 Морковь 0,5 штуки <br>
 Пшеничная мука 1,5 чайные ложки <br>
@@ -234,8 +234,8 @@ INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img
 5. Запекать в духовке при 180 градусах 20 минут.',
 '250 г', TIME '00:40:00', '/img/mintaj-v-duhovke.jpg', 5);
 
-INSERT INTO "dishes" (name, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
-'Грибной суп из шампиньонов', 200,
+INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+'Грибной суп из шампиньонов', '', 200,
 'Шампиньоны 100 г <br>
 Картофель 1 штука <br>
 Лук репчатый 0,5 штуки <br>

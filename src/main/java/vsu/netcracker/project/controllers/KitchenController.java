@@ -2,14 +2,8 @@ package vsu.netcracker.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import vsu.netcracker.project.database.models.DishStatus;
-import vsu.netcracker.project.database.models.DishesFromOrder;
-import vsu.netcracker.project.database.models.OrderStatus;
-import vsu.netcracker.project.database.models.Orders;
-import vsu.netcracker.project.database.service.DishStatusService;
-import vsu.netcracker.project.database.service.DishesFromOrderService;
-import vsu.netcracker.project.database.service.OrderStatusService;
-import vsu.netcracker.project.database.service.OrdersService;
+import vsu.netcracker.project.database.models.*;
+import vsu.netcracker.project.database.service.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +26,12 @@ public class KitchenController {
 
     @Autowired
     private DishStatusService dishStatusService;
+
+    @Autowired
+    private TableStatusService tableStatusService;
+
+    @Autowired
+    private RestaurantTableService restaurantTableService;
 
     @GetMapping
     public List<DishesFromOrder> showTables() {
@@ -69,13 +69,13 @@ order.getDishesFromOrder()
         return dishesFromOrdersKithen;
     }
 
-    // ToDo - изменить этот метод с учетом добавленных кнопок
-    @PostMapping("/status-change") // ToDo - после апдейта заказ на дно уходит
+    @PostMapping("/status-change") // ToDo - после апдейта заказ и столик на дно уходят
     public void changeStatus(@RequestBody Map<String, Object> json) {
         String status = (String) json.values().toArray()[0];
         Integer id = (Integer) json.values().toArray()[1];
         Integer tableNumber = (Integer) json.values().toArray()[2];
         Orders order = ordersService.findByTableNumber(tableNumber);
+        RestaurantTable restaurantTable = order.getRestaurantTable();
         DishStatus dishStatus = dishStatusService.findByTitle(status);
         for (DishesFromOrder dishFromOrder : order.getDishesFromOrder()) {
             if (dishFromOrder.getDish().getId().equals(id)) {
@@ -86,16 +86,25 @@ order.getDishesFromOrder()
                 }
             }
         }
-        OrderStatus statuses = null;
+        OrderStatus orderStatus = null;
         if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готово"))) {
-            statuses = orderStatusService.findByTitle("dish_is_ready");
+            orderStatus = orderStatusService.findByTitle("dish_is_ready");
         } else if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готовится"))) {
-            statuses = orderStatusService.findByTitle("in_process_of_cooking");
+            orderStatus = orderStatusService.findByTitle("in_process_of_cooking");
         } else if (order.getDishesFromOrder().stream().allMatch(s -> s.getDishStatus().getTitle().equals("В ожидании"))) {
-            statuses = orderStatusService.findByTitle("no_one_here");
+            orderStatus = orderStatusService.findByTitle("no_one_here");
         }
-        order.setOrderStatus(statuses);
+        order.setOrderStatus(orderStatus);
         ordersService.editOrder(order);
-        // ToDo - почему-то после смены статуса появляются "мертвые" кортежи
+        TableStatus tableStatus = null;
+        if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("dish_is_ready"))) {
+            tableStatus = tableStatusService.findByTitle("dish_is_ready");
+        } else if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("in_process_of_cooking"))) {
+            tableStatus = tableStatusService.findByTitle("in_process_of_cooking");
+        } else if (restaurantTable.getOrdersList().stream().allMatch(s -> s.getOrderStatus().getTitle().equals("no_one_here"))) {
+            tableStatus = tableStatusService.findByTitle("no_one_here");
+        }
+        restaurantTable.setTableStatus(tableStatus);
+        restaurantTableService.editTable(restaurantTable);
     }
 }
