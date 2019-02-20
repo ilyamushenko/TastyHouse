@@ -69,7 +69,8 @@ order.getDishesFromOrder()
         return dishesFromOrdersKithen;
     }
 
-    @PostMapping("/status-change") // ToDo - после апдейта заказ и столик на дно уходят
+    // ToDo - можно позже попробовать осуществить изменение заказа и столика с помощью своих событий
+    @PostMapping("/status-change")
     public void changeStatus(@RequestBody Map<String, Object> json) {
         String status = (String) json.values().toArray()[0];
         Integer id = (Integer) json.values().toArray()[1];
