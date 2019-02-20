@@ -1,4 +1,4 @@
-package vsu.netcracker.project.config;
+/* package vsu.netcracker.project.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -11,4 +11,4 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("http://localhost:8081/login").setViewName("http://localhost:8081/login");
     }
 
-}
+} */

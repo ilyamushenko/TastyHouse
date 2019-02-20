@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
@@ -36,9 +37,17 @@ public class Dishes implements Serializable {
     @JsonManagedReference
     @JoinColumn(name = "type_dish_id")
     private TypeDish typeDish;
-    @OneToMany(mappedBy = "dish", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "dish")
     @JsonBackReference
     private List<DishesFromOrder> dishesFromOrder;
+    @ManyToMany
+    @JoinTable(
+            name = "dishes_and_staff",
+            joinColumns = { @JoinColumn(name = "dishes_id") },
+            inverseJoinColumns = { @JoinColumn(name = "staff_id") }
+    )
+    @JsonManagedReference
+    private List<Staff> staffList;
 
     public Dishes() {
 
@@ -53,6 +62,14 @@ public class Dishes implements Serializable {
         this.preparingTime = preparingTime;
         this.typeDish = typeDish;
         this.dishesFromOrder = dishesFromOrder;
+    }
+
+    public List<Staff> getStaffList() {
+        return staffList;
+    }
+
+    public void setStaffList(List<Staff> staffList) {
+        this.staffList = staffList;
     }
 
     public String getImgUrl() {

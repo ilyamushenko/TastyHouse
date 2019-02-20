@@ -1,12 +1,12 @@
 package vsu.netcracker.project.database.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
-
-// ToDo - я тут подумал: надо применить аннотацию @Formula для расчета процента для прогесс бара у официанта (ну попробовать по крайней мере)
 
 @Entity
 @Table(name = "dishes_from_order")
@@ -20,10 +20,12 @@ public class DishesFromOrder implements Serializable {
     private Integer id;
     @Column(name = "real_time")
     private Time realTime;
-    @Column(name = "status", nullable = false)
-    private String status;
     @ManyToOne
     @JsonManagedReference
+    @JoinColumn(name = "dish_status_id")
+    private DishStatus dishStatus;
+    @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "orders_id")
     private Orders order;
     @ManyToOne
@@ -35,9 +37,9 @@ public class DishesFromOrder implements Serializable {
 
     }
 
-    public DishesFromOrder(Time realTime, String status) {
+    public DishesFromOrder(Time realTime, DishStatus dishStatus) {
         this.realTime = realTime;
-        this.status = status;
+        this.dishStatus = dishStatus;
     }
 
     public Integer getId() {
@@ -56,14 +58,6 @@ public class DishesFromOrder implements Serializable {
         this.realTime = realTime;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public Orders getOrder() {
         return order;
     }
@@ -78,5 +72,13 @@ public class DishesFromOrder implements Serializable {
 
     public void setDish(Dishes dish) {
         this.dish = dish;
+    }
+
+    public DishStatus getDishStatus() {
+        return dishStatus;
+    }
+
+    public void setDishStatus(DishStatus dishStatus) {
+        this.dishStatus = dishStatus;
     }
 }

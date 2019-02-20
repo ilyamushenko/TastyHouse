@@ -1,17 +1,18 @@
 package vsu.netcracker.project.database.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import vsu.netcracker.project.database.models.Dishes;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
-@Transactional
-@Repository
-public interface DishesDAO extends CrudRepository<Dishes, Long> {
+public interface DishesDAO extends JpaRepository<Dishes, Integer> {
 
-    Dishes findByName(String name);
-    Dishes findById(long id);
-    List<Dishes> findAll();
+    @Query("select d from Dishes d where d.name = :name")
+    Dishes findByName(@Param("name") String name);
+
+    @Query("select d from Dishes d where d.id = :id")
+    Dishes getById(@Param("id") Integer id);
 }

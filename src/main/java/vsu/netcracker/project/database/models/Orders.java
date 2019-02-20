@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -21,36 +22,41 @@ public class Orders implements Serializable {
     private Integer id;
     @Column(name = "type", nullable = false)
     private String type;
-    @Column(name = "table_number", nullable = false)
-    private Integer tableNumber;
     @Column(name = "date_orders", nullable = false)
     private Timestamp dateOrders;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "type_payment_id")
     private TypePayment typePayment;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @OneToMany(mappedBy = "order")
+    @JsonManagedReference
     private List<DishesFromOrder> dishesFromOrder;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "statuses_id")
-    private Statuses statuses;
+    @JoinColumn(name = "order_status_id")
+    private OrderStatus orderStatus;
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "staff_id")
-    private Staff staff;
+    @JoinColumn(name = "restaurant_table_id")
+    private RestaurantTable restaurantTable;
 
     public Orders() {
 
     }
 
-    public Orders(String type, Integer tableNumber, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, Statuses statuses) {
+    public Orders(String type, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, OrderStatus orderStatus) {
         this.type = type;
-        this.tableNumber = tableNumber;
         this.dateOrders = dateOrders;
         this.dishesFromOrder = dishesFromOrder;
-        this.statuses = statuses;
+        this.orderStatus = orderStatus;
+    }
+
+    public RestaurantTable getRestaurantTable() {
+        return restaurantTable;
+    }
+
+    public void setRestaurantTable(RestaurantTable restaurantTable) {
+        this.restaurantTable = restaurantTable;
     }
 
     public TypePayment getTypePayment() {
@@ -59,14 +65,6 @@ public class Orders implements Serializable {
 
     public void setTypePayment(TypePayment typePayment) {
         this.typePayment = typePayment;
-    }
-
-    public Staff getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Staff staff) {
-        this.staff = staff;
     }
 
     public Integer getId() {
@@ -85,14 +83,6 @@ public class Orders implements Serializable {
         this.type = type;
     }
 
-    public Integer getTableNumber() {
-        return tableNumber;
-    }
-
-    public void setTableNumber(Integer tableNumber) {
-        this.tableNumber = tableNumber;
-    }
-
     public Timestamp getDateOrders() {
         return dateOrders;
     }
@@ -109,12 +99,12 @@ public class Orders implements Serializable {
         this.dishesFromOrder = dishesFromOrder;
     }
 
-    public Statuses getStatuses() {
-        return statuses;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setStatuses(Statuses statuses) {
-        this.statuses = statuses;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
@@ -124,12 +114,11 @@ public class Orders implements Serializable {
         Orders orders = (Orders) o;
         return getId().equals(orders.getId()) &&
                 getType().equals(orders.getType()) &&
-                getTableNumber().equals(orders.getTableNumber()) &&
                 getDateOrders().equals(orders.getDateOrders());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getTableNumber(), getDateOrders());
+        return Objects.hash(getId(), getType(), getDateOrders());
     }
 }

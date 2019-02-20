@@ -1,4 +1,4 @@
-package vsu.netcracker.project.config;
+/* package vsu.netcracker.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,4 +40,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         return new InMemoryUserDetailsManager(user);
     }
-}
+} */

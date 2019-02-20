@@ -1,34 +1,34 @@
 package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.criterion.Order;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "statuses")
-public class Statuses implements Serializable {
+@Table(name = "order_status")
+public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = 4L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "statuses_id")
+    @Column(name = "order_status_id")
     private Integer id;
     @Column(name = "title", nullable = false)
     private String title;
-    @OneToMany(mappedBy = "statuses", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderStatus")
     @JsonBackReference
     private List<Orders> orders;
 
-    public Statuses() {
+    public OrderStatus() {
 
     }
 
-    public Statuses(String title) {
+    public OrderStatus(String title) {
         this.title = title;
     }
 
@@ -60,9 +60,9 @@ public class Statuses implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Statuses statuses = (Statuses) o;
-        return getId().equals(statuses.getId()) &&
-                getTitle().equals(statuses.getTitle());
+        OrderStatus orderStatus = (OrderStatus) o;
+        return getId().equals(orderStatus.getId()) &&
+                getTitle().equals(orderStatus.getTitle());
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Statuses implements Serializable {
 
     @Override
     public String toString() {
-        return "Statuses{" +
+        return "OrderStatus{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", orders=" + orders +

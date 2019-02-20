@@ -1,8 +1,10 @@
 package vsu.netcracker.project.database.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -33,9 +35,9 @@ public class Staff implements Serializable {
     @JsonManagedReference
     @JoinColumn(name = "role_staff_id")
     private RoleStaff roleStaff;
-    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Orders> ordersSet;
+    @ManyToMany(mappedBy = "staffList")
+    @JsonBackReference
+    private List<Dishes> dishesList;
 
     public Staff() {
 
@@ -49,6 +51,14 @@ public class Staff implements Serializable {
         this.password = password;
         this.login = login;
         this.roleStaff = roleStaff;
+    }
+
+    public List<Dishes> getDishesList() {
+        return dishesList;
+    }
+
+    public void setDishesList(List<Dishes> dishesList) {
+        this.dishesList = dishesList;
     }
 
     public Integer getId() {
@@ -115,14 +125,6 @@ public class Staff implements Serializable {
         this.roleStaff = roleStaff;
     }
 
-    public List<Orders> getOrdersSet() {
-        return ordersSet;
-    }
-
-    public void setOrdersSet(List<Orders> ordersSet) {
-        this.ordersSet = ordersSet;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -153,7 +155,6 @@ public class Staff implements Serializable {
                 ", password='" + password + '\'' +
                 ", login='" + login + '\'' +
                 ", roleStaff=" + roleStaff +
-                ", ordersSet=" + ordersSet +
                 '}';
     }
 }

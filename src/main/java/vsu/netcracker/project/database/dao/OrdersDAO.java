@@ -1,20 +1,18 @@
 package vsu.netcracker.project.database.dao;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.Orders;
 
-import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Transactional
-@Repository
-public interface OrdersDAO extends CrudRepository<Orders, Integer> {
+public interface OrdersDAO extends JpaRepository<Orders, Integer> {
 
-    Orders findByTableNumber(Integer tableNumber);
+    @Query("select o from Orders o where o.id = :tableNumber")
+    Orders findByTableNumber(@Param("tableNumber") Integer tableNumber);
 
-    List<Orders> findByDateOrdersBetween(Timestamp dateOrders, Timestamp dateOrders2);
-
-    List<Orders> findAll();
+    @Query("select o from Orders o where o.dateOrders between :dateOrders and :dateOrders2")
+    List<Orders> findByDateOrdersBetween(@Param("dateOrders") Timestamp dateOrders, @Param("dateOrders2") Timestamp dateOrders2);
 }

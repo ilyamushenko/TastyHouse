@@ -1,17 +1,12 @@
 package vsu.netcracker.project.database.dao;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.RoleStaff;
 
-import javax.transaction.Transactional;
-import java.util.List;
+public interface RoleStaffDAO extends JpaRepository<RoleStaff, Integer> {
 
-@Transactional
-@Repository
-public interface RoleStaffDAO extends CrudRepository<RoleStaff, Integer> {
-
-    RoleStaff findByTitle(String title);
-
-    List<RoleStaff> findAll();
+    @Query("select r from RoleStaff r where r.title = :title")
+    RoleStaff findByTitle(@Param("title") String title);
 }

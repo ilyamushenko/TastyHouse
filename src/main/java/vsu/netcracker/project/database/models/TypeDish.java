@@ -3,6 +3,7 @@ package vsu.netcracker.project.database.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -19,7 +20,7 @@ public class TypeDish implements Serializable {
     private Integer id;
     @Column(name = "title", nullable = false)
     private String title;
-    @OneToMany(mappedBy = "typeDish", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "typeDish")
     @JsonBackReference
     private List<Dishes> dishes;
 

@@ -3,18 +3,15 @@ package vsu.netcracker.project.utils;
 import vsu.netcracker.project.database.models.Dishes;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Orders;
-import vsu.netcracker.project.database.models.Statuses;
+import vsu.netcracker.project.database.models.RestaurantTable;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Utils {
 
-    public static Map<Integer, List<Orders>> convertListToMap(List<Orders> list, int step) {
-        LinkedHashMap<Integer, List<Orders>> map = new LinkedHashMap<>();
+    public static Map<Integer, List<RestaurantTable>> convertListToMap(List<RestaurantTable> list, int step) {
+        LinkedHashMap<Integer, List<RestaurantTable>> map = new LinkedHashMap<>();
         for (int i = 0; i < list.size(); i += step) {
             if (i + step < list.size())
                 map.put(i, list.subList(i, i + step));
@@ -40,32 +37,56 @@ public class Utils {
         return map;
     }
 
-    // ToDo - сделать правильный подсчет времени для прогресс бара у официанта
-
-    public static long getPercentageOfReady(Orders order) {
-        Timestamp nowTimestamp = new Timestamp(System.currentTimeMillis());
-        long nowSeconds = nowTimestamp.toLocalDateTime().toLocalTime().toSecondOfDay();
-        long orderSeconds = order.getDateOrders().toLocalDateTime().toLocalTime().toSecondOfDay();
-        long orderTotalTimeSeconds = getTotalTimeOfCooking(order);
-        long timestampDiff = Math.abs(nowSeconds - orderSeconds);
-        return 100 * timestampDiff / orderTotalTimeSeconds;
-    }
-
-    public static Float getTotalPriceOfDishes(Orders order) {
-        Float sum = 0.0f;
-        List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
-        for (DishesFromOrder dishFromOrder : dishesFromOrder) {
-            sum += dishFromOrder.getDish().getPrice();
+    public static Map<Integer, Map<Integer, List<DishesFromOrder>>> convertListToMapWithMap(List<Orders> orders, int step) {
+        LinkedHashMap<Integer, Map<Integer, List<DishesFromOrder>>> map = new LinkedHashMap<>();
+        for (int i = 0; i < orders.size(); i++) {
+            LinkedHashMap<Integer, List<DishesFromOrder>> tempMap = new LinkedHashMap<>();
+            for (int j = 0; j < orders.get(i).getDishesFromOrder().size(); j += step) {
+                if (j + step < orders.get(i).getDishesFromOrder().size())
+                    tempMap.put(j, orders.get(i).getDishesFromOrder().subList(j, j + step));
+                else
+                    tempMap.put(j, orders.get(i).getDishesFromOrder().subList(j, orders.get(i).getDishesFromOrder().size()));
+            }
+            map.put(i, tempMap);
         }
-        return sum;
+        return map;
     }
 
-    private static long getTotalTimeOfCooking(Orders order) {
-        long orderTotalTimeSeconds = 0;
+    public static List<Integer> getPercentageOfReady(List<Orders> orders) {
+        List<Integer> listPercentageOfReady = new ArrayList<>();
+        Timestamp nowTimestamp = new Timestamp(System.currentTimeMillis());
+        Integer nowSeconds = nowTimestamp.toLocalDateTime().toLocalTime().toSecondOfDay();
+        for (Orders order : orders) {
+            Integer orderSeconds = order.getDateOrders().toLocalDateTime().toLocalTime().toSecondOfDay();
+            Integer orderTotalTimeSeconds = getTotalTimeOfCooking(order);
+            Integer timestampDiff = Math.abs(nowSeconds - orderSeconds);
+            if (timestampDiff >= orderTotalTimeSeconds)
+                listPercentageOfReady.add(100);
+            else
+                listPercentageOfReady.add(100 * timestampDiff / orderTotalTimeSeconds);
+        }
+        return listPercentageOfReady;
+    }
+
+    private static Integer getTotalTimeOfCooking(Orders order) {
+        int orderTotalTimeSeconds = 0;
         List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
         for (DishesFromOrder dishFromOrder : dishesFromOrder) {
             orderTotalTimeSeconds += dishFromOrder.getDish().getPreparingTime().toLocalTime().toSecondOfDay();
         }
         return orderTotalTimeSeconds;
+    }
+
+    public static List<Float> getTotalPriceOfDishes(List<Orders> orders) {
+        List<Float> listTotalPriceOfDishes = new ArrayList<>();
+        for (Orders order : orders) {
+            Float sum = 0.0f;
+            List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
+            for (DishesFromOrder dishFromOrder : dishesFromOrder) {
+                sum += dishFromOrder.getDish().getPrice();
+            }
+            listTotalPriceOfDishes.add(sum);
+        }
+        return listTotalPriceOfDishes;
     }
 }

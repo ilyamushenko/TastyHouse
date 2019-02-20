@@ -1,17 +1,12 @@
 package vsu.netcracker.project.database.dao;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.TypePayment;
 
-import javax.transaction.Transactional;
-import java.util.List;
+public interface TypePaymentDAO extends JpaRepository<TypePayment, Integer> {
 
-@Transactional
-@Repository
-public interface TypePaymentDAO extends CrudRepository<TypePayment, Integer> {
-
-    TypePayment findByTitle(String title);
-
-    List<TypePayment> findAll();
+    @Query("select tp from TypePayment tp where tp.title = :title")
+    TypePayment findByTitle(@Param("title") String title);
 }
