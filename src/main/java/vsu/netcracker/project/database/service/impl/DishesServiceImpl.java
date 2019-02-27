@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.DishesService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class DishesServiceImpl implements DishesService {
 

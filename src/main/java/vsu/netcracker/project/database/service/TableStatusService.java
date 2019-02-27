@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.TableStatus;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface TableStatusService {
 
     TableStatus addStatus(TableStatus status);

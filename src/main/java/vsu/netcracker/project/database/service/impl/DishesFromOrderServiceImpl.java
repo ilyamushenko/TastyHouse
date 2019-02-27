@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.DishesFromOrderService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class DishesFromOrderServiceImpl implements DishesFromOrderService {
 
@@ -36,6 +39,6 @@ public class DishesFromOrderServiceImpl implements DishesFromOrderService {
 
     @Override
     public DishesFromOrder findDishesFromOrderByOrder(Integer orderId) {
-        return dishesFromOrderDAO.findDishesFromOrderByOrder(orderId);
+        return dishesFromOrderDAO.findDishesFromOrderById(orderId);
     }
 }

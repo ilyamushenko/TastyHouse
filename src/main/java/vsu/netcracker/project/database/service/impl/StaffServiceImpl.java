@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.StaffService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class StaffServiceImpl implements StaffService {
 

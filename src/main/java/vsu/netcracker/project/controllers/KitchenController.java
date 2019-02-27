@@ -9,30 +9,96 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Controller class for handle kitchen requests
+ * @author Алина Попова
+ */
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("kitchen")
 public class KitchenController {
 
+    /**
+     * service for interaction with {@link DishesFromOrder} objects
+     */
     @Autowired
     private DishesFromOrderService dishesFromOrderService;
 
+    /**
+     * service for interaction with {@link Orders} objects
+     */
     @Autowired
     private OrdersService ordersService;
 
+    /**
+     * service for interaction with {@link OrderStatus} objects
+     */
     @Autowired
     private OrderStatusService orderStatusService;
 
+    /**
+     * service for interaction with {@link DishStatus} objects
+     */
     @Autowired
     private DishStatusService dishStatusService;
 
+    /**
+     * service for interaction with {@link TableStatus} objects
+     */
     @Autowired
     private TableStatusService tableStatusService;
 
+    /**
+     * service for interaction with {@link RestaurantTable} objects
+     */
     @Autowired
     private RestaurantTableService restaurantTableService;
 
+    /**
+     * function, which changes the {@link TableStatus} of {@link RestaurantTable}
+     *
+     * @param restaurantTable - the {@link RestaurantTable}, which we need to update
+     * @see KitchenController#changeDishStatus(Map)
+     * @see KitchenController#changeOrderStatus(Orders)
+     */
+    private void changeTableStatus(RestaurantTable restaurantTable) {
+        TableStatus tableStatus = null;
+        if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("dish_is_ready"))) {
+            tableStatus = tableStatusService.findByTitle("dish_is_ready");
+        } else if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("in_process_of_cooking"))) {
+            tableStatus = tableStatusService.findByTitle("in_process_of_cooking");
+        } else if (restaurantTable.getOrdersList().stream().allMatch(s -> s.getOrderStatus().getTitle().equals("no_one_here"))) {
+            tableStatus = tableStatusService.findByTitle("no_one_here");
+        }
+        restaurantTable.setTableStatus(tableStatus);
+        restaurantTableService.editTable(restaurantTable);
+    }
+
+    /**
+     * function, which changes the {@link OrderStatus} of {@link Orders}
+     *
+     * @param order - the {@link Orders}, which we need to update
+     * @see KitchenController#changeDishStatus(Map)
+     * @see KitchenController#changeTableStatus(RestaurantTable)
+     */
+    private void changeOrderStatus(Orders order) {
+        OrderStatus orderStatus = null;
+        if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готово"))) {
+            orderStatus = orderStatusService.findByTitle("dish_is_ready");
+        } else if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готовится"))) {
+            orderStatus = orderStatusService.findByTitle("in_process_of_cooking");
+        } else if (order.getDishesFromOrder().stream().allMatch(s -> s.getDishStatus().getTitle().equals("В ожидании"))) {
+            orderStatus = orderStatusService.findByTitle("no_one_here");
+        }
+        order.setOrderStatus(orderStatus);
+        ordersService.editOrder(order);
+    }
+
+    /**
+     * start request for kitchen
+     *
+     * @return returns List of {@link DishesFromOrder}, which have {@link DishStatus} equal to 'В ожидании'
+     */
     @GetMapping
     public List<DishesFromOrder> showTables() {
         List<DishesFromOrder> dishesFromOrders = dishesFromOrderService.findAll();
@@ -69,9 +135,15 @@ order.getDishesFromOrder()
         return dishesFromOrdersKithen;
     }
 
-    // ToDo - можно позже попробовать осуществить изменение заказа и столика с помощью своих событий
+    /**
+     * post request for changing {@link DishStatus}
+     *
+     * @param json - json object, which contains from status, id and tableNumber of {@link Orders}
+     * @see KitchenController#changeOrderStatus(Orders)
+     * @see KitchenController#changeTableStatus(RestaurantTable)
+     */
     @PostMapping("/status-change")
-    public void changeStatus(@RequestBody Map<String, Object> json) {
+    public void changeDishStatus(@RequestBody Map<String, Object> json) {
         String status = (String) json.values().toArray()[0];
         Integer id = (Integer) json.values().toArray()[1];
         Integer tableNumber = (Integer) json.values().toArray()[2];
@@ -87,25 +159,7 @@ order.getDishesFromOrder()
                 }
             }
         }
-        OrderStatus orderStatus = null;
-        if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готово"))) {
-            orderStatus = orderStatusService.findByTitle("dish_is_ready");
-        } else if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готовится"))) {
-            orderStatus = orderStatusService.findByTitle("in_process_of_cooking");
-        } else if (order.getDishesFromOrder().stream().allMatch(s -> s.getDishStatus().getTitle().equals("В ожидании"))) {
-            orderStatus = orderStatusService.findByTitle("no_one_here");
-        }
-        order.setOrderStatus(orderStatus);
-        ordersService.editOrder(order);
-        TableStatus tableStatus = null;
-        if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("dish_is_ready"))) {
-            tableStatus = tableStatusService.findByTitle("dish_is_ready");
-        } else if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("in_process_of_cooking"))) {
-            tableStatus = tableStatusService.findByTitle("in_process_of_cooking");
-        } else if (restaurantTable.getOrdersList().stream().allMatch(s -> s.getOrderStatus().getTitle().equals("no_one_here"))) {
-            tableStatus = tableStatusService.findByTitle("no_one_here");
-        }
-        restaurantTable.setTableStatus(tableStatus);
-        restaurantTableService.editTable(restaurantTable);
+        changeOrderStatus(order);
+        changeTableStatus(restaurantTable);
     }
 }

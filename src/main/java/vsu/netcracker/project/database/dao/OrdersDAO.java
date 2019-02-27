@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.models.Orders;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface OrdersDAO extends JpaRepository<Orders, Integer> {
 
     @Query("select o from Orders o where o.id = :tableNumber")

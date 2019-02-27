@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.RoleStaff;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface RoleStaffService {
 
     RoleStaff addRoleStaff(RoleStaff roleStaff);

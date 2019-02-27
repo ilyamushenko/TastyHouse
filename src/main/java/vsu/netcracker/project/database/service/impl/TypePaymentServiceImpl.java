@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.TypePaymentService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class TypePaymentServiceImpl implements TypePaymentService {
 

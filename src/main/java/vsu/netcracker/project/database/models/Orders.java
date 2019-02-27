@@ -10,6 +10,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "orders")
 public class Orders implements Serializable {

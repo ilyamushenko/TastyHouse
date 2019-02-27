@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.Staff;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface StaffService {
 
     Staff addStaff(Staff staff);

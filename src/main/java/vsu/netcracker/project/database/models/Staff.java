@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "staff")
 public class Staff implements Serializable {

@@ -9,6 +9,9 @@ import vsu.netcracker.project.database.service.OrdersService;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class OrdersServiceImpl implements OrdersService {
 

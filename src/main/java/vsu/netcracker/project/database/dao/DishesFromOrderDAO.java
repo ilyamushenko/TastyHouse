@@ -9,8 +9,11 @@ import vsu.netcracker.project.database.models.Orders;
 
 import javax.transaction.Transactional;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface DishesFromOrderDAO extends JpaRepository<DishesFromOrder, Integer> {
 
     @Query("select o.dishesFromOrder from Orders o where o.id = :orderId")
-    DishesFromOrder findDishesFromOrderByOrder(@Param("orderId") Integer orderId);
+    DishesFromOrder findDishesFromOrderById(@Param("orderId") Integer orderId);
 }

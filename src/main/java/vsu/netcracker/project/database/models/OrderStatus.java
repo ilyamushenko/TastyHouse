@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "order_status")
 public class OrderStatus implements Serializable {

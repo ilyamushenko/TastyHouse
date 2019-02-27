@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "table_status")
 public class TableStatus implements Serializable {

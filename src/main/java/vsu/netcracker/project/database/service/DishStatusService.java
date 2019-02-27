@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.DishStatus;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface DishStatusService {
 
     DishStatus addStatus(DishStatus status);

@@ -19,22 +19,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller class for handle admin requests
+ * @author Илья Мущенко
+ */
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/admin")
 public class AdministratorController {
 
+    /**
+     * type of {@link Dishes}
+     */
     private String type;
 
+    /**
+     * service for interaction with {@link Orders} objects
+     */
     @Autowired
     private OrdersService ordersService;
 
+    /**
+     * service for interaction with {@link vsu.netcracker.project.database.models.DishesFromOrder} objects
+     */
     @Autowired
     private DishesFromOrderService dishesFromOrderService;
 
+    /**
+     * service for interaction with {@link Dishes} objects
+     */
     @Autowired
     private DishesService dishesService;
 
+    /**
+     * start request for admin
+     *
+     * @return returns Map which represent json object to client
+     */
     @GetMapping
     public Map<String, String> please() {
         System.out.println("priiint");
@@ -46,6 +67,12 @@ public class AdministratorController {
         return json;
     }
 
+    /**
+     * post request for admin, which returns json object, containing info about most popular dish
+     *
+     * @param selectedType - selected type of statistic
+     * @return returns Map which represent json object to client
+     */
     @PostMapping
     public Map<String, String> post(@RequestBody Map<String, String> selectedType) {
         type = (String) selectedType.values().toArray()[0];

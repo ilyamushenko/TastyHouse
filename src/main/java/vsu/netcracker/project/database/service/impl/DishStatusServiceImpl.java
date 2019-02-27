@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.DishStatusService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class DishStatusServiceImpl implements DishStatusService {
 

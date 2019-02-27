@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.RoleStaffService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class RoleStaffServiceImpl implements RoleStaffService {
 

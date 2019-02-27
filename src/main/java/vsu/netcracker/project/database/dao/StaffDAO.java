@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.Staff;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface StaffDAO extends JpaRepository<Staff, Integer> {
 
     @Query("select s from Staff s where s.email = :email")

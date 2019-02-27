@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.Dishes;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface DishesService {
 
     Dishes addDish(Dishes dish);

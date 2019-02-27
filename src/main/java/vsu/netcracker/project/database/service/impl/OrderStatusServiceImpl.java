@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.OrderStatusService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class OrderStatusServiceImpl implements OrderStatusService {
 

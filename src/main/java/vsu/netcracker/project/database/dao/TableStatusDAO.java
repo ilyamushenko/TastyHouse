@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.TableStatus;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface TableStatusDAO extends JpaRepository<TableStatus, Integer> {
 
     @Query("select ts from TableStatus ts where ts.title = :title")

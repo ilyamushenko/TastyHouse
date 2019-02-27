@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.DishesFromOrder;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface DishesFromOrderService {
 
     DishesFromOrder addDishFromOrder(DishesFromOrder dishesFromOrder);

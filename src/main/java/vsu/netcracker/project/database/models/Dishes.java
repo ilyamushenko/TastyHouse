@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "dishes")
 public class Dishes implements Serializable {

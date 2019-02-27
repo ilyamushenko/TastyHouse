@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.RoleStaff;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface RoleStaffDAO extends JpaRepository<RoleStaff, Integer> {
 
     @Query("select r from RoleStaff r where r.title = :title")

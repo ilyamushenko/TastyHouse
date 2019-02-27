@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.DishStatus;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface DishStatusDAO extends JpaRepository<DishStatus, Integer> {
 
     @Query("select ds from DishStatus ds where ds.title = :title")

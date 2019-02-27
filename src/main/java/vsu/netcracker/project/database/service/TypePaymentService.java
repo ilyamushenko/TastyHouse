@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.TypePayment;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface TypePaymentService {
 
     TypePayment addTypePayment(TypePayment typePayment);

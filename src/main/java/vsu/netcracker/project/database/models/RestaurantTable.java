@@ -8,12 +8,18 @@ import java.util.List;
 
 // ToDo - добавить еще необходимых атрибутов
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "restaurant_table")
 public class RestaurantTable implements Serializable {
 
     private static final long serialVersionUID = 4L;
 
+    /**
+     * id of the {@link RestaurantTable} (although this is a tableNumber)
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "restaurant_table_id")

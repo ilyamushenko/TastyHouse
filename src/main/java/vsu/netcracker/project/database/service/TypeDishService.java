@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.TypeDish;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface TypeDishService {
 
     TypeDish addTypeDish(TypeDish typeDish);

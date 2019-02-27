@@ -5,6 +5,9 @@ import vsu.netcracker.project.database.models.Orders;
 import java.sql.Timestamp;
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface OrdersService {
 
     Orders addOrder(Orders order);

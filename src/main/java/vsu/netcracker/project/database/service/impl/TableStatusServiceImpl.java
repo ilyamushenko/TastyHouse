@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.service.TableStatusService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class TableStatusServiceImpl implements TableStatusService {
 

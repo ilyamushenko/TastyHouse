@@ -14,14 +14,27 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller class for handle waiter requests
+ * @author Кушнеренко Виктор
+ */
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("waiter")
 public class WaiterController {
 
+    /**
+     * service for interaction with {@link RestaurantTable} objects
+     */
     @Autowired
     private RestaurantTableService restaurantTableService;
 
+    /**
+     * get request, which return List of {@link Orders} on concrete {@link RestaurantTable}
+     *
+     * @param tableNumber - the number of concrete {@link RestaurantTable}
+     * @return returns List of {@link Orders} on concrete {@link RestaurantTable}
+     */
     @GetMapping("/orders/{tableNumber}")
     public List<Object> showOrdersOnTable(@PathVariable Integer tableNumber) {
         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
@@ -35,6 +48,11 @@ public class WaiterController {
         return list;
     }
 
+    /**
+     * get request, which return List of {@link RestaurantTable}
+     *
+     * @return returns List of {@link RestaurantTable}
+     */
     @GetMapping
     public Map<Integer, List<RestaurantTable>> showTables() {
         List<RestaurantTable> restaurantTables = restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id"));

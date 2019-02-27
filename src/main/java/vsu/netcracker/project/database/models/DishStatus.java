@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "dish_status")
 public class DishStatus implements Serializable {

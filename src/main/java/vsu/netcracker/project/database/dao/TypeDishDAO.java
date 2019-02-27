@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.TypeDish;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface TypeDishDAO extends JpaRepository<TypeDish, Integer> {
 
     @Query("select td from TypeDish td where td.title = :title")

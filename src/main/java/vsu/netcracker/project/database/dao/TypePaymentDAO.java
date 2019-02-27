@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.TypePayment;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface TypePaymentDAO extends JpaRepository<TypePayment, Integer> {
 
     @Query("select tp from TypePayment tp where tp.title = :title")

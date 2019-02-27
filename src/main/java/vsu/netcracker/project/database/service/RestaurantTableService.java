@@ -6,6 +6,9 @@ import vsu.netcracker.project.database.models.RestaurantTable;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface RestaurantTableService {
 
     RestaurantTable addTable(RestaurantTable restaurantTable);

@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.models.Dishes;
 
 import javax.transaction.Transactional;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface DishesDAO extends JpaRepository<Dishes, Integer> {
 
     @Query("select d from Dishes d where d.name = :name")

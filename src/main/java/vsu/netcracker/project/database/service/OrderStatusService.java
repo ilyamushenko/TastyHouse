@@ -4,6 +4,9 @@ import vsu.netcracker.project.database.models.OrderStatus;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface OrderStatusService {
 
     OrderStatus addStatus(OrderStatus status);

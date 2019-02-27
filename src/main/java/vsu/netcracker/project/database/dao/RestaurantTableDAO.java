@@ -8,6 +8,9 @@ import vsu.netcracker.project.database.models.RestaurantTable;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 public interface RestaurantTableDAO extends JpaRepository<RestaurantTable, Integer> {
 
     @Query("select rt from RestaurantTable rt where rt.id = :id")

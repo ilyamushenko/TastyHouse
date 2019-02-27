@@ -8,6 +8,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Entity
 @Table(name = "dishes_from_order")
 public class DishesFromOrder implements Serializable {

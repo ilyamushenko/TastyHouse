@@ -10,6 +10,9 @@ import vsu.netcracker.project.database.service.RestaurantTableService;
 
 import java.util.List;
 
+/**
+ * @author Кушнеренко Виктор
+ */
 @Service
 public class RestaurantTableServiceImpl implements RestaurantTableService {
 
