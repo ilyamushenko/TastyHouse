@@ -115,7 +115,7 @@ public class MenuController {
      *
      * @param json - json object, which contains the id of {@link Dishes}
      */
-    @PostMapping("/cancel") // ToDo - проверить что работает отмена и подтверждение
+    @PostMapping("/cancel")
     public void cancelDishes(@RequestBody Map<String, Object> json) {
         Integer dishId = (Integer) json.values().toArray()[0];
         Predicate<Dishes> deletingOnIdPredicate = d -> d.getId().equals(dishId);
@@ -151,5 +151,6 @@ public class MenuController {
             dishesFromOrder.setOrder(order);
             dishesFromOrderService.addDishFromOrder(dishesFromOrder);
         }
+        cart.clear();
     }
 }

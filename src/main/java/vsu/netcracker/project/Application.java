@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-// ToDo - добавить в приложение логирование и java doc (по возможности и желанию) + еще можно тесты для кода
+// ToDo - добавить в приложение логирование (по возможности и желанию) + еще можно тесты для кода
 /**
     Class with entry point of our app
     @author Кушнеренко Виктор
