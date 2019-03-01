@@ -1,17 +1,14 @@
 package vsu.netcracker.project.controllers;
 
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.*;
-import vsu.netcracker.project.database.service.DishStatusService;
-import vsu.netcracker.project.database.service.DishesFromOrderService;
-import vsu.netcracker.project.database.service.DishesService;
-import vsu.netcracker.project.database.service.OrdersService;
+import vsu.netcracker.project.database.service.*;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.util.*;
 import java.util.function.Predicate;
 
 /**
@@ -48,9 +45,21 @@ public class MenuController {
     private DishesFromOrderService dishesFromOrderService;
 
     /**
+     * service for interaction with {@link RestaurantTable} objects
+     */
+    @Autowired
+    private RestaurantTableService restaurantTableService;
+
+    @Autowired
+    private TypePaymentService typePaymentService;
+    @Autowired
+    private OrderStatusService orderStatusService;
+
+    /**
      * cart for {@link Dishes}, which the {@link Staff} bought
      */
     private List<Dishes> cart = new ArrayList<>();
+    private Object LocalDateTime;
 
     /**
      * get request, which gives the List of {@link Dishes} of determined type
@@ -119,9 +128,18 @@ public class MenuController {
      * @param json - json object, which contains the number of {@link Orders}
      */
     @PostMapping("/confirm")
-    public void confirmOrder(@RequestBody Map<String, Object> json) {
-        Integer tableNumber = (Integer) json.values().toArray()[0];
-        Orders order = ordersService.findByTableNumber(tableNumber);
+    public void confirmOrder(@RequestBody Map<String, String> json) {
+        Integer tableNumber = Integer.valueOf(json.get("tableNumber"));
+
+        Orders order = new Orders();
+        RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
+        order.setRestaurantTable(restaurantTable);
+        order.setType("На месте");
+        order.setDateOrders(Timestamp.valueOf(org.joda.time.LocalDateTime.now().toString("yyyy-MM-dd HH:mm:ss")));
+        order.setTypePayment(typePaymentService.findByTitle("Наличными"));
+        order.setOrderStatus(orderStatusService.findByTitle("Принят"));
+        ordersService.addOrder(order);
+
         int preparingTimeInSecond = cart.stream()
                 .mapToInt(dish -> dish.getPreparingTime().toLocalTime().toSecondOfDay())
                 .sum();
@@ -129,8 +147,6 @@ public class MenuController {
         DishStatus dishStatus = dishStatusService.findByTitle("В ожидании");
         for (Dishes dish : cart) {
             DishesFromOrder dishesFromOrder = new DishesFromOrder(preparingTime, dishStatus);
-            order.getDishesFromOrder().add(dishesFromOrder);
-            dish.getDishesFromOrder().add(dishesFromOrder);
             dishesFromOrder.setDish(dish);
             dishesFromOrder.setOrder(order);
             dishesFromOrderService.addDishFromOrder(dishesFromOrder);
