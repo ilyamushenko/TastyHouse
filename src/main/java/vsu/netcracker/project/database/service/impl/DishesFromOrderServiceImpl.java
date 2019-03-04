@@ -38,7 +38,7 @@ public class DishesFromOrderServiceImpl implements DishesFromOrderService {
     }
 
     @Override
-    public DishesFromOrder findDishesFromOrderByOrder(Integer orderId) {
+    public List<DishesFromOrder> findDishesFromOrderByOrder(Integer orderId) {
         return dishesFromOrderDAO.findDishesFromOrderById(orderId);
     }
 

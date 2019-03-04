@@ -4,6 +4,7 @@ package vsu.netcracker.project.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.Dishes;
+import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Orders;
 import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.DishesService;
@@ -15,6 +16,7 @@ import vsu.netcracker.project.utils.UtilsForAdministrator;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,29 +95,92 @@ public class AdministratorController {
                 break;
             }
         }
-        List<Orders> needOrders = ordersService.findByDateOrdersBetween(needTime, Timestamp.valueOf(LocalDateTime.now()));
-        // из-за того что заказов нет - type_dish не пихается - тихо возникает исключение
+
+        List<Orders> orders = ordersService.findByDateOrdersBetween(needTime, now);
+        List<List<DishesFromOrder>> dishesFromOrders = new ArrayList<>();
+        for (Orders ord : orders) {
+
+            List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrderByOrder(ord.getId());
+            if (temp != null) {
+                dishesFromOrders.add(temp);
+            }
+        }
         Map<Integer, Integer> counterOfDishes = new HashMap<>();
-        for (Orders ord : needOrders) {
-            try {
-                Integer dish = dishesFromOrderService.findDishesFromOrderByOrder(ord.getId()).getDish().getId();
+
+        for (List<DishesFromOrder> dfoList : dishesFromOrders) {
+
+            for (DishesFromOrder dfo : dfoList) {
+                int dish = dfo.getDish().getId();
                 if (counterOfDishes.keySet().contains(dish)) {
                     counterOfDishes.put(dish, counterOfDishes.get(dish) + 1);
                 } else {
                     counterOfDishes.put(dish, 1);
                 }
-            } catch (Exception ignored) {
             }
         }
+
         Integer needId = UtilsForAdministrator.findKeyWithMaxValueInMap(counterOfDishes);
+        double count = UtilsForAdministrator.findMaxValueInMap(counterOfDishes);
+
         Dishes dish = dishesService.getById(needId);
         Map<String, String> json = new HashMap<>();
         json.put("type_dish", dish.getTypeDish().getTitle());
         json.put("name", dish.getName());
         json.put("img_url", dish.getImgUrl());
         json.put("time", dish.getPreparingTime().toString());
-        json.put("price", String.valueOf(dish.getPrice().toString()));
-        json.put("count", String.valueOf(UtilsForAdministrator.findMaxValueInMap(counterOfDishes)));
+        json.put("price", String.valueOf(dish.getPrice() * count));
+        json.put("count", String.valueOf((int) count));
         return json;
     }
+
+    @PostMapping("/inform")
+    public Map<String, String> getDishesInfo(@RequestBody Map<String, String> needDishMap) {
+        String needDish = (String) needDishMap.values().toArray()[0];
+        System.out.println(needDish);
+        int a = Integer.valueOf(needDish);
+        Dishes dish = dishesService.getById(Integer.valueOf(needDish));
+        Map<String, String> map = new HashMap<>();
+        map.put("name", dish.getName());
+        map.put("img", dish.getImgUrl());
+        map.put("description", dish.getDescription());
+        map.put("ingredient", dish.getIngredient());
+        map.put("mass", dish.getMass());
+        map.put("recipe", dish.getRecipe());
+        map.put("time", String.valueOf(dish.getPreparingTime()));
+        map.put("type", String.valueOf(dish.getTypeDish().getTitle()));
+        map.put("price", String.valueOf(dish.getPrice()));
+        return map;
+    }
+
+    @GetMapping("/inform")
+    public Map<String, List<Map<String, String>>> getAllDishes() {
+        //Map<ТипБлюда, Map<НазваниеБлюда, НазваниеДляОтправкиОбратно(ID)>>
+
+
+        List<Dishes> dishes = dishesService.findAll();
+        Map<String, List<Map<String, String>>> json = new HashMap<>();
+        boolean willAdd;
+
+        for(Dishes dish: dishes) {
+            String typeDish = dish.getTypeDish().getTitle();
+            List<Map<String, String>> templist;
+            if(json.containsKey(typeDish)) {
+                templist = json.get(typeDish);
+                willAdd = false;
+            }
+            else {
+                templist = new ArrayList<>();
+                willAdd = true;
+            }
+            Map<String, String> tempmap = new HashMap<>();
+            tempmap.put("text", dish.getName());
+            tempmap.put("value", String.valueOf(dish.getId()));
+            templist.add(tempmap);
+            if(willAdd) json.put(typeDish, templist);
+        }
+        System.out.println(json);
+        return json;
+
+    }
+
 }

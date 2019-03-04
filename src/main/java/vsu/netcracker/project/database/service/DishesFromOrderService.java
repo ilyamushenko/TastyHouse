@@ -17,7 +17,7 @@ public interface DishesFromOrderService {
 
     List<DishesFromOrder> findAll();
 
-    DishesFromOrder findDishesFromOrderByOrder(Integer orderId);
+    List<DishesFromOrder> findDishesFromOrderByOrder(Integer orderId);
 
     DishesFromOrder getById(Integer id);
 }
