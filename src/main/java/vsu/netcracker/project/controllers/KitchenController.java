@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.*;
 import vsu.netcracker.project.database.service.*;
+import vsu.netcracker.project.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,33 +106,10 @@ public class KitchenController {
         List<DishesFromOrder> dishesFromOrdersKithen = new ArrayList<>();
         for (DishesFromOrder dishesFromOrder : dishesFromOrders
         ) {
-            if (dishesFromOrder.getDishStatus().getTitle().equals("В ожидании"))
+            if (!dishesFromOrder.getDishStatus().getTitle().equals("Готово"))
                 dishesFromOrdersKithen.add(dishesFromOrder);
         }
-        /*
-        List<Dishes> dishes = dishesDAO.findAll();
-        List<DishesFromOrder> dishesFromOrders = dishesFromOrderDAO.findAll();
-        List<Orders> orders_kitchen = new ArrayList<Orders>();
-        Map<Integer, List<Dishes>> map = ;
-        for (Orders order: orders
-             ) {
-            if (order.getOrderStatus().getId() == 5)
-                orders_kitchen.add(order);
-order.getDishesFromOrder()
-            map = Utils.convertListToMap(order, 2);
-        }*/
-        /*
-        for (DishesFromOrder dishesFromOrder: dishesFromOrders
-        ) {
-            if (dishesFromOrder.getOrder().equals(orders_kitchen))
-                orders_kitchen.add(order);
-        }*/
-        //Map<Integer, List<Dishes>> mapOrders;
-
-
-        //Map<Integer, List<Dishes>> mapOrders;
-        //mapOrders = Utils.convertListToMap(dishesFromOrdersKithen, 4);
-
+        dishesFromOrdersKithen.sort((p1, p2)->p1.getTimeOrder().compareTo(p2.getTimeOrder()));
         return dishesFromOrdersKithen;
     }
 
@@ -147,9 +125,14 @@ order.getDishesFromOrder()
         String status = (String) json.values().toArray()[0];
         Integer id = (Integer) json.values().toArray()[1];
         Integer tableNumber = (Integer) json.values().toArray()[2];
+        //Orders orders = ordersService.findById(id);
         Orders order = ordersService.findByTableNumber(tableNumber);
         RestaurantTable restaurantTable = order.getRestaurantTable();
         DishStatus dishStatus = dishStatusService.findByTitle(status);
+        DishesFromOrder dishesFromOrder = dishesFromOrderService.getById(id);
+        dishesFromOrder.setDishStatus(dishStatus);
+        dishesFromOrderService.editDishFromOrder(dishesFromOrder);
+        /*
         for (DishesFromOrder dishFromOrder : order.getDishesFromOrder()) {
             if (dishFromOrder.getDish().getId().equals(id)) {
                 if (!dishFromOrder.getDishStatus().getTitle().equals("Готово")) {
@@ -158,7 +141,7 @@ order.getDishesFromOrder()
                     break;
                 }
             }
-        }
+        }*/
         changeOrderStatus(order);
         changeTableStatus(restaurantTable);
     }

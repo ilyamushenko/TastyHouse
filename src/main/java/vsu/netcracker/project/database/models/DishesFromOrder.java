@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
+import java.sql.Timestamp;
 
 /**
  * @author Кушнеренко Виктор
@@ -35,6 +36,7 @@ public class DishesFromOrder implements Serializable {
     @JsonManagedReference
     @JoinColumn(name = "dishes_id")
     private Dishes dish;
+
 
     public DishesFromOrder() {
 
@@ -83,5 +85,9 @@ public class DishesFromOrder implements Serializable {
 
     public void setDishStatus(DishStatus dishStatus) {
         this.dishStatus = dishStatus;
+    }
+
+    public  Timestamp getTimeOrder() {
+        return order.getDateOrders();
     }
 }

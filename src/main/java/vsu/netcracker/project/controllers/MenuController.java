@@ -54,6 +54,8 @@ public class MenuController {
     private TypePaymentService typePaymentService;
     @Autowired
     private OrderStatusService orderStatusService;
+    @Autowired
+    private TableStatusService tableStatusService;
 
     /**
      * cart for {@link Dishes}, which the {@link Staff} bought
@@ -139,6 +141,9 @@ public class MenuController {
         order.setTypePayment(typePaymentService.findByTitle("Наличными"));
         order.setOrderStatus(orderStatusService.findByTitle("Принят"));
         ordersService.addOrder(order);
+        TableStatus tableStatus = tableStatusService.findByTitle("Занят, но не принят");
+        restaurantTable.setTableStatus(tableStatus);
+        restaurantTableService.editTable(restaurantTable);
 
         int preparingTimeInSecond = cart.stream()
                 .mapToInt(dish -> dish.getPreparingTime().toLocalTime().toSecondOfDay())

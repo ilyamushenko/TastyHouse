@@ -6,10 +6,7 @@ import vsu.netcracker.project.database.models.Orders;
 import vsu.netcracker.project.database.models.RestaurantTable;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class with support functions

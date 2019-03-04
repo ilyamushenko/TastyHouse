@@ -16,4 +16,7 @@ public interface DishesFromOrderDAO extends JpaRepository<DishesFromOrder, Integ
 
     @Query("select o.dishesFromOrder from Orders o where o.id = :orderId")
     DishesFromOrder findDishesFromOrderById(@Param("orderId") Integer orderId);
+
+    @Query("select d from DishesFromOrder d where d.id = :id")
+    DishesFromOrder getById(@Param("id") Integer id);
 }
