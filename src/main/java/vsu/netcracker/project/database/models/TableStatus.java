@@ -19,7 +19,7 @@ public class TableStatus implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "table_status_id")
     private Integer id;
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, unique = true)
     private String title;
     @OneToMany(mappedBy = "tableStatus")
     @JsonBackReference

@@ -21,7 +21,7 @@ public class TypeDish implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_dish_id")
     private Integer id;
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, unique = true)
     private String title;
     @OneToMany(mappedBy = "typeDish")
     @JsonBackReference

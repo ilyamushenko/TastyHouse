@@ -21,7 +21,7 @@ public class RoleStaff implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_staff_id")
     private Integer id;
-    @Column(name = "title", nullable = false)
+    @Column(name = "title", nullable = false, unique = true)
     private String title;
     @OneToMany(mappedBy = "roleStaff")
     @JsonBackReference
