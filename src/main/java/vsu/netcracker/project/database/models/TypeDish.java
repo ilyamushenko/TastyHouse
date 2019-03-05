@@ -25,13 +25,13 @@ public class TypeDish implements Serializable {
     private String title;
     @OneToMany(mappedBy = "typeDish")
     @JsonBackReference
-    private List<Dishes> dishes;
+    private List<Dish> dishes;
 
     public TypeDish() {
 
     }
 
-    public TypeDish(String title, List<Dishes> dishes) {
+    public TypeDish(String title, List<Dish> dishes) {
         this.title = title;
         this.dishes = dishes;
     }
@@ -52,11 +52,11 @@ public class TypeDish implements Serializable {
         this.title = title;
     }
 
-    public List<Dishes> getDishes() {
+    public List<Dish> getDishes() {
         return dishes;
     }
 
-    public void setDishes(List<Dishes> dishes) {
+    public void setDishes(List<Dish> dishes) {
         this.dishes = dishes;
     }
 

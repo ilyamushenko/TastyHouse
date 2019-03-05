@@ -25,7 +25,7 @@ public class OrderStatus implements Serializable {
     private String title;
     @OneToMany(mappedBy = "orderStatus")
     @JsonBackReference
-    private List<Orders> orders;
+    private List<Order> orders;
 
     public OrderStatus() {
 
@@ -51,11 +51,11 @@ public class OrderStatus implements Serializable {
         this.title = title;
     }
 
-    public List<Orders> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Orders> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 

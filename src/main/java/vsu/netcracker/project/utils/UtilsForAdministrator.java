@@ -1,5 +1,7 @@
 package vsu.netcracker.project.utils;
 
+import vsu.netcracker.project.database.models.Dish;
+
 import java.util.Map;
 
 /**
@@ -12,7 +14,7 @@ public class UtilsForAdministrator {
     /**
      * function, which finds key with max value of id in Map
      *
-     * @param map - entry Map, with {@link vsu.netcracker.project.database.models.Dishes} id and index
+     * @param map - entry Map, with {@link Dish} id and index
      * @return returns max id in Map
      */
     public static Integer findKeyWithMaxValueInMap(Map<Integer, Integer> map) {
@@ -28,9 +30,9 @@ public class UtilsForAdministrator {
     }
 
     /**
-     * function, which finds count of pays for {@link vsu.netcracker.project.database.models.Dishes}
+     * function, which finds count of pays for {@link Dish}
      *
-     * @param map - entry Map, with {@link vsu.netcracker.project.database.models.Dishes} id and index
+     * @param map - entry Map, with {@link Dish} id and index
      * @return returns index, which according to max id in Map
      */
     public static int findMaxValueInMap(Map<Integer, Integer> map) {

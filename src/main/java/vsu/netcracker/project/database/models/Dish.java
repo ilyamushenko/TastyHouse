@@ -13,14 +13,14 @@ import java.util.List;
  * @author Кушнеренко Виктор
  */
 @Entity
-@Table(name = "dishes")
-public class Dishes implements Serializable {
+@Table(name = "dish")
+public class Dish implements Serializable {
 
     private static final long serialVersionUID = 4L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dishes_id")
+    @Column(name = "dish_id")
     private Integer id;
     @Column(name = "name", nullable = false) // есть еще @NotNull
     private String name;
@@ -48,17 +48,17 @@ public class Dishes implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "dishes_and_staff",
-            joinColumns = { @JoinColumn(name = "dishes_id") },
+            joinColumns = { @JoinColumn(name = "dish_id") },
             inverseJoinColumns = { @JoinColumn(name = "staff_id") }
     )
     @JsonManagedReference
     private List<Staff> staffList;
 
-    public Dishes() {
+    public Dish() {
 
     }
 
-    public Dishes(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder) {
+    public Dish(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder) {
         this.name = name;
         this.price = price;
         this.ingredient = ingredient;

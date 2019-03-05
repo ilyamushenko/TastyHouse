@@ -1,6 +1,5 @@
 package vsu.netcracker.project.controllers;
 
-import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.*;
@@ -21,16 +20,16 @@ import java.util.function.Predicate;
 public class MenuController {
 
     /**
-     * service for interaction with {@link Dishes} objects
+     * service for interaction with {@link Dish} objects
      */
     @Autowired
-    private DishesService dishesService;
+    private DishService dishService;
 
     /**
-     * service for interaction with {@link Orders} objects
+     * service for interaction with {@link Order} objects
      */
     @Autowired
-    private OrdersService ordersService;
+    private OrderService orderService;
 
     /**
      * service for interaction with {@link DishStatus} objects
@@ -58,22 +57,22 @@ public class MenuController {
     private TableStatusService tableStatusService;
 
     /**
-     * cart for {@link Dishes}, which the {@link Staff} bought
+     * cart for {@link Dish}, which the {@link Staff} bought
      */
-    private List<Dishes> cart = new ArrayList<>();
+    private List<Dish> cart = new ArrayList<>();
     private Object LocalDateTime;
 
     /**
-     * get request, which gives the List of {@link Dishes} of determined type
+     * get request, which gives the List of {@link Dish} of determined type
      *
-     * @param dishType - type of {@link Dishes}
-     * @return returns the List of {@link Dishes} of determined type
+     * @param dishType - type of {@link Dish}
+     * @return returns the List of {@link Dish} of determined type
      */
     @GetMapping("menu/{dishType}")
-    public List<Dishes> showTables(@PathVariable String dishType) {
-        List<Dishes> dishes = dishesService.findAll();
-        List<Dishes> selectedDish = new ArrayList<>();
-        for (Dishes elem : dishes) {
+    public List<Dish> showTables(@PathVariable String dishType) {
+        List<Dish> dishes = dishService.findAll();
+        List<Dish> selectedDish = new ArrayList<>();
+        for (Dish elem : dishes) {
             TypeDish elemType = elem.getTypeDish();
             if (elemType.getTitle().equals(dishType)) {
                 selectedDish.add(elem);
@@ -85,26 +84,26 @@ public class MenuController {
     // ToDo - как достать номер столика, с которого заказал посетитель? И если он захочет вдруг пересесть на другой?
 
     /**
-     * post request, which add the {@link Dishes} to the cart
+     * post request, which add the {@link Dish} to the cart
      *
-     * @param json - json object, which contains the id of {@link Dishes}
+     * @param json - json object, which contains the id of {@link Dish}
      */
     @PostMapping("/add")
     public void addDishToCart(@RequestBody Map<String, Object> json) {
         Integer dishId = (Integer) json.values().toArray()[0];
-        Dishes dish = dishesService.getById(dishId);
+        Dish dish = dishService.getById(dishId);
         cart.add(dish);
     }
 
     /**
-     * post request, which delete the {@link Dishes} from the cart
+     * post request, which delete the {@link Dish} from the cart
      *
-     * @param json - json object, which contains the id of {@link Dishes}
+     * @param json - json object, which contains the id of {@link Dish}
      */
     @PostMapping("/delete")
     public void deleteDishFromCart(@RequestBody Map<String, Object> json) {
         Integer dishId = (Integer) json.values().toArray()[0];
-        for (Dishes d : cart) {
+        for (Dish d : cart) {
             if (d.getId().equals(dishId)) {
                 cart.remove(d);
                 break;
@@ -113,34 +112,34 @@ public class MenuController {
     }
 
     /**
-     * post request, which delete the {@link Dishes} of determined type
+     * post request, which delete the {@link Dish} of determined type
      *
-     * @param json - json object, which contains the id of {@link Dishes}
+     * @param json - json object, which contains the id of {@link Dish}
      */
     @PostMapping("/cancel")
     public void cancelDishes(@RequestBody Map<String, Object> json) {
         Integer dishId = (Integer) json.values().toArray()[0];
-        Predicate<Dishes> deletingOnIdPredicate = d -> d.getId().equals(dishId);
+        Predicate<Dish> deletingOnIdPredicate = d -> d.getId().equals(dishId);
         cart.removeIf(deletingOnIdPredicate);
     }
 
     /**
-     * post request for confirm the order with {@link Dishes} in the cart
+     * post request for confirm the order with {@link Dish} in the cart
      *
-     * @param json - json object, which contains the number of {@link Orders}
+     * @param json - json object, which contains the number of {@link Order}
      */
     @PostMapping("/confirm")
     public void confirmOrder(@RequestBody Map<String, String> json) {
         Integer tableNumber = Integer.valueOf(json.get("tableNumber"));
 
-        Orders order = new Orders();
+        Order order = new Order();
         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
         order.setRestaurantTable(restaurantTable);
         order.setType("На месте");
         order.setDateOrders(Timestamp.valueOf(org.joda.time.LocalDateTime.now().toString("yyyy-MM-dd HH:mm:ss")));
         order.setTypePayment(typePaymentService.findByTitle("Наличными"));
         order.setOrderStatus(orderStatusService.findByTitle("Принят"));
-        ordersService.addOrder(order);
+        orderService.addOrder(order);
         TableStatus tableStatus = tableStatusService.findByTitle("Занят, но не принят");
         restaurantTable.setTableStatus(tableStatus);
         restaurantTableService.editTable(restaurantTable);
@@ -150,7 +149,7 @@ public class MenuController {
                 .sum();
         Time preparingTime = new Time(preparingTimeInSecond);
         DishStatus dishStatus = dishStatusService.findByTitle("В ожидании");
-        for (Dishes dish : cart) {
+        for (Dish dish : cart) {
             DishesFromOrder dishesFromOrder = new DishesFromOrder(preparingTime, dishStatus);
             dishesFromOrder.setDish(dish);
             dishesFromOrder.setOrder(order);

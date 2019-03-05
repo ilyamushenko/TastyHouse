@@ -14,14 +14,14 @@ import java.util.Objects;
  * @author Кушнеренко Виктор
  */
 @Entity
-@Table(name = "orders")
-public class Orders implements Serializable {
+@Table(name = "restaurant_order")
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 4L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "orders_id")
+    @Column(name = "order_id")
     private Integer id;
     @Column(name = "type", nullable = false)
     private String type;
@@ -43,11 +43,11 @@ public class Orders implements Serializable {
     @JoinColumn(name = "restaurant_table_id")
     private RestaurantTable restaurantTable;
 
-    public Orders() {
+    public Order() {
 
     }
 
-    public Orders(String type, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, OrderStatus orderStatus) {
+    public Order(String type, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, OrderStatus orderStatus) {
         this.type = type;
         this.dateOrders = dateOrders;
         this.dishesFromOrder = dishesFromOrder;
@@ -114,10 +114,10 @@ public class Orders implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Orders orders = (Orders) o;
-        return getId().equals(orders.getId()) &&
-                getType().equals(orders.getType()) &&
-                getDateOrders().equals(orders.getDateOrders());
+        Order order = (Order) o;
+        return getId().equals(order.getId()) &&
+                getType().equals(order.getType()) &&
+                getDateOrders().equals(order.getDateOrders());
     }
 
     @Override

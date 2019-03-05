@@ -25,13 +25,13 @@ public class TypePayment implements Serializable {
     private String title;
     @OneToMany(mappedBy = "typePayment")
     @JsonBackReference
-    private List<Orders> orders;
+    private List<Order> orders;
 
     public TypePayment() {
 
     }
 
-    public TypePayment(String title, List<Orders> orders) {
+    public TypePayment(String title, List<Order> orders) {
         this.title = title;
         this.orders = orders;
     }
@@ -52,11 +52,11 @@ public class TypePayment implements Serializable {
         this.title = title;
     }
 
-    public List<Orders> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Orders> orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 

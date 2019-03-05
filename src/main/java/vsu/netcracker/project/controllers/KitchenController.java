@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.*;
 import vsu.netcracker.project.database.service.*;
-import vsu.netcracker.project.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +25,16 @@ public class KitchenController {
     private DishesFromOrderService dishesFromOrderService;
 
     /**
-     * service for interaction with {@link Orders} objects
+     * service for interaction with {@link Order} objects
      */
     @Autowired
-    private OrdersService ordersService;
+    private OrderService orderService;
+
+    /**
+     * service for interaction with {@link Dish} objects
+     */
+    @Autowired
+    private DishService dishService;
 
     /**
      * service for interaction with {@link OrderStatus} objects
@@ -60,7 +65,7 @@ public class KitchenController {
      *
      * @param restaurantTable - the {@link RestaurantTable}, which we need to update
      * @see KitchenController#changeDishStatus(Map)
-     * @see KitchenController#changeOrderStatus(Orders)
+     * @see KitchenController#changeOrderStatus(Order)
      */
     private void changeTableStatus(RestaurantTable restaurantTable) {
         TableStatus tableStatus = null;
@@ -76,13 +81,13 @@ public class KitchenController {
     }
 
     /**
-     * function, which changes the {@link OrderStatus} of {@link Orders}
+     * function, which changes the {@link OrderStatus} of {@link Order}
      *
-     * @param order - the {@link Orders}, which we need to update
+     * @param order - the {@link Order}, which we need to update
      * @see KitchenController#changeDishStatus(Map)
      * @see KitchenController#changeTableStatus(RestaurantTable)
      */
-    private void changeOrderStatus(Orders order) {
+    private void changeOrderStatus(Order order) {
         OrderStatus orderStatus = null;
         if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готово"))) {
             orderStatus = orderStatusService.findByTitle("dish_is_ready");
@@ -92,7 +97,7 @@ public class KitchenController {
             orderStatus = orderStatusService.findByTitle("no_one_here");
         }
         order.setOrderStatus(orderStatus);
-        ordersService.editOrder(order);
+        orderService.editOrder(order);
     }
 
     /**
@@ -116,8 +121,8 @@ public class KitchenController {
     /**
      * post request for changing {@link DishStatus}
      *
-     * @param json - json object, which contains from status, id and tableNumber of {@link Orders}
-     * @see KitchenController#changeOrderStatus(Orders)
+     * @param json - json object, which contains from status, id and tableNumber of {@link Order}
+     * @see KitchenController#changeOrderStatus(Order)
      * @see KitchenController#changeTableStatus(RestaurantTable)
      */
     @PostMapping("/status-change")
@@ -125,8 +130,8 @@ public class KitchenController {
         String status = (String) json.values().toArray()[0];
         Integer id = (Integer) json.values().toArray()[1];
         Integer tableNumber = (Integer) json.values().toArray()[2];
-        //Orders orders = ordersService.findById(id);
-        Orders order = ordersService.findByTableNumber(tableNumber);
+        //Order orders = orderService.findById(id);
+        Order order = orderService.findByTableNumber(tableNumber);
         RestaurantTable restaurantTable = order.getRestaurantTable();
         DishStatus dishStatus = dishStatusService.findByTitle(status);
         DishesFromOrder dishesFromOrder = dishesFromOrderService.getById(id);

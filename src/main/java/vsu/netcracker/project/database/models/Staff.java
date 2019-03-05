@@ -40,7 +40,7 @@ public class Staff implements Serializable {
     private RoleStaff roleStaff;
     @ManyToMany(mappedBy = "staffList")
     @JsonBackReference
-    private List<Dishes> dishesList;
+    private List<Dish> dishesList;
 
     public Staff() {
 
@@ -56,11 +56,11 @@ public class Staff implements Serializable {
         this.roleStaff = roleStaff;
     }
 
-    public List<Dishes> getDishesList() {
+    public List<Dish> getDishesList() {
         return dishesList;
     }
 
-    public void setDishesList(List<Dishes> dishesList) {
+    public void setDishesList(List<Dish> dishesList) {
         this.dishesList = dishesList;
     }
 

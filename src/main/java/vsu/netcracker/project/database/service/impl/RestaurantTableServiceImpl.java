@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vsu.netcracker.project.database.dao.RestaurantTableDAO;
-import vsu.netcracker.project.database.models.Orders;
 import vsu.netcracker.project.database.models.RestaurantTable;
 import vsu.netcracker.project.database.service.RestaurantTableService;
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.DishesFromOrder;
-import vsu.netcracker.project.database.models.Orders;
+import vsu.netcracker.project.database.models.Order;
 import vsu.netcracker.project.database.models.RestaurantTable;
 import vsu.netcracker.project.database.service.RestaurantTableService;
 import vsu.netcracker.project.utils.Utils;
@@ -30,16 +30,16 @@ public class WaiterController {
     private RestaurantTableService restaurantTableService;
 
     /**
-     * get request, which return List of {@link Orders} on concrete {@link RestaurantTable}
+     * get request, which return List of {@link Order} on concrete {@link RestaurantTable}
      *
      * @param tableNumber - the number of concrete {@link RestaurantTable}
-     * @return returns List of {@link Orders} on concrete {@link RestaurantTable}
+     * @return returns List of {@link Order} on concrete {@link RestaurantTable}
      */
     @GetMapping("/orders/{tableNumber}")
     public List<Object> showOrdersOnTable(@PathVariable Integer tableNumber) {
         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
-        List<Orders> listOrders = restaurantTable.getOrdersList();
-        listOrders.sort(Comparator.comparing(Orders::getId));
+        List<Order> listOrders = restaurantTable.getOrdersList();
+        listOrders.sort(Comparator.comparing(Order::getId));
         Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 2);
         List<Integer> listPercentOfReady = Utils.getPercentageOfReady(listOrders);
         List<Float> listTotalPriceOfDishes = Utils.getTotalPriceOfDishes(listOrders);

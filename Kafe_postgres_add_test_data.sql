@@ -3,9 +3,9 @@ TRUNCATE TABLE type_payment RESTART IDENTITY CASCADE;
 TRUNCATE TABLE order_status RESTART IDENTITY CASCADE;
 TRUNCATE TABLE role_staff RESTART IDENTITY CASCADE;
 TRUNCATE TABLE staff RESTART IDENTITY CASCADE;
-TRUNCATE TABLE orders RESTART IDENTITY CASCADE;
+TRUNCATE TABLE restaurant_order RESTART IDENTITY CASCADE;
 TRUNCATE TABLE type_dish RESTART IDENTITY CASCADE;
-TRUNCATE TABLE dishes RESTART IDENTITY CASCADE;
+TRUNCATE TABLE dish RESTART IDENTITY CASCADE;
 TRUNCATE TABLE dishes_from_order RESTART IDENTITY CASCADE;
 TRUNCATE TABLE dishes_and_staff RESTART IDENTITY CASCADE;
 TRUNCATE TABLE restaurant_table RESTART IDENTITY CASCADE;
@@ -59,25 +59,25 @@ INSERT INTO staff (last_name, first_name, phone, email, password, login, role_st
 INSERT INTO staff (last_name, first_name, phone, email, password, login, role_staff_id) VALUES ('Иванова', 'Юлия', '8-950-959-64-75', 'ivanova@tastyhouse.com', 'qwerty', 'ivanova', 2);
 
 /* Вставка заказов */
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-03-01 13:25:00', 'На месте', 5, 1, 1);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-14 12:20:00', 'На месте', 5, 2, 1);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-10 11:43:00', 'На месте', 6, 1, 1);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2003-05-15 20:53:00', 'На месте', 2, 2, 2);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2002-06-24 15:34:00', 'На месте', 5, 1, 2);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 2, 2);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 1, 3);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 2, 3);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 1, 3);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 3);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 1, 4);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 2, 4);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 1, 5);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 2, 6);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 1, 6);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 6);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-13 13:54:00', 'На месте', 5, 1, 7);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-21 13:54:00', 'На месте', 6, 2, 7);
-INSERT INTO orders (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2018-07-23 18:15:00', 'На месте', 2, 1, 7);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-03-01 13:25:00', 'На месте', 5, 1, 1);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-14 12:20:00', 'На месте', 5, 2, 1);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-10 11:43:00', 'На месте', 6, 1, 1);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2003-05-15 20:53:00', 'На месте', 2, 2, 2);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2002-06-24 15:34:00', 'На месте', 5, 1, 2);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 2, 2);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 1, 3);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 2, 3);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 1, 3);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 3);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 1, 4);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 2, 4);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 1, 5);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 2, 6);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 1, 6);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 6);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-13 13:54:00', 'На месте', 5, 1, 7);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-21 13:54:00', 'На месте', 6, 2, 7);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2018-07-23 18:15:00', 'На месте', 2, 1, 7);
 
 
 /* Вставка типов блюд */
@@ -90,7 +90,7 @@ INSERT INTO type_dish (title) VALUES ('Рыба и морепродукты'); /
 /* Вставка блюд */
 /* Ингредиенты, рецепт, масса, время - поставил кавычки как заглушку, можете вставлять туда что вам нужно */ 
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Цезарь с курицей', '', 250.9,
 'Чеснок луковица 2 г <br>
 Салат Романо 35 г <br>
@@ -110,7 +110,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 7. На крупной терке натираем “Пармезан”.',
  '200 г', TIME '00:40:00', '/img/cezar.jpg', 1);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Салат с креветками', '', 200,
 'Очищенные вареные креветки 150 г <br>
 Помидоры 1 штука <br>
@@ -121,7 +121,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 2. Все, вместе с креветками, смешайте. Добавьте соль по вкусу и заправьте оливковым маслом.',
  '250 г', TIME '00:50:00', '/img/krevetki.jpg', 1);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Салат с красной рыбой', '', 150,
 'Слабосоленая семга 50 г <br>
 Сметана по вкусу <br>
@@ -136,7 +136,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 5. Добавьте соль, укроп и зеленый лук.',
 '200 г', TIME '00:25:00', '/img/salat-s-krasnoj-ryboj.jpg', 1);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Бутерброды с красной икрой и сыром', '', 100,
 'Батон 2 куска <br>
 Икра красная 20 г <br>
@@ -149,7 +149,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 4.Украсить каждый бутерброд веточкой укропа.',
 '100 г', TIME '00:10:00', '/img/buterbrody-s-krasnoj-ikroj-i-syrom.jpg', 2);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Новогодний десерт "Радость обезьянки"', '', 200,
 'Сливочное мороженое 200 гр.<br>
 Молоко	200 мл.<br>
@@ -163,7 +163,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 5. Присыпать шоколадом и убрать в холод до подачи.',
 '250 г', TIME '00:10:00', '/img/novogodnij-desert-radost-obezyanki.jpg', 4);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Тирамису', '', 300,
 'Яйцо куриное 0,5 штуки <br>
 Сыр маскарпоне 50 г <br>
@@ -182,7 +182,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 8. Затем — оставшееся пропитанное печенье.',
 '200 г', TIME '00:15:00', '/img/tiramisu.jpg', 4);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES ('Курица с картошкой «Праздничная»', '', 200,
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES ('Курица с картошкой «Праздничная»', '', 200,
 'Курица 0,4 кг  <br>
 Картофель 1,5 штуки <br>
 Чеснок 1,5 зубчика <br>
@@ -196,7 +196,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 5. Запекать в духовке при 200 градусах до готовности курицы.',
 '350 г', TIME '01:00:00', '/img/kurica-s-kartoshkoj-prazdnichnaya.jpg', 3);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Мини-пиццы', '', 100,
 'Чиабатта 0,5 штуки <br>
 Сыр 100 г <br>
@@ -217,7 +217,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 9. Выпекать при температуре 200–220 градусов 10–15 минут. ',
 '400 г', TIME '00:30:00', '/img/mini-piccy.jpg', 3);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Минтай в духовке', '', 150,
 'Лук репчатый 0,5 штуки <br>
 Морковь 0,5 штуки <br>
@@ -234,7 +234,7 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 5. Запекать в духовке при 180 градусах 20 минут.',
 '250 г', TIME '00:40:00', '/img/mintaj-v-duhovke.jpg', 5);
 
-INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
+INSERT INTO "dish" (name, description, price, ingredient, recipe, mass, preparing_time, img_url, type_dish_id) VALUES (
 'Грибной суп из шампиньонов', '', 200,
 'Шампиньоны 100 г <br>
 Картофель 1 штука <br>
@@ -249,36 +249,36 @@ INSERT INTO "dishes" (name, description, price, ingredient, recipe, mass, prepar
 '200 г', TIME '00:30:00', '/img/gribnoj-sup-iz-shampinonov.jpg', 5);
 
 /* Вставка для связующей таблицы между блюдами и персоналом */
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (1, 1);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (2, 1);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (3, 1);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (4, 1);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (5, 1);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (6, 2);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (7, 2);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (8, 2);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (9, 2);
-INSERT INTO dishes_and_staff (dishes_id, staff_id) VALUES (10, 2);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (1, 1);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (2, 1);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (3, 1);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (4, 1);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (5, 1);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (6, 2);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (7, 2);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (8, 2);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (9, 2);
+INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (10, 2);
 
 /* Вставка для таблицы связи блюдо-заказ */
 /* NULL здесь как заглушка - вставляйте что считаете нужным */
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 1, 1, 1);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 1);
 
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 1, 1, 2);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 1, 1, 2);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 2);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 2);
 
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 1, 1, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 1, 1, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 1, 1, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
 
 
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '00:30:00', 2, 1, 2);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '00:50:00', 3, 1, 3);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:20:00', 1, 2, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:00:00', 2, 2, 5);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '02:00:00', 1, 2, 6);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:40:00', 1, 3, 7);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '00:40:00', 2, 3, 8);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '02:00:00', 2, 3, 9);
-INSERT INTO dishes_from_order (real_time, dish_status_id, orders_id, dishes_id) VALUES (TIME '01:10:00', 3, 3, 10);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:30:00', 2, 1, 2);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:50:00', 3, 1, 3);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:20:00', 1, 2, 4);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 2, 2, 5);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '02:00:00', 1, 2, 6);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:40:00', 1, 3, 7);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:40:00', 2, 3, 8);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '02:00:00', 2, 3, 9);
+INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:10:00', 3, 3, 10);

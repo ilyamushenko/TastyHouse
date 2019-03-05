@@ -1,5 +1,6 @@
 package vsu.netcracker.project.database.service;
 
+import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 
 import java.util.List;

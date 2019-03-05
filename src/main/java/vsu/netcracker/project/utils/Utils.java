@@ -1,8 +1,8 @@
 package vsu.netcracker.project.utils;
 
-import vsu.netcracker.project.database.models.Dishes;
+import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
-import vsu.netcracker.project.database.models.Orders;
+import vsu.netcracker.project.database.models.Order;
 import vsu.netcracker.project.database.models.RestaurantTable;
 
 import java.sql.Timestamp;
@@ -21,7 +21,7 @@ public class Utils {
      * @param list - list of {@link RestaurantTable}, which need to convert
      * @param step - size of every List in result Map
      * @return returns Map from index and Lists of {@link RestaurantTable} of a certain size
-     * @see Utils#convertListToMap(Orders, int)
+     * @see Utils#convertListToMap(Order, int)
      * @see Utils#convertListToMapWithMap(List, int)
      */
     public static Map<Integer, List<RestaurantTable>> convertListToMap(List<RestaurantTable> list, int step) {
@@ -36,18 +36,18 @@ public class Utils {
     }
 
     /**
-     * function which converts {@link Dishes} of object with class {@link Orders} into Map with Lists of a certain size
+     * function which converts {@link Dish} of object with class {@link Order} into Map with Lists of a certain size
      *
-     * @param order - order, whose {@link Dishes} need to convert
+     * @param order - order, whose {@link Dish} need to convert
      * @param step - size of every List in result Map
-     * @return returns Map from index and Lists of {@link Dishes} of a certain size
+     * @return returns Map from index and Lists of {@link Dish} of a certain size
      * @see Utils#convertListToMap(List, int)
      * @see Utils#convertListToMapWithMap(List, int)
      */
-    public static Map<Integer, List<Dishes>> convertListToMap(Orders order, int step) {
-        LinkedHashMap<Integer, List<Dishes>> map = new LinkedHashMap<>();
+    public static Map<Integer, List<Dish>> convertListToMap(Order order, int step) {
+        LinkedHashMap<Integer, List<Dish>> map = new LinkedHashMap<>();
         List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
-        List<Dishes> list = new ArrayList<>();
+        List<Dish> list = new ArrayList<>();
         for (DishesFromOrder dishFromOrder : dishesFromOrder) {
             list.add(dishFromOrder.getDish());
         }
@@ -61,15 +61,15 @@ public class Utils {
     }
 
     /**
-     * function which converts List of {@link Orders} into double Map of {@link DishesFromOrder} with Lists of a certain size
+     * function which converts List of {@link Order} into double Map of {@link DishesFromOrder} with Lists of a certain size
      *
-     * @param orders - List of {@link Orders} which need to convert
+     * @param orders - List of {@link Order} which need to convert
      * @param step - size of every List in result Map
      * @return returns double Map from index and Lists of {@link DishesFromOrder} of a certain size
      * @see Utils#convertListToMap(List, int)
-     * @see Utils#convertListToMap(Orders, int)
+     * @see Utils#convertListToMap(Order, int)
      */
-    public static Map<Integer, Map<Integer, List<DishesFromOrder>>> convertListToMapWithMap(List<Orders> orders, int step) {
+    public static Map<Integer, Map<Integer, List<DishesFromOrder>>> convertListToMapWithMap(List<Order> orders, int step) {
         LinkedHashMap<Integer, Map<Integer, List<DishesFromOrder>>> map = new LinkedHashMap<>();
         for (int i = 0; i < orders.size(); i++) {
             LinkedHashMap<Integer, List<DishesFromOrder>> tempMap = new LinkedHashMap<>();
@@ -85,17 +85,17 @@ public class Utils {
     }
 
     /**
-     * function, which gives from List of {@link Orders} List with percentage of ready every order
+     * function, which gives from List of {@link Order} List with percentage of ready every order
      *
-     * @param orders - List of {@link Orders}, from which we take percentages
+     * @param orders - List of {@link Order}, from which we take percentages
      * @return returns List with percentage of ready every order
-     * @see Utils#getTotalTimeOfCooking(Orders)
+     * @see Utils#getTotalTimeOfCooking(Order)
      */
-    public static List<Integer> getPercentageOfReady(List<Orders> orders) {
+    public static List<Integer> getPercentageOfReady(List<Order> orders) {
         List<Integer> listPercentageOfReady = new ArrayList<>();
         Timestamp nowTimestamp = new Timestamp(System.currentTimeMillis());
         Integer nowSeconds = nowTimestamp.toLocalDateTime().toLocalTime().toSecondOfDay();
-        for (Orders order : orders) {
+        for (Order order : orders) {
             Integer orderSeconds = order.getDateOrders().toLocalDateTime().toLocalTime().toSecondOfDay();
             Integer orderTotalTimeSeconds = getTotalTimeOfCooking(order);
             Integer timestampDiff = Math.abs(nowSeconds - orderSeconds);
@@ -108,13 +108,13 @@ public class Utils {
     }
 
     /**
-     * function, which give from {@link Orders} total time of cooking all of the {@link Dishes} in it
+     * function, which give from {@link Order} total time of cooking all of the {@link Dish} in it
      *
-     * @param order - {@link Orders}, from which we take total time of cooking
+     * @param order - {@link Order}, from which we take total time of cooking
      * @return returns total time of cooking in seconds
      * @see Utils#getPercentageOfReady(List)
      */
-    private static Integer getTotalTimeOfCooking(Orders order) {
+    private static Integer getTotalTimeOfCooking(Order order) {
         int orderTotalTimeSeconds = 0;
         List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
         for (DishesFromOrder dishFromOrder : dishesFromOrder) {
@@ -124,15 +124,15 @@ public class Utils {
     }
 
     /**
-     * function, which give from List of {@link Orders} total price of {@link Dishes}
+     * function, which give from List of {@link Order} total price of {@link Dish}
      *
-     * @param orders - List of {@link Orders}, from which we take total price of {@link Dishes}
-     * @return returns List of total price of {@link Dishes}, which integer part means the count of rubles and
+     * @param orders - List of {@link Order}, from which we take total price of {@link Dish}
+     * @return returns List of total price of {@link Dish}, which integer part means the count of rubles and
      * the float part means the count of kopeek
      */
-    public static List<Float> getTotalPriceOfDishes(List<Orders> orders) {
+    public static List<Float> getTotalPriceOfDishes(List<Order> orders) {
         List<Float> listTotalPriceOfDishes = new ArrayList<>();
-        for (Orders order : orders) {
+        for (Order order : orders) {
             Float sum = 0.0f;
             List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
             for (DishesFromOrder dishFromOrder : dishesFromOrder) {

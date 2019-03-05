@@ -3,15 +3,12 @@ package vsu.netcracker.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import vsu.netcracker.project.database.models.Dishes;
+import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
-import vsu.netcracker.project.database.models.Orders;
+import vsu.netcracker.project.database.models.Order;
 import vsu.netcracker.project.database.service.DishesFromOrderService;
-import vsu.netcracker.project.database.service.DishesService;
-import vsu.netcracker.project.database.service.OrdersService;
-import vsu.netcracker.project.database.service.impl.DishesFromOrderServiceImpl;
-import vsu.netcracker.project.database.service.impl.DishesServiceImpl;
-import vsu.netcracker.project.database.service.impl.OrdersServiceImpl;
+import vsu.netcracker.project.database.service.DishService;
+import vsu.netcracker.project.database.service.OrderService;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
 import java.sql.Timestamp;
@@ -31,15 +28,15 @@ import java.util.Map;
 public class AdministratorController {
 
     /**
-     * type of {@link Dishes}
+     * type of {@link Dish}
      */
     private String type;
 
     /**
-     * service for interaction with {@link Orders} objects
+     * service for interaction with {@link Order} objects
      */
     @Autowired
-    private OrdersService ordersService;
+    private OrderService orderService;
 
     /**
      * service for interaction with {@link vsu.netcracker.project.database.models.DishesFromOrder} objects
@@ -48,10 +45,10 @@ public class AdministratorController {
     private DishesFromOrderService dishesFromOrderService;
 
     /**
-     * service for interaction with {@link Dishes} objects
+     * service for interaction with {@link Dish} objects
      */
     @Autowired
-    private DishesService dishesService;
+    private DishService dishService;
 
     /**
      * start request for admin
@@ -96,9 +93,9 @@ public class AdministratorController {
             }
         }
 
-        List<Orders> orders = ordersService.findByDateOrdersBetween(needTime, now);
+        List<Order> orders = orderService.findByDateOrdersBetween(needTime, now);
         List<List<DishesFromOrder>> dishesFromOrders = new ArrayList<>();
-        for (Orders ord : orders) {
+        for (Order ord : orders) {
 
             List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrderByOrder(ord.getId());
             if (temp != null) {
@@ -122,7 +119,7 @@ public class AdministratorController {
         Integer needId = UtilsForAdministrator.findKeyWithMaxValueInMap(counterOfDishes);
         double count = UtilsForAdministrator.findMaxValueInMap(counterOfDishes);
 
-        Dishes dish = dishesService.getById(needId);
+        Dish dish = dishService.getById(needId);
         Map<String, String> json = new HashMap<>();
         json.put("type_dish", dish.getTypeDish().getTitle());
         json.put("name", dish.getName());
@@ -138,7 +135,7 @@ public class AdministratorController {
         String needDish = (String) needDishMap.values().toArray()[0];
         System.out.println(needDish);
         int a = Integer.valueOf(needDish);
-        Dishes dish = dishesService.getById(Integer.valueOf(needDish));
+        Dish dish = dishService.getById(Integer.valueOf(needDish));
         Map<String, String> map = new HashMap<>();
         map.put("name", dish.getName());
         map.put("img", dish.getImgUrl());
@@ -157,11 +154,11 @@ public class AdministratorController {
         //Map<ТипБлюда, Map<НазваниеБлюда, НазваниеДляОтправкиОбратно(ID)>>
 
 
-        List<Dishes> dishes = dishesService.findAll();
+        List<Dish> dishes = dishService.findAll();
         Map<String, List<Map<String, String>>> json = new HashMap<>();
         boolean willAdd;
 
-        for(Dishes dish: dishes) {
+        for(Dish dish: dishes) {
             String typeDish = dish.getTypeDish().getTitle();
             List<Map<String, String>> templist;
             if(json.containsKey(typeDish)) {

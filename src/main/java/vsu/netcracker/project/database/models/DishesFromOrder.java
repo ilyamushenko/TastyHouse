@@ -30,12 +30,12 @@ public class DishesFromOrder implements Serializable {
     private DishStatus dishStatus;
     @ManyToOne
     @JsonBackReference
-    @JoinColumn(name = "orders_id")
-    private Orders order;
+    @JoinColumn(name = "order_id")
+    private Order order;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "dishes_id")
-    private Dishes dish;
+    @JoinColumn(name = "dish_id")
+    private Dish dish;
 
 
     public DishesFromOrder() {
@@ -63,19 +63,19 @@ public class DishesFromOrder implements Serializable {
         this.realTime = realTime;
     }
 
-    public Orders getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
-    public Dishes getDish() {
+    public Dish getDish() {
         return dish;
     }
 
-    public void setDish(Dishes dish) {
+    public void setDish(Dish dish) {
         this.dish = dish;
     }
 

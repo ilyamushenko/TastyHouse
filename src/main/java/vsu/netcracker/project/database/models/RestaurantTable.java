@@ -26,7 +26,7 @@ public class RestaurantTable implements Serializable {
     private Integer id; // служит и как id, и как номер столика
     @OneToMany(mappedBy = "restaurantTable")
     @JsonManagedReference
-    private List<Orders> ordersList;
+    private List<Order> ordersList;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "table_status_id")
@@ -40,11 +40,11 @@ public class RestaurantTable implements Serializable {
         this.id = id;
     }
 
-    public List<Orders> getOrdersList() {
+    public List<Order> getOrdersList() {
         return ordersList;
     }
 
-    public void setOrdersList(List<Orders> ordersList) {
+    public void setOrdersList(List<Order> ordersList) {
         this.ordersList = ordersList;
     }
 
