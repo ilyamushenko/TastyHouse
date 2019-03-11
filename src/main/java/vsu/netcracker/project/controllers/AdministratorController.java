@@ -51,22 +51,6 @@ public class AdministratorController {
     private DishService dishService;
 
     /**
-     * start request for admin
-     *
-     * @return returns Map which represent json object to client
-     */
-    @GetMapping
-    public Map<String, String> please() {
-        System.out.println("priiint");
-        HashMap<String, String> json = new HashMap<>();
-        json.put("1", "first");
-        json.put("2", "second");
-        json.put("3", "third");
-
-        return json;
-    }
-
-    /**
      * post request for admin, which returns json object, containing info about most popular dish
      *
      * @param selectedType - selected type of statistic
