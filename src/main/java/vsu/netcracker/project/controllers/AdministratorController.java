@@ -76,6 +76,7 @@ public class AdministratorController {
     public Map<String, String> post(@RequestBody Map<String, String> selectedType) {
         type = (String) selectedType.values().toArray()[0];
         System.out.println(type);
+
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         Timestamp needTime = null;
         switch (type) {
@@ -134,15 +135,12 @@ public class AdministratorController {
     public Map<String, String> getDishesInfo(@RequestBody Map<String, String> needDishMap) {
         String needDish = (String) needDishMap.values().toArray()[0];
         System.out.println(needDish);
-        int a = Integer.valueOf(needDish);
+        int id = Integer.valueOf(needDish);
+        Map<String, String > map =  UtilsForAdministrator.getFullInfoAboutDish(id, orderService, dishesFromOrderService);
         Dish dish = dishService.getById(Integer.valueOf(needDish));
-        Map<String, String> map = new HashMap<>();
         map.put("name", dish.getName());
         map.put("img", dish.getImgUrl());
-        map.put("description", dish.getDescription());
-        map.put("ingredient", dish.getIngredient());
         map.put("mass", dish.getMass());
-        map.put("recipe", dish.getRecipe());
         map.put("time", String.valueOf(dish.getPreparingTime()));
         map.put("type", String.valueOf(dish.getTypeDish().getTitle()));
         map.put("price", String.valueOf(dish.getPrice()));
@@ -179,5 +177,10 @@ public class AdministratorController {
         return json;
 
     }
+
+//    @GetMapping()
+//    public Map<String, String> getInfoAboutAllDishes() {
+//        UtilsForAdministrator.
+//    }
 
 }
