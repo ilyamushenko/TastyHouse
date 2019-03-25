@@ -1,7 +1,12 @@
 package vsu.netcracker.project.controllers;
 
+import com.stripe.Stripe;
+import com.stripe.model.Charge;
+import com.stripe.exception.*;
+import com.stripe.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import vsu.netcracker.project.database.models.*;
 import vsu.netcracker.project.database.service.*;
 
@@ -14,7 +19,7 @@ import java.util.function.Predicate;
  * Controller class for handle menu requests
  * @author Андрей Стрижко
  */
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping
 public class MenuController {
@@ -128,33 +133,74 @@ public class MenuController {
      *
      * @param json - json object, which contains the number of {@link Order}
      */
-    @PostMapping("/confirm")
-    public void confirmOrder(@RequestBody Map<String, String> json) {
+    @PostMapping("/confirm/{pay}")
+    public String confirmOrder(@RequestBody Map<String, String> json, @PathVariable Integer pay) {
+        String message = "";
+        ModelAndView model = new ModelAndView();
         Integer tableNumber = Integer.valueOf(json.get("tableNumber"));
-
+        String stripeToken = String.valueOf(json.get("token"));
+        float price = 0;
         Order order = new Order();
         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
         order.setRestaurantTable(restaurantTable);
         order.setType("На месте");
         order.setDateOrders(Timestamp.valueOf(org.joda.time.LocalDateTime.now().toString("yyyy-MM-dd HH:mm:ss")));
-        order.setTypePayment(typePaymentService.findByTitle("Наличными"));
+        if(pay == 1) {
+            order.setTypePayment(typePaymentService.findByTitle("По карте"));
+        }
+        else order.setTypePayment(typePaymentService.findByTitle("Наличными"));
         order.setOrderStatus(orderStatusService.findByTitle("Принят"));
         orderService.addOrder(order);
-        TableStatus tableStatus = tableStatusService.findByTitle("Занят, но не принят");
-        restaurantTable.setTableStatus(tableStatus);
-        restaurantTableService.editTable(restaurantTable);
 
-        int preparingTimeInSecond = cart.stream()
-                .mapToInt(dish -> dish.getPreparingTime().toLocalTime().toSecondOfDay())
-                .sum();
-        Time preparingTime = new Time(preparingTimeInSecond);
-        DishStatus dishStatus = dishStatusService.findByTitle("В ожидании");
+        message = "Оплата наличными. Ожидайте официанта";
+
         for (Dish dish : cart) {
-            DishesFromOrder dishesFromOrder = new DishesFromOrder(preparingTime, dishStatus);
-            dishesFromOrder.setDish(dish);
-            dishesFromOrder.setOrder(order);
-            dishesFromOrderService.addDishFromOrder(dishesFromOrder);
+            price += dish.getPrice();
+        }
+        if (pay == 1) {
+            Stripe.apiKey = "sk_test_LWGe8XDaCeaFRuAVJopBOdoT00K322zhWt";
+            if (stripeToken != null) {
+                try {
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("amount", Math.round(price/0.7));
+                    params.put("currency", "usd");
+                    params.put("description", "Example charge");
+                    params.put("source", stripeToken);
+                    //params.put("customer", customer.getId());
+                    Map<String, String> metadata = new HashMap<>();
+                    metadata.put("order_id", order.getId().toString());
+                    params.put("metadata", metadata);
+                    Charge charge = Charge.create(params);
+
+                    if (charge.getPaid() && charge.getStatus().equals("succeeded")){
+                        TableStatus tableStatus = tableStatusService.findByTitle("Занят, но не принят");
+                        restaurantTable.setTableStatus(tableStatus);
+                        restaurantTableService.editTable(restaurantTable);
+
+                        int preparingTimeInSecond = cart.stream()
+                                .mapToInt(dish -> dish.getPreparingTime().toLocalTime().toSecondOfDay())
+                                .sum();
+                        Time preparingTime = new Time(preparingTimeInSecond);
+                        DishStatus dishStatus = dishStatusService.findByTitle("В ожидании");
+                        for (Dish dish : cart) {
+                            DishesFromOrder dishesFromOrder = new DishesFromOrder(preparingTime, dishStatus);
+                            dishesFromOrder.setDish(dish);
+                            dishesFromOrder.setOrder(order);
+                            dishesFromOrderService.addDishFromOrder(dishesFromOrder);
+                        }
+                        message ="Оплата по карте прошла успешно";
+                    } else{
+
+                        throw new Exception();
+                    }
+                    System.out.println("yes");
+                } catch (Exception e) {
+                    message ="Ошибка оплаты картой";
+                    System.out.println("no");
+                }
+            }
         }
         cart.clear();
+        return message;
     }
 }

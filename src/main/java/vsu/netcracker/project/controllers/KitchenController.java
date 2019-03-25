@@ -13,7 +13,7 @@ import java.util.Map;
  * Controller class for handle kitchen requests
  * @author Алина Попова
  */
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("kitchen")
 public class KitchenController {

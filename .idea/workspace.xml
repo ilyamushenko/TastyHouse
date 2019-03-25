@@ -2,15 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b7d9731-5f57-4e1d-a7af-123ed4e40565" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/TastyHouse.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TastyHouse.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/KitchenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/KitchenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishesFromOrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishesFromOrderDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/DishesFromOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/DishesFromOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishesFromOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishesFromOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/OrdersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/OrdersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishesFromOrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishesFromOrderServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/WaiterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/WaiterController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -70,39 +68,46 @@
         <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="TastyHouse@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="TastyHouse: database" type="162271b6:PgImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="983ebcf7:PgImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="table_status: table" type="69fad909:PgImplModel$LocalTable" />
-      </path>
     </expand>
     <select />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/KitchenController.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="111" column="92" selection-start-line="111" selection-start-column="92" selection-end-line="111" selection-end-column="92" />
+            <state relative-caret-position="901">
+              <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="586">
+              <caret line="204" column="5" selection-start-line="204" selection-start-column="5" selection-end-line="204" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/DishesFromOrder.java">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.3.RELEASE/spring-web-5.1.3.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="90" column="37" lean-forward="true" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
-              <folding>
-                <element signature="e#1976#1977#0" expanded="true" />
-                <element signature="e#2020#2021#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1411">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/WaiterController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="38" column="75" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="75" />
             </state>
           </provider>
         </entry>
@@ -127,12 +132,17 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="card_payment" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/resources/templates/WaiterOrdersOnTable2.ftl" />
         <option value="$PROJECT_DIR$/Kafe_postgres_create.sql" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/Orders.java" />
         <option value="$PROJECT_DIR$/src/main/resources/jawr.properties" />
@@ -164,18 +174,13 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/WaiterOrdersOnTable.ftl" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Dishes.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/WaiterController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/config/SimpleCORSFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/config/MyConfigurations.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/config/MyConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/config/MvcConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/config/WebSecurityConfig.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Orders.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/OrdersService.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishesFromOrderDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishesFromOrderService.java" />
@@ -183,6 +188,12 @@
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/DishesFromOrder.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/utils/Utils.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/KitchenController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/WaiterController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/config/PayPalClient.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" />
       </list>
     </option>
   </component>
@@ -226,6 +237,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -322,26 +334,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="project" type="462c0819:PsiDirectoryNode" />
               <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
@@ -356,22 +358,28 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="postgresql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551742152760" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553357362116" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../laba1" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/study-project-master" />
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources" />
+      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources\static\js" />
+      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources\static\js\libs" />
+      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources\static" />
+      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse2\src\main\resources\static" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
     </key>
@@ -381,13 +389,6 @@
       <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources\static\css\libs\fontawesome_css" />
       <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse2\src\main\resources\static\css\libs\fontawesome_css" />
       <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse2\src\main\resources\static\css\libs\fontawesome_css\css" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources" />
-      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources\static\js" />
-      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources\static\js\libs" />
-      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse\src\main\resources\static" />
-      <recent name="C:\Users\Виктор\Desktop\Университет\Для NetCracker\TastyHouse2\src\main\resources\static" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -427,6 +428,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Application" />
+        <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>
   </component>
@@ -451,6 +453,16 @@
       <workItem from="1551424620140" duration="8851000" />
       <workItem from="1551698296967" duration="8708000" />
       <workItem from="1551734938951" duration="6631000" />
+      <workItem from="1551800493922" duration="1518000" />
+      <workItem from="1551803028225" duration="184000" />
+      <workItem from="1551864130980" duration="5629000" />
+      <workItem from="1552160752081" duration="4673000" />
+      <workItem from="1552303867502" duration="5133000" />
+      <workItem from="1552935177861" duration="11328000" />
+      <workItem from="1553072436412" duration="9806000" />
+      <workItem from="1553113538568" duration="5946000" />
+      <workItem from="1553152997537" duration="8109000" />
+      <workItem from="1553497858949" duration="290000" />
     </task>
     <task id="LOCAL-00001" summary="Подредактировал в ORM тип рецепта и ингредиента.">
       <created>1548834801915</created>
@@ -466,17 +478,24 @@
       <option name="project" value="LOCAL" />
       <updated>1551424966053</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="то, что затерла у Ильи))">
+      <created>1551743190174</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1551743190174</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79936000" />
+    <option name="totallyTimeSpent" value="133191000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836066" visible="true" weight="0.29500756" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49836066" visible="true" weight="0.2881997" />
       <window_info id="Structure" order="1" sideWeight="0.50163937" side_tool="true" weight="0.25340393" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -491,7 +510,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.40092167" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.41781875" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.5437788" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -586,84 +605,34 @@
     <MESSAGE value="добавление заказа в базу" />
     <option name="LAST_COMMIT_MESSAGE" value="добавление заказа в базу" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/KitchenController.java</url>
+          <line>137</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((InvalidRequestException)e).detailMessage" language="JAVA" custom="com.stripe.exception.InvalidRequestException" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>((InvalidRequestException)e).detailMessage</expression-string>
+        <language-id>JAVA</language-id>
+        <custom-info>com.stripe.exception.InvalidRequestException</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.13/tomcat-embed-core-9.0.13.jar!/org/apache/catalina/core/StandardContextValve.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/tomcat/embed/tomcat-embed-core/9.0.13/tomcat-embed-core-9.0.13.jar!/org/apache/catalina/core/StandardWrapperValve.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="204" selection-start-line="204" selection-end-line="204" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/OrderStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/StaffDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/RoleStaffDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishStatusDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/TableStatusDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/TypePaymentDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/TypeDishDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.3.RELEASE/spring-webmvc-5.1.3.RELEASE.jar!/org/springframework/web/servlet/mvc/method/annotation/ServletInvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.3.RELEASE/spring-webmvc-5.1.3.RELEASE.jar!/org/springframework/web/servlet/mvc/method/annotation/RequestMappingHandlerAdapter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="491" selection-start-line="491" selection-end-line="491" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.1.3.RELEASE/spring-webmvc-5.1.3.RELEASE.jar!/org/springframework/web/servlet/mvc/method/AbstractHandlerMethodAdapter.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
@@ -741,19 +710,11 @@
       </provider>
     </entry>
     <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/orders.sql" />
-    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/type_payment" />
     <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/order_status" />
     <entry file="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.10.1/joda-time-2.10.1.jar!/org/joda/time/LocalDate.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="664" column="18" selection-start-line="664" selection-start-column="18" selection-end-line="664" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -766,78 +727,12 @@
     </entry>
     <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/table_status" />
     <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/restaurant_table" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="146" selection-start-line="146" selection-end-line="146" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/orders" />
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.3.RELEASE/spring-web-5.1.3.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="101">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dishes_from_order" />
-    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dish_status" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishesDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="19" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishesService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="19" column="18" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishesFromOrderDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/OrdersDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/OrdersService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" selection-start-line="23" selection-end-line="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/OrdersServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-87">
-          <caret line="15" column="7" selection-start-line="15" selection-start-column="7" selection-end-line="15" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishesFromOrderService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="21" column="27" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishesDAO.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishesService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/OrdersDAO.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/OrdersService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/OrdersServiceImpl.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/DishStatus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -848,13 +743,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/RestaurantTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-26">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/RoleStaff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
@@ -873,36 +761,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishesFromOrderServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
-          <folding>
-            <element signature="e#1343#1344#0" expanded="true" />
-            <element signature="e#1402#1403#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Orders.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="92" column="39" selection-start-line="92" selection-start-column="30" selection-end-line="92" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Dishes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="161" column="5" lean-forward="true" selection-start-line="161" selection-start-column="5" selection-end-line="161" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3953#3954#0" expanded="true" />
-            <element signature="e#3991#3992#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Orders.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Dishes.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/utils/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="215">
@@ -910,21 +770,138 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/DishesFromOrder.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/KitchenController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="90" column="37" lean-forward="true" selection-start-line="90" selection-start-column="37" selection-end-line="90" selection-end-column="37" />
+        <state relative-caret-position="170">
+          <caret line="14" column="3" selection-start-line="14" selection-start-column="3" selection-end-line="14" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishesFromOrderServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="42" column="67" selection-start-line="42" selection-start-column="67" selection-end-line="42" selection-end-column="67" />
           <folding>
-            <element signature="e#1976#1977#0" expanded="true" />
-            <element signature="e#2020#2021#0" expanded="true" />
+            <element signature="e#1349#1350#0" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/KitchenController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishesFromOrderService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="111" column="92" selection-start-line="111" selection-start-column="92" selection-end-line="111" selection-end-column="92" />
+        <state relative-caret-position="306">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishesFromOrderDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="16" column="85" selection-start-line="16" selection-start-column="85" selection-end-line="16" selection-end-column="85" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dish_status" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="24" column="27" selection-start-line="24" selection-start-column="27" selection-end-line="24" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dishes_and_staff" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Staff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="101" lean-forward="true" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Dish.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/RoleStaff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/DishesFromOrder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="31" column="22" lean-forward="true" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishStatusDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dishes" />
+    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dish" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/config/PayPalClient.java" />
+    <entry file="file://$PROJECT_DIR$/Kafe_postgres_add_test_data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dishes_from_order" />
+    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/type_payment">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="53" column="21" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.3.RELEASE/spring-web-5.1.3.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1411">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/WaiterController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="38" column="75" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="204" column="5" selection-start-line="204" selection-start-column="5" selection-end-line="204" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

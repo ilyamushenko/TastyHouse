@@ -22,7 +22,7 @@ import java.util.Map;
  * Controller class for handle admin requests
  * @author Илья Мущенко
  */
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/admin")
 public class AdministratorController {

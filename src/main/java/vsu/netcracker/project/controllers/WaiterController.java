@@ -18,7 +18,7 @@ import java.util.Map;
  * Controller class for handle waiter requests
  * @author Кушнеренко Виктор
  */
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("waiter")
 public class WaiterController {
