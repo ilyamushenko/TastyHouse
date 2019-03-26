@@ -2,12 +2,17 @@ package vsu.netcracker.project.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Order;
-import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.DishService;
+import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.OrderService;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
@@ -20,6 +25,7 @@ import java.util.Map;
 
 /**
  * Controller class for handle admin requests
+ *
  * @author Илья Мущенко
  */
 @CrossOrigin(origins = "*")
@@ -35,20 +41,27 @@ public class AdministratorController {
     /**
      * service for interaction with {@link Order} objects
      */
-    @Autowired
-    private OrderService orderService;
+    private final OrderService orderService;
 
     /**
      * service for interaction with {@link vsu.netcracker.project.database.models.DishesFromOrder} objects
      */
-    @Autowired
-    private DishesFromOrderService dishesFromOrderService;
+    private final DishesFromOrderService dishesFromOrderService;
 
     /**
      * service for interaction with {@link Dish} objects
      */
+    private final DishService dishService;
+
+    /**
+     * injecting services with constructor
+     */
     @Autowired
-    private DishService dishService;
+    public AdministratorController(OrderService orderService, DishesFromOrderService dishesFromOrderService, DishService dishService) {
+        this.orderService = orderService;
+        this.dishesFromOrderService = dishesFromOrderService;
+        this.dishService = dishService;
+    }
 
     /**
      * post request for admin, which returns json object, containing info about most popular dish
@@ -58,7 +71,7 @@ public class AdministratorController {
      */
     @PostMapping
     public Map<String, String> post(@RequestBody Map<String, String> selectedType) {
-        type = (String) selectedType.values().toArray()[0];
+        type = selectedType.get("statistic_type");
         System.out.println(type);
 
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
@@ -117,10 +130,10 @@ public class AdministratorController {
 
     @PostMapping("/inform")
     public Map<String, String> getDishesInfo(@RequestBody Map<String, String> needDishMap) {
-        String needDish = (String) needDishMap.values().toArray()[0];
+        String needDish = needDishMap.get("needDish");
         System.out.println(needDish);
         int id = Integer.valueOf(needDish);
-        Map<String, String > map =  UtilsForAdministrator.getFullInfoAboutDish(id, orderService, dishesFromOrderService);
+        Map<String, String> map = UtilsForAdministrator.getFullInfoAboutDish(id, orderService, dishesFromOrderService);
         Dish dish = dishService.getById(Integer.valueOf(needDish));
         map.put("name", dish.getName());
         map.put("img", dish.getImgUrl());
@@ -140,26 +153,25 @@ public class AdministratorController {
         Map<String, List<Map<String, String>>> json = new HashMap<>();
         boolean willAdd;
 
-        for(Dish dish: dishes) {
+        for (Dish dish : dishes) {
             String typeDish = dish.getTypeDish().getTitle();
-            List<Map<String, String>> templist;
-            if(json.containsKey(typeDish)) {
-                templist = json.get(typeDish);
+            List<Map<String, String>> tempList;
+            if (json.containsKey(typeDish)) {
+                tempList = json.get(typeDish);
                 willAdd = false;
-            }
-            else {
-                templist = new ArrayList<>();
+            } else {
+                tempList = new ArrayList<>();
                 willAdd = true;
             }
-            Map<String, String> tempmap = new HashMap<>();
-            tempmap.put("text", dish.getName());
-            tempmap.put("value", String.valueOf(dish.getId()));
-            templist.add(tempmap);
-            if(willAdd) json.put(typeDish, templist);
+            Map<String, String> tempMap = new HashMap<>();
+            tempMap.put("text", dish.getName());
+            tempMap.put("value", String.valueOf(dish.getId()));
+            tempList.add(tempMap);
+            if (willAdd)
+                json.put(typeDish, tempList);
         }
         System.out.println(json);
         return json;
-
     }
 
 //    @GetMapping()

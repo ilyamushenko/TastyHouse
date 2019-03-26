@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class TableStatusServiceImpl implements TableStatusService {
 
+    private final TableStatusDAO tableStatusDAO;
+
     @Autowired
-    private TableStatusDAO tableStatusDAO;
+    public TableStatusServiceImpl(TableStatusDAO tableStatusDAO) {
+        this.tableStatusDAO = tableStatusDAO;
+    }
 
     @Override
     public TableStatus addStatus(TableStatus status) {

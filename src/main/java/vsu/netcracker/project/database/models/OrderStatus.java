@@ -2,7 +2,12 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -63,14 +68,13 @@ public class OrderStatus implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderStatus orderStatus = (OrderStatus) o;
-        return getId().equals(orderStatus.getId()) &&
-                getTitle().equals(orderStatus.getTitle());
+        OrderStatus that = (OrderStatus) o;
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle());
+        return Objects.hash(id);
     }
 
     @Override
@@ -78,7 +82,6 @@ public class OrderStatus implements Serializable {
         return "OrderStatus{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", orders=" + orders +
                 '}';
     }
 }

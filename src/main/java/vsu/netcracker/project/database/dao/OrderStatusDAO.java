@@ -10,6 +10,5 @@ import vsu.netcracker.project.database.models.OrderStatus;
  */
 public interface OrderStatusDAO extends JpaRepository<OrderStatus, Integer> {
 
-    @Query("select s from OrderStatus s where s.title = :title")
-    OrderStatus findByTitle(@Param("title") String title);
+    OrderStatus findByTitle(String title);
 }

@@ -16,8 +16,6 @@ public interface OrderService {
 
     Order editOrder(Order order);
 
-    Order findByTableNumber(Integer tableNumber);
-
     List<Order> findByDateOrdersBetween(Timestamp dateOrders, Timestamp dateOrders2);
 
     List<Order> findAll();

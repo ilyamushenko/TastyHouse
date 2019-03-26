@@ -2,17 +2,32 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Кушнеренко Виктор
  */
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "dish")
 public class Dish implements Serializable {
 
@@ -48,8 +63,8 @@ public class Dish implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "dishes_and_staff",
-            joinColumns = { @JoinColumn(name = "dish_id") },
-            inverseJoinColumns = { @JoinColumn(name = "staff_id") }
+            joinColumns = {@JoinColumn(name = "dish_id")},
+            inverseJoinColumns = {@JoinColumn(name = "staff_id")}
     )
     @JsonManagedReference
     private List<Staff> staffList;
@@ -163,5 +178,33 @@ public class Dish implements Serializable {
 
     public void setDishesFromOrder(List<DishesFromOrder> dishesFromOrder) {
         this.dishesFromOrder = dishesFromOrder;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dish dish = (Dish) o;
+        return id.equals(dish.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", ingredient='" + ingredient + '\'' +
+                ", recipe='" + recipe + '\'' +
+                ", mass='" + mass + '\'' +
+                ", preparingTime=" + preparingTime +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

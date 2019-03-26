@@ -2,7 +2,12 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -65,12 +70,19 @@ public class TypeDish implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeDish typeDish = (TypeDish) o;
-        return getId().equals(typeDish.getId()) &&
-                getTitle().equals(typeDish.getTitle());
+        return id.equals(typeDish.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle());
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "TypeDish{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class DishStatusServiceImpl implements DishStatusService {
 
+    private final DishStatusDAO dishStatusDAO;
+
     @Autowired
-    private DishStatusDAO dishStatusDAO;
+    public DishStatusServiceImpl(DishStatusDAO dishStatusDAO) {
+        this.dishStatusDAO = dishStatusDAO;
+    }
 
     @Override
     public DishStatus addStatus(DishStatus status) {

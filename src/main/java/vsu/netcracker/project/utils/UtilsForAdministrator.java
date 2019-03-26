@@ -3,18 +3,19 @@ package vsu.netcracker.project.utils;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Order;
-import vsu.netcracker.project.database.service.DishService;
 import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.OrderService;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class with support functions
  * for help to {@link vsu.netcracker.project.controllers.AdministratorController}
+ *
  * @author Илья Мущенко
  */
 public class UtilsForAdministrator {
@@ -50,6 +51,7 @@ public class UtilsForAdministrator {
         }
         return max;
     }
+
     //Сколько раз в день в неделю в месяц
     //В какие дни недели чаще всего покупают
     //В какое время чаще всего покупают
@@ -65,8 +67,9 @@ public class UtilsForAdministrator {
         for (Order order : orders) {
             List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrderByOrder(order.getId());
             if (temp != null) {
-                for(DishesFromOrder dishesFromOrder : temp) {
-                    if (id == dishesFromOrder.getDish().getId()) counter++;
+                for (DishesFromOrder dishesFromOrder : temp) {
+                    if (id == dishesFromOrder.getDish().getId())
+                        counter++;
                 }
             }
         }
@@ -74,15 +77,15 @@ public class UtilsForAdministrator {
     }
 
     private static Map<String, String> getInformationAboutDishDayOfTheWeek(int id,
-                                                              OrderService orderService,
-                                                              DishesFromOrderService dishesFromOrderService) {
+                                                                           OrderService orderService,
+                                                                           DishesFromOrderService dishesFromOrderService) {
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         HashMap<Integer, Integer> dayOfWeeks = new HashMap<>();
         List<Order> orders = orderService.findByDateOrdersBetween(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)), now);
-        for(Order order: orders) {
+        for (Order order : orders) {
             List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrderByOrder(order.getId());
             if (temp != null) {
-                for(DishesFromOrder dishesFromOrder : temp) {
+                for (DishesFromOrder dishesFromOrder : temp) {
                     if (id == dishesFromOrder.getDish().getId()) { //Сделать мапу где будут дни недели, а потом поиск макс
                         int day = order.getDateOrders().toLocalDateTime().getDayOfWeek().getValue();
                         Integer count = dayOfWeeks.get(day);
@@ -104,7 +107,7 @@ public class UtilsForAdministrator {
     }
 
     private static void mergeMaps(Map<String, String> map1, Map<String, String> map2) {
-        for(Map.Entry<String, String> entry: map2.entrySet())
+        for (Map.Entry<String, String> entry : map2.entrySet())
             map1.put(entry.getKey(), entry.getValue());
     }
 

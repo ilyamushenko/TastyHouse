@@ -1,16 +1,29 @@
 package vsu.netcracker.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import vsu.netcracker.project.database.models.*;
-import vsu.netcracker.project.database.service.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import vsu.netcracker.project.database.models.DishStatus;
+import vsu.netcracker.project.database.models.DishesFromOrder;
+import vsu.netcracker.project.database.models.Order;
+import vsu.netcracker.project.database.models.RestaurantTable;
+import vsu.netcracker.project.database.models.TableStatus;
+import vsu.netcracker.project.database.service.DishStatusService;
+import vsu.netcracker.project.database.service.DishesFromOrderService;
+import vsu.netcracker.project.database.service.RestaurantTableService;
+import vsu.netcracker.project.database.service.TableStatusService;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Controller class for handle kitchen requests
+ *
  * @author Алина Попова
  */
 @CrossOrigin(origins = "*")
@@ -21,83 +34,64 @@ public class KitchenController {
     /**
      * service for interaction with {@link DishesFromOrder} objects
      */
-    @Autowired
-    private DishesFromOrderService dishesFromOrderService;
-
-    /**
-     * service for interaction with {@link Order} objects
-     */
-    @Autowired
-    private OrderService orderService;
-
-    /**
-     * service for interaction with {@link Dish} objects
-     */
-    @Autowired
-    private DishService dishService;
-
-    /**
-     * service for interaction with {@link OrderStatus} objects
-     */
-    @Autowired
-    private OrderStatusService orderStatusService;
+    private final DishesFromOrderService dishesFromOrderService;
 
     /**
      * service for interaction with {@link DishStatus} objects
      */
-    @Autowired
-    private DishStatusService dishStatusService;
+    private final DishStatusService dishStatusService;
 
     /**
      * service for interaction with {@link TableStatus} objects
      */
-    @Autowired
-    private TableStatusService tableStatusService;
+    private final TableStatusService tableStatusService;
 
     /**
      * service for interaction with {@link RestaurantTable} objects
      */
+    private final RestaurantTableService restaurantTableService;
+
+    /**
+     * injecting services with constructor
+     */
     @Autowired
-    private RestaurantTableService restaurantTableService;
+    public KitchenController(DishesFromOrderService dishesFromOrderService,
+                             DishStatusService dishStatusService,
+                             TableStatusService tableStatusService,
+                             RestaurantTableService restaurantTableService) {
+        this.dishesFromOrderService = dishesFromOrderService;
+        this.dishStatusService = dishStatusService;
+        this.tableStatusService = tableStatusService;
+        this.restaurantTableService = restaurantTableService;
+    }
 
     /**
      * function, which changes the {@link TableStatus} of {@link RestaurantTable}
      *
      * @param restaurantTable - the {@link RestaurantTable}, which we need to update
      * @see KitchenController#changeDishStatus(Map)
-     * @see KitchenController#changeOrderStatus(Order)
      */
     private void changeTableStatus(RestaurantTable restaurantTable) {
         TableStatus tableStatus = null;
-        if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("dish_is_ready"))) {
-            tableStatus = tableStatusService.findByTitle("dish_is_ready");
-        } else if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("in_process_of_cooking"))) {
-            tableStatus = tableStatusService.findByTitle("in_process_of_cooking");
-        } else if (restaurantTable.getOrdersList().stream().allMatch(s -> s.getOrderStatus().getTitle().equals("no_one_here"))) {
-            tableStatus = tableStatusService.findByTitle("no_one_here");
+        if (!restaurantTable.getTableStatus().getTitle().equals("free")) {
+            if (restaurantTable.getOrdersList().stream().allMatch(
+                    s -> s.getDishesFromOrder().stream().allMatch(
+                            d -> d.getDishStatus().getTitle().equals("Готово")))) {
+                tableStatus = tableStatusService.findByTitle("busy_no_need_attention");
+            } else if (restaurantTable.getOrdersList().stream().allMatch(
+                    s -> s.getDishesFromOrder().stream().noneMatch(
+                            d -> d.getDishStatus().getTitle().equals("Готово")))) {
+                tableStatus = tableStatusService.findByTitle("busy_need_attention");
+            } else if (restaurantTable.getOrdersList().stream().allMatch(
+                    s -> s.getDishesFromOrder().stream().anyMatch(
+                            d -> d.getDishStatus().getTitle().equals("Готово")))) {
+                tableStatus = tableStatusService.findByTitle("busy_need_to_bring");
+            }
+        } else {
+            tableStatus = tableStatusService.findByTitle("free");
         }
         restaurantTable.setTableStatus(tableStatus);
         restaurantTableService.editTable(restaurantTable);
-    }
-
-    /**
-     * function, which changes the {@link OrderStatus} of {@link Order}
-     *
-     * @param order - the {@link Order}, which we need to update
-     * @see KitchenController#changeDishStatus(Map)
-     * @see KitchenController#changeTableStatus(RestaurantTable)
-     */
-    private void changeOrderStatus(Order order) {
-        OrderStatus orderStatus = null;
-        if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готово"))) {
-            orderStatus = orderStatusService.findByTitle("dish_is_ready");
-        } else if (order.getDishesFromOrder().stream().anyMatch(s -> s.getDishStatus().getTitle().equals("Готовится"))) {
-            orderStatus = orderStatusService.findByTitle("in_process_of_cooking");
-        } else if (order.getDishesFromOrder().stream().allMatch(s -> s.getDishStatus().getTitle().equals("В ожидании"))) {
-            orderStatus = orderStatusService.findByTitle("no_one_here");
-        }
-        order.setOrderStatus(orderStatus);
-        orderService.editOrder(order);
     }
 
     /**
@@ -107,14 +101,9 @@ public class KitchenController {
      */
     @GetMapping
     public List<DishesFromOrder> showTables() {
-        List<DishesFromOrder> dishesFromOrders = dishesFromOrderService.findAll();
-        List<DishesFromOrder> dishesFromOrdersKithen = new ArrayList<>();
-        for (DishesFromOrder dishesFromOrder : dishesFromOrders
-        ) {
-            if (!dishesFromOrder.getDishStatus().getTitle().equals("Готово"))
-                dishesFromOrdersKithen.add(dishesFromOrder);
-        }
-        dishesFromOrdersKithen.sort((p1, p2)->p1.getTimeOrder().compareTo(p2.getTimeOrder()));
+        DishStatus dishStatus = dishStatusService.findByTitle("Готово");
+        List<DishesFromOrder> dishesFromOrdersKithen = dishesFromOrderService.getByDishStatusIsNot(dishStatus);
+        dishesFromOrdersKithen.sort(Comparator.comparing(DishesFromOrder::getTimeOrder));
         return dishesFromOrdersKithen;
     }
 
@@ -122,32 +111,18 @@ public class KitchenController {
      * post request for changing {@link DishStatus}
      *
      * @param json - json object, which contains from status, id and tableNumber of {@link Order}
-     * @see KitchenController#changeOrderStatus(Order)
      * @see KitchenController#changeTableStatus(RestaurantTable)
      */
     @PostMapping("/status-change")
     public void changeDishStatus(@RequestBody Map<String, Object> json) {
-        String status = (String) json.values().toArray()[0];
-        Integer id = (Integer) json.values().toArray()[1];
-        Integer tableNumber = (Integer) json.values().toArray()[2];
-        //Order orders = orderService.findById(id);
-        Order order = orderService.findByTableNumber(tableNumber);
-        RestaurantTable restaurantTable = order.getRestaurantTable();
-        DishStatus dishStatus = dishStatusService.findByTitle(status);
+        String status = (String) json.get("status");
+        Integer id = (Integer) json.get("id");
+        Integer tableNumber = (Integer) json.get("tableNumber");
         DishesFromOrder dishesFromOrder = dishesFromOrderService.getById(id);
+        RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
+        DishStatus dishStatus = dishStatusService.findByTitle(status);
         dishesFromOrder.setDishStatus(dishStatus);
         dishesFromOrderService.editDishFromOrder(dishesFromOrder);
-        /*
-        for (DishesFromOrder dishFromOrder : order.getDishesFromOrder()) {
-            if (dishFromOrder.getDish().getId().equals(id)) {
-                if (!dishFromOrder.getDishStatus().getTitle().equals("Готово")) {
-                    dishFromOrder.setDishStatus(dishStatus);
-                    dishesFromOrderService.editDishFromOrder(dishFromOrder);
-                    break;
-                }
-            }
-        }*/
-        changeOrderStatus(order);
         changeTableStatus(restaurantTable);
     }
 }

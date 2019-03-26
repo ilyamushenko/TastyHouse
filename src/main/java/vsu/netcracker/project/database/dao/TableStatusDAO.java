@@ -10,6 +10,5 @@ import vsu.netcracker.project.database.models.TableStatus;
  */
 public interface TableStatusDAO extends JpaRepository<TableStatus, Integer> {
 
-    @Query("select ts from TableStatus ts where ts.title = :title")
-    TableStatus findByTitle(@Param("title") String title);
+    TableStatus findByTitle(String title);
 }

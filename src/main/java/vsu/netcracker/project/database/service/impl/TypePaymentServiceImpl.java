@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class TypePaymentServiceImpl implements TypePaymentService {
 
+    private final TypePaymentDAO typePaymentDAO;
+
     @Autowired
-    private TypePaymentDAO typePaymentDAO;
+    public TypePaymentServiceImpl(TypePaymentDAO typePaymentDAO) {
+        this.typePaymentDAO = typePaymentDAO;
+    }
 
     @Override
     public TypePayment addTypePayment(TypePayment typePayment) {

@@ -10,6 +10,5 @@ import vsu.netcracker.project.database.models.TypePayment;
  */
 public interface TypePaymentDAO extends JpaRepository<TypePayment, Integer> {
 
-    @Query("select tp from TypePayment tp where tp.title = :title")
-    TypePayment findByTitle(@Param("title") String title);
+    TypePayment findByTitle(String title);
 }

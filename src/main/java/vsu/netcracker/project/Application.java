@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 // ToDo - добавить в приложение логирование (по возможности и желанию) + еще можно тесты для кода
+// ToDo - повозиться с типами блюд в меню (у нас нет супов, но есть морепродукты и т. д.)
 
 /**
  * Class with entry point of our app

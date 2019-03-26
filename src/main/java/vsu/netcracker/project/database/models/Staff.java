@@ -3,7 +3,14 @@ package vsu.netcracker.project.database.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -133,18 +140,12 @@ public class Staff implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Staff staff = (Staff) o;
-        return getId().equals(staff.getId()) &&
-                getLastName().equals(staff.getLastName()) &&
-                getFirstName().equals(staff.getFirstName()) &&
-                getPhone().equals(staff.getPhone()) &&
-                getEmail().equals(staff.getEmail()) &&
-                getPassword().equals(staff.getPassword()) &&
-                getLogin().equals(staff.getLogin());
+        return id.equals(staff.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getLastName(), getFirstName(), getPhone(), getEmail(), getPassword(), getLogin());
+        return Objects.hash(id);
     }
 
     @Override
@@ -157,7 +158,6 @@ public class Staff implements Serializable {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", login='" + login + '\'' +
-                ", roleStaff=" + roleStaff +
                 '}';
     }
 }

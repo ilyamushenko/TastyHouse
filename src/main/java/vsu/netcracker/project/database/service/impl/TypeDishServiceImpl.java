@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class TypeDishServiceImpl implements TypeDishService {
 
+    private final TypeDishDAO typeDishDAO;
+
     @Autowired
-    private TypeDishDAO typeDishDAO;
+    public TypeDishServiceImpl(TypeDishDAO typeDishDAO) {
+        this.typeDishDAO = typeDishDAO;
+    }
 
     @Override
     public TypeDish addTypeDish(TypeDish typeDish) {

@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class RoleStaffServiceImpl implements RoleStaffService {
 
+    private final RoleStaffDAO roleStaffDAO;
+
     @Autowired
-    private RoleStaffDAO roleStaffDAO;
+    public RoleStaffServiceImpl(RoleStaffDAO roleStaffDAO) {
+        this.roleStaffDAO = roleStaffDAO;
+    }
 
     @Override
     public RoleStaff addRoleStaff(RoleStaff roleStaff) {

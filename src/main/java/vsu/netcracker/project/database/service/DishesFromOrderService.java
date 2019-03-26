@@ -1,6 +1,6 @@
 package vsu.netcracker.project.database.service;
 
-import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.DishStatus;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 
 import java.util.List;
@@ -21,4 +21,6 @@ public interface DishesFromOrderService {
     List<DishesFromOrder> findDishesFromOrderByOrder(Integer orderId);
 
     DishesFromOrder getById(Integer id);
+
+    List<DishesFromOrder> getByDishStatusIsNot(DishStatus dishStatus);
 }

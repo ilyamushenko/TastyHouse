@@ -3,11 +3,18 @@ package vsu.netcracker.project.database.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  * @author Кушнеренко Виктор
@@ -87,7 +94,28 @@ public class DishesFromOrder implements Serializable {
         this.dishStatus = dishStatus;
     }
 
-    public  Timestamp getTimeOrder() {
+    public Timestamp getTimeOrder() {
         return order.getDateOrders();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DishesFromOrder that = (DishesFromOrder) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "DishesFromOrder{" +
+                "id=" + id +
+                ", realTime=" + realTime +
+                '}';
     }
 }

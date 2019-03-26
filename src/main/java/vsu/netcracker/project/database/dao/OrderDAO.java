@@ -13,9 +13,5 @@ import java.util.List;
  */
 public interface OrderDAO extends JpaRepository<Order, Integer> {
 
-    @Query("select o from Order o where o.id = :tableNumber")
-    Order findByTableNumber(@Param("tableNumber") Integer tableNumber);
-
-    @Query("select o from Order o where o.dateOrders between :dateOrders and :dateOrders2")
-    List<Order> findByDateOrdersBetween(@Param("dateOrders") Timestamp dateOrders, @Param("dateOrders2") Timestamp dateOrders2);
+    List<Order> findByDateOrdersBetween(Timestamp dateOrders, Timestamp dateOrders2);
 }

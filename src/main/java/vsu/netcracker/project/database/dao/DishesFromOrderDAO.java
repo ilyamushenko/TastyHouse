@@ -3,7 +3,7 @@ package vsu.netcracker.project.database.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.DishStatus;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.List;
  */
 public interface DishesFromOrderDAO extends JpaRepository<DishesFromOrder, Integer> {
 
-    @Query("select o.dishesFromOrder from Order o where o.id = :orderId")
-    List<DishesFromOrder> findDishesFromOrderById(@Param("orderId") Integer orderId);
+    List<DishesFromOrder> findDishesFromOrderById(Integer orderId);
 
-    @Query("select d from DishesFromOrder d where d.id = :id")
-    DishesFromOrder getById(@Param("id") Integer id);
+    DishesFromOrder getById(Integer id);
+
+    List<DishesFromOrder> getByDishStatusIsNot(DishStatus dishStatus);
 }

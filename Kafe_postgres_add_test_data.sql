@@ -13,42 +13,32 @@ TRUNCATE TABLE table_status RESTART IDENTITY CASCADE;
 TRUNCATE TABLE dish_status RESTART IDENTITY CASCADE;
 
 /* Вставка статусов столиков */
-INSERT INTO table_status (title) VALUES ('reserved'); /* 1 */
-INSERT INTO table_status (title) VALUES ('no_one_here'); /* 2 */
-INSERT INTO table_status (title) VALUES ('Занят, но не принят'); /* 3 */
-INSERT INTO table_status (title) VALUES ('Принят'); /* 4 */
-INSERT INTO table_status (title) VALUES ('in_process_of_cooking'); /* 5 */
-INSERT INTO table_status (title) VALUES ('dish_is_ready'); /* 6 */
-INSERT INTO table_status (title) VALUES ('Ждет оплаты'); /* 7 */
-INSERT INTO table_status (title) VALUES ('Оплачен'); /* 8 */
+INSERT INTO table_status (title) VALUES ('free'); /* Свободен */
+INSERT INTO table_status (title) VALUES ('busy_need_to_bring'); /* Занят, нужно отнести */
+INSERT INTO table_status (title) VALUES ('busy_need_attention'); /* Занят, требует внимания */
+INSERT INTO table_status (title) VALUES ('busy_no_need_attention'); /* Занят, не требует внимания */
 
 /* Вставка статусов блюд */
-INSERT INTO dish_status (title) VALUES ('В ожидании');
-INSERT INTO dish_status (title) VALUES ('Готовится');
-INSERT INTO dish_status (title) VALUES ('Готово');
+INSERT INTO dish_status (title) VALUES ('В ожидании'); /* В ожидании */
+INSERT INTO dish_status (title) VALUES ('Готовится'); /* Готовится */
+INSERT INTO dish_status (title) VALUES ('Готово'); /* Готово */
 
 /* Вставка ресторанных столиков */
+INSERT INTO restaurant_table (table_status_id) VALUES (1);
 INSERT INTO restaurant_table (table_status_id) VALUES (2);
-INSERT INTO restaurant_table (table_status_id) VALUES (5);
-INSERT INTO restaurant_table (table_status_id) VALUES (6);
+INSERT INTO restaurant_table (table_status_id) VALUES (3);
+INSERT INTO restaurant_table (table_status_id) VALUES (4);
+INSERT INTO restaurant_table (table_status_id) VALUES (1);
 INSERT INTO restaurant_table (table_status_id) VALUES (2);
-INSERT INTO restaurant_table (table_status_id) VALUES (5);
-INSERT INTO restaurant_table (table_status_id) VALUES (6);
-INSERT INTO restaurant_table (table_status_id) VALUES (2);
+INSERT INTO restaurant_table (table_status_id) VALUES (3);
 
 /* Вставка типов оплаты */
 INSERT INTO type_payment (title) VALUES ('По карте');
 INSERT INTO type_payment (title) VALUES ('Наличными');
 
 /* Вставка статусов заказов */
-INSERT INTO order_status (title) VALUES ('reserved'); /* 1 */
-INSERT INTO order_status (title) VALUES ('no_one_here'); /* 2 */
-INSERT INTO order_status (title) VALUES ('Занят, но не принят'); /* 3 */
-INSERT INTO order_status (title) VALUES ('Принят'); /* 4 */
-INSERT INTO order_status (title) VALUES ('in_process_of_cooking'); /* 5 */
-INSERT INTO order_status (title) VALUES ('dish_is_ready'); /* 6 */
-INSERT INTO order_status (title) VALUES ('Ждет оплаты'); /* 7 */
-INSERT INTO order_status (title) VALUES ('Оплачен'); /* 8 */
+INSERT INTO order_status (title) VALUES ('paid'); /* Оплачено */
+INSERT INTO order_status (title) VALUES ('not_paid'); /* Не оплачено */
 
 /* Вставка роли персонала */
 INSERT INTO role_staff (title) VALUES ('Официант'); /* 1 */
@@ -59,25 +49,23 @@ INSERT INTO staff (last_name, first_name, phone, email, password, login, role_st
 INSERT INTO staff (last_name, first_name, phone, email, password, login, role_staff_id) VALUES ('Иванова', 'Юлия', '8-950-959-64-75', 'ivanova@tastyhouse.com', 'qwerty', 'ivanova', 2);
 
 /* Вставка заказов */
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-03-01 13:25:00', 'На месте', 5, 1, 1);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-14 12:20:00', 'На месте', 5, 2, 1);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-10 11:43:00', 'На месте', 6, 1, 1);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2003-05-15 20:53:00', 'На месте', 2, 2, 2);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2002-06-24 15:34:00', 'На месте', 5, 1, 2);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 2, 2);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 1, 3);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 2, 3);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 1, 3);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-03-01 13:25:00', 'На месте', 1, 1, 1);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-14 12:20:00', 'На месте', 2, 2, 1);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-10 11:43:00', 'На месте', 1, 1, 1);
+
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 1, 3);
 INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 3);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 1, 4);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 2, 4);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 1, 5);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 5, 2, 6);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 6, 1, 6);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 1, 3);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 3);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 1, 4);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 4);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 1, 5);
 INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 6);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-13 13:54:00', 'На месте', 5, 1, 7);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-21 13:54:00', 'На месте', 6, 2, 7);
-INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2018-07-23 18:15:00', 'На месте', 2, 1, 7);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 1, 1, 6);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2005-07-23 13:54:00', 'На месте', 2, 2, 6);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-13 13:54:00', 'На месте', 1, 1, 7);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2019-02-21 13:54:00', 'На месте', 2, 2, 7);
+INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id) VALUES (TIMESTAMP '2018-07-23 18:15:00', 'На месте', 1, 1, 7);
 
 
 /* Вставка типов блюд */
