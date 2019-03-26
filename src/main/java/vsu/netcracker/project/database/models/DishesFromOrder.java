@@ -31,6 +31,10 @@ public class DishesFromOrder implements Serializable {
     private Integer id;
     @Column(name = "real_time")
     private Time realTime;
+    @Column(name = "begin_cooking_time")
+    private Time beginCookingTime;
+    @Column(name = "end_cooking_time")
+    private Time endCookingTime;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "dish_status_id")
@@ -96,6 +100,22 @@ public class DishesFromOrder implements Serializable {
 
     public Timestamp getTimeOrder() {
         return order.getDateOrders();
+    }
+
+    public Time getBeginCookingTime() {
+        return beginCookingTime;
+    }
+
+    public void setBeginCookingTime(Time beginCookingTime) {
+        this.beginCookingTime = beginCookingTime;
+    }
+
+    public Time getEndCookingTime() {
+        return endCookingTime;
+    }
+
+    public void setEndCookingTime(Time endCookingTime) {
+        this.endCookingTime = endCookingTime;
     }
 
     @Override

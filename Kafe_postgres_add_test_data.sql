@@ -250,23 +250,23 @@ INSERT INTO dishes_and_staff (dish_id, staff_id) VALUES (10, 2);
 
 /* Вставка для таблицы связи блюдо-заказ */
 /* NULL здесь как заглушка - вставляйте что считаете нужным */
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 1);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 1, 1, 1);
 
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 2);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 2);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 1, 1, 2);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 1, 1, 2);
 
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 1, 1, 4);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 1, 1, 4);
 
 
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:30:00', 2, 1, 2);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:50:00', 3, 1, 3);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:20:00', 1, 2, 4);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', 2, 2, 5);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '02:00:00', 1, 2, 6);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:40:00', 1, 3, 7);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:40:00', 2, 3, 8);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '02:00:00', 2, 3, 9);
-INSERT INTO dishes_from_order (real_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:10:00', 3, 3, 10);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:30:00', '', '', 2, 1, 2);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:50:00', '', '', 3, 1, 3);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:20:00', '', '', 1, 2, 4);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:00:00', '', '', 2, 2, 5);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '02:00:00', '', '', 1, 2, 6);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:40:00', '', '', 1, 3, 7);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '00:40:00', '', '', 2, 3, 8);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '02:00:00', '', '', 2, 3, 9);
+INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:10:00', '', '', 3, 3, 10);
