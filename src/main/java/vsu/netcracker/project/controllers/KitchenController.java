@@ -17,6 +17,7 @@ import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.RestaurantTableService;
 import vsu.netcracker.project.database.service.TableStatusService;
 
+import java.sql.Timestamp;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -118,8 +119,15 @@ public class KitchenController {
         String status = (String) json.get("status");
         Integer id = (Integer) json.get("id");
         Integer tableNumber = (Integer) json.get("tableNumber");
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         DishesFromOrder dishesFromOrder = dishesFromOrderService.getById(id);
         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
+        if(status.equals("Готовится")) {
+            dishesFromOrder.setBeginCookingTime(timestamp);
+        }
+        else if(status.equals("Готово")) {
+            dishesFromOrder.setEndCookingTime(timestamp);
+        }
         DishStatus dishStatus = dishStatusService.findByTitle(status);
         dishesFromOrder.setDishStatus(dishStatus);
         dishesFromOrderService.editDishFromOrder(dishesFromOrder);
