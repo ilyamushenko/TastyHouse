@@ -32,6 +32,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/admin")
 public class AdministratorController {
+    //5555 5555 5555 4444 01/23 123 36101 ---- для оплаты по карте
 
     /**
      * type of {@link Dish}
@@ -95,7 +96,7 @@ public class AdministratorController {
         List<List<DishesFromOrder>> dishesFromOrders = new ArrayList<>();
         for (Order ord : orders) {
 
-            List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrderByOrder(ord.getId());
+            List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrdersByOrderId(ord.getId());
             if (temp != null) {
                 dishesFromOrders.add(temp);
             }

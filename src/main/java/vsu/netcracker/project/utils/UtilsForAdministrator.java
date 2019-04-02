@@ -65,7 +65,7 @@ public class UtilsForAdministrator {
         List<Order> orders = orderService.findByDateOrdersBetween(needTime, now);
         int counter = 0;
         for (Order order : orders) {
-            List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrderByOrder(order.getId());
+            List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrdersByOrderId(order.getId());
             if (temp != null) {
                 for (DishesFromOrder dishesFromOrder : temp) {
                     if (id == dishesFromOrder.getDish().getId())
@@ -83,7 +83,7 @@ public class UtilsForAdministrator {
         HashMap<Integer, Integer> dayOfWeeks = new HashMap<>();
         List<Order> orders = orderService.findByDateOrdersBetween(Timestamp.valueOf(LocalDateTime.now().minusMonths(3)), now);
         for (Order order : orders) {
-            List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrderByOrder(order.getId());
+            List<DishesFromOrder> temp = dishesFromOrderService.findDishesFromOrdersByOrderId(order.getId());
             if (temp != null) {
                 for (DishesFromOrder dishesFromOrder : temp) {
                     if (id == dishesFromOrder.getDish().getId()) { //Сделать мапу где будут дни недели, а потом поиск макс

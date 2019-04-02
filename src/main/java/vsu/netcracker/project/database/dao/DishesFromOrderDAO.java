@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface DishesFromOrderDAO extends JpaRepository<DishesFromOrder, Integer> {
 
-    List<DishesFromOrder> findDishesFromOrderById(Integer orderId);
+    List<DishesFromOrder> findDishesFromOrdersByOrderId(Integer orderId);
 
     DishesFromOrder getById(Integer id);
 
