@@ -8,20 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vsu.netcracker.project.database.models.Dish;
-import vsu.netcracker.project.database.models.DishesFromOrder;
-import vsu.netcracker.project.database.models.Order;
-import vsu.netcracker.project.database.service.DishService;
-import vsu.netcracker.project.database.service.DishesFromOrderService;
-import vsu.netcracker.project.database.service.OrderService;
+import vsu.netcracker.project.database.models.*;
+import vsu.netcracker.project.database.service.*;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Controller class for handle admin requests
@@ -33,6 +27,9 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdministratorController {
     //5555 5555 5555 4444 01/23 123 36101 ---- для оплаты по карте
+
+    @Autowired
+    private ImageService imageService;
 
     /**
      * type of {@link Dish}
@@ -55,13 +52,28 @@ public class AdministratorController {
     private final DishService dishService;
 
     /**
+     * service for interaction with {@link Ingredient} objects
+     */
+    private final IngredientService ingredientService;
+    /**
+     * service for interaction with {@link TypeDish} objects
+     */
+    private final TypeDishService typeDishService;
+    /**
+     * service for interaction with {@link FoodIngredients} objects
+     */
+    private final FoodIngredientsService foodIngredientsService;
+    /**
      * injecting services with constructor
      */
     @Autowired
-    public AdministratorController(OrderService orderService, DishesFromOrderService dishesFromOrderService, DishService dishService) {
+    public AdministratorController(OrderService orderService, DishesFromOrderService dishesFromOrderService, DishService dishService, IngredientService ingredientService, TypeDishService typeDishService, FoodIngredientsService foodIngredientsService) {
         this.orderService = orderService;
         this.dishesFromOrderService = dishesFromOrderService;
         this.dishService = dishService;
+        this.ingredientService = ingredientService;
+        this.typeDishService = typeDishService;
+        this.foodIngredientsService = foodIngredientsService;
     }
 
     /**
@@ -179,5 +191,69 @@ public class AdministratorController {
 //    public Map<String, String> getInfoAboutAllDishes() {
 //        UtilsForAdministrator.
 //    }
+    @GetMapping("/addDish/ingredient")
+    public List<Ingredient> showIngredients() {
+        List<Ingredient> ingredient = ingredientService.findAll();
+        ingredient.sort(Comparator.comparing(Ingredient::getName));
+        return ingredient;
+    }
+    @GetMapping("/addDish/typeDish")
+    public List<TypeDish> showTypeDish() {
+        List<TypeDish> typeDishes = typeDishService.findAll();
+        return typeDishes;
+    }
 
+    @PostMapping("/addDishInMenu")
+    public Dish addDishInMenu(@RequestBody Map<String, Object> json) {
+        Integer typeDish = (Integer) json.get("typeDish");
+        String name = (String) json.get("name");
+        Float price = Float.valueOf((String) json.get("price")) ;
+        String massDish = (String) json.get("massDish");
+        Time preparingTime = (Time.valueOf((String) json.get("preparingTime"))) ;
+        String recipe = (String) json.get("recipe");
+        String description = (String) json.get("description");
+        String img = (String) json.get("img");
+        String nameImg = name.replace(' ', '_');
+
+        TypeDish typeDish1 = typeDishService.getById(typeDish);
+
+        Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description);
+        dishService.addDish(dish);
+
+        List<Map<String, Object>> lit = (List<Map<String, Object>>) json.get("dishIngredients");
+        lit.forEach(x -> {
+            Integer ingridient = (Integer) x.get("value");
+            Float mass = Float.valueOf((String) x.get("mass"));
+            FoodIngredients foodIngredient = new FoodIngredients();
+            foodIngredient.setQuantity(mass);
+            foodIngredient.setIngredient(ingredientService.getById(ingridient));
+            foodIngredient.setDish(dish);
+            foodIngredientsService.addFoodIngredients(foodIngredient);
+        });
+
+        return dish;
+    }
+
+    @PostMapping("/addIngredient")
+    public Ingredient addIngredient(@RequestBody Map<String, Object> json) {
+        String name = (String) json.get("name");
+        String type = (String) json.get("type");
+        String unit = (String) json.get("unit");
+
+        Ingredient ingredient = new Ingredient(name, type, 0f, unit);
+
+        ingredientService.addIngredient(ingredient);
+        return ingredient;
+    }
+
+    @PostMapping("/editMassIngredient")
+    public Ingredient editMassIngredient(@RequestBody Map<String, String> json) {
+        Float mass = Float.valueOf(json.get("mass"));
+        Integer id = Integer.valueOf(json.get("id"));
+        Ingredient ingredient = ingredientService.getById(id);
+        ingredient.setQuantity_in_stock(ingredient.getQuantity_in_stock() + mass);
+
+        ingredientService.editIngredient(ingredient);
+        return ingredient;
+    }
 }

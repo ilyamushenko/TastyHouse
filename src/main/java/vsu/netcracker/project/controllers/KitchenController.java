@@ -29,7 +29,7 @@ import java.util.Map;
  */
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("kitchen")
+    @RequestMapping("kitchen")
 public class KitchenController {
 
     /**

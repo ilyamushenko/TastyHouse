@@ -69,11 +69,15 @@ public class Dish implements Serializable {
     @JsonManagedReference
     private List<Staff> staffList;
 
+    @OneToMany(mappedBy = "dish")
+    @JsonManagedReference
+    private List<FoodIngredients> ingredients;
+
     public Dish() {
 
     }
 
-    public Dish(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder) {
+    public Dish(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder, List<FoodIngredients> foodIngredients) {
         this.name = name;
         this.price = price;
         this.ingredient = ingredient;
@@ -82,6 +86,18 @@ public class Dish implements Serializable {
         this.preparingTime = preparingTime;
         this.typeDish = typeDish;
         this.dishesFromOrder = dishesFromOrder;
+        this.ingredients = foodIngredients;
+    }
+    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, String imgUrl, String description) {
+        this.name = name;
+        this.price = price;
+        this.recipe = recipe;
+        this.mass = mass;
+        this.preparingTime = preparingTime;
+        this.typeDish = typeDish;
+        this.imgUrl = imgUrl;
+        this.description = description;
+        this.ingredient = "";
     }
 
     public String getDescription() {
@@ -180,6 +196,14 @@ public class Dish implements Serializable {
         this.dishesFromOrder = dishesFromOrder;
     }
 
+    public List<FoodIngredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<FoodIngredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -205,6 +229,10 @@ public class Dish implements Serializable {
                 ", preparingTime=" + preparingTime +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", description='" + description + '\'' +
+                ", typeDish=" + typeDish +
+                ", dishesFromOrder=" + dishesFromOrder +
+                ", staffList=" + staffList +
+                ", ingredients=" + ingredients +
                 '}';
     }
 }

@@ -11,4 +11,6 @@ import vsu.netcracker.project.database.models.TypeDish;
 public interface TypeDishDAO extends JpaRepository<TypeDish, Integer> {
 
     TypeDish findByTitle(String title);
+
+    TypeDish getById(Integer id);
 }
