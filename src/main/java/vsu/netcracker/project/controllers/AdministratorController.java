@@ -256,4 +256,17 @@ public class AdministratorController {
         ingredientService.editIngredient(ingredient);
         return ingredient;
     }
+
+    @PostMapping("/deleteIngredient")
+    public boolean deleteIngredient(@RequestBody Integer id) {
+        if (id != null)  {
+            List<FoodIngredients> foodIngredients = foodIngredientsService.findByIngredientId(id);
+            if(foodIngredients.size()==0) {
+                ingredientService.delete(id);
+                return true;
+            }
+            else return false;
+        }
+        return false;
+    }
 }

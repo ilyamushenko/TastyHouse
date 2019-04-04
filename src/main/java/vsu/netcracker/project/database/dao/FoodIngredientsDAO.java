@@ -11,7 +11,9 @@ import java.util.List;
 
 public interface FoodIngredientsDAO extends JpaRepository<FoodIngredients, Integer> {
 
-    List<FoodIngredients> findFoodIngredientsByDish(Integer dishId);
+    List<FoodIngredients> findByDishId(Integer dishId);
+
+    List<FoodIngredients> findByIngredientId(Integer ingredientId);
 
     FoodIngredients getById(Integer id);
 }

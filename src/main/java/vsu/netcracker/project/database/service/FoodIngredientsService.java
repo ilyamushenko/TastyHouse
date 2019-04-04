@@ -20,6 +20,8 @@ public interface FoodIngredientsService {
 
     List<FoodIngredients> findFoodIngredientsByDish(Integer dishId);
 
+    List<FoodIngredients> findByIngredientId(Integer ingredientId);
+
     FoodIngredients getById(Integer id);
 
 }
