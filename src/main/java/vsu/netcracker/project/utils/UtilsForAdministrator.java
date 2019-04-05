@@ -3,6 +3,7 @@ package vsu.netcracker.project.utils;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Order;
+import vsu.netcracker.project.database.service.DishService;
 import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.OrderService;
 
@@ -133,6 +134,15 @@ public class UtilsForAdministrator {
 
         return json;
 
+    }
+
+    public static Map<String, String> GetSalesForAllDishes(List<Integer> listOfDishesId, DishesFromOrderService dishesFromOrderService, OrderService orderService, DishService dishService) {
+        Map<String, String> json = new HashMap<>();
+        for (int id : listOfDishesId) {
+            int salesInMonth = getInformationAboutDishInPeriod(Timestamp.valueOf(LocalDateTime.now().minusMonths(1)), id, orderService, dishesFromOrderService);
+            json.put(dishService.getById(id).getName(), String.valueOf(salesInMonth));
+        }
+        return json;
     }
 
 //    public static getFullInformationAboutAllDishes() {

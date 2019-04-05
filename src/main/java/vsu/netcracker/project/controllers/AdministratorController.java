@@ -175,6 +175,14 @@ public class AdministratorController {
         return json;
     }
 
+    @GetMapping("/rating")
+    public Map<String, String> salesForAllDishes() {
+        List<Integer> listOfDishesId = new ArrayList<>();
+        dishService.findAll().forEach(dish -> listOfDishesId.add(dish.getId()));
+        return UtilsForAdministrator.GetSalesForAllDishes(listOfDishesId, dishesFromOrderService, orderService, dishService);
+    }
+
+
 //    @GetMapping()
 //    public Map<String, String> getInfoAboutAllDishes() {
 //        UtilsForAdministrator.
