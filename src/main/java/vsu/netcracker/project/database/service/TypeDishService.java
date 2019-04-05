@@ -17,5 +17,7 @@ public interface TypeDishService {
 
     TypeDish findByTitle(String title);
 
+    TypeDish getById(Integer id);
+
     List<TypeDish> findAll();
 }

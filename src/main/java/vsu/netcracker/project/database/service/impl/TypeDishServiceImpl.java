@@ -42,6 +42,11 @@ public class TypeDishServiceImpl implements TypeDishService {
     }
 
     @Override
+    public TypeDish getById(Integer id) {
+        return typeDishDAO.getById(id);
+    }
+
+    @Override
     public List<TypeDish> findAll() {
         return typeDishDAO.findAll();
     }
