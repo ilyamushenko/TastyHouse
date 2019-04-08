@@ -41,8 +41,6 @@ public class Dish implements Serializable {
     private String name;
     @Column(name = "price", nullable = false)
     private Float price;
-    @Column(name = "ingredient", nullable = false, columnDefinition = "text")
-    private String ingredient;
     @Column(name = "recipe", nullable = false, columnDefinition = "text")
     private String recipe;
     @Column(name = "mass", nullable = false)
@@ -53,6 +51,8 @@ public class Dish implements Serializable {
     private String imgUrl;
     @Column(name = "description", nullable = false)
     private String description;
+    @Column(name = "stopList")
+    private Boolean stopList;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "type_dish_id")
@@ -77,18 +77,18 @@ public class Dish implements Serializable {
 
     }
 
-    public Dish(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder, List<FoodIngredients> foodIngredients) {
+    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder, List<FoodIngredients> foodIngredients, Boolean stopList) {
         this.name = name;
         this.price = price;
-        this.ingredient = ingredient;
         this.recipe = recipe;
         this.mass = mass;
         this.preparingTime = preparingTime;
         this.typeDish = typeDish;
         this.dishesFromOrder = dishesFromOrder;
         this.ingredients = foodIngredients;
+        this.stopList = stopList;
     }
-    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, String imgUrl, String description) {
+    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, String imgUrl, String description, Boolean stopList) {
         this.name = name;
         this.price = price;
         this.recipe = recipe;
@@ -97,7 +97,7 @@ public class Dish implements Serializable {
         this.typeDish = typeDish;
         this.imgUrl = imgUrl;
         this.description = description;
-        this.ingredient = "";
+        this.stopList = stopList;
     }
 
     public String getDescription() {
@@ -148,14 +148,6 @@ public class Dish implements Serializable {
         this.price = price;
     }
 
-    public String getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
     public String getRecipe() {
         return recipe;
     }
@@ -204,6 +196,14 @@ public class Dish implements Serializable {
         this.ingredients = ingredients;
     }
 
+    public Boolean getStopList() {
+        return stopList;
+    }
+
+    public void setStopList(Boolean stopList) {
+        this.stopList = stopList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -223,7 +223,6 @@ public class Dish implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                ", ingredient='" + ingredient + '\'' +
                 ", recipe='" + recipe + '\'' +
                 ", mass='" + mass + '\'' +
                 ", preparingTime=" + preparingTime +
@@ -233,6 +232,7 @@ public class Dish implements Serializable {
                 ", dishesFromOrder=" + dishesFromOrder +
                 ", staffList=" + staffList +
                 ", ingredients=" + ingredients +
+                ", stopList=" + stopList +
                 '}';
     }
 }

@@ -225,11 +225,11 @@ public class AdministratorController {
 
         TypeDish typeDish1 = typeDishService.getById(typeDish);
 
-        Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description);
+        Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description, false);
         dishService.addDish(dish);
 
-        List<Map<String, Object>> lit = (List<Map<String, Object>>) json.get("dishIngredients");
-        lit.forEach(x -> {
+        List<Map<String, Object>> list = (List<Map<String, Object>>) json.get("dishIngredients");
+        list.forEach(x -> {
             Integer ingridient = (Integer) x.get("value");
             Float mass = Float.valueOf((String) x.get("mass"));
             FoodIngredients foodIngredient = new FoodIngredients();
@@ -276,5 +276,11 @@ public class AdministratorController {
             else return false;
         }
         return false;
+    }
+
+    @GetMapping("/showDish")
+    public List<Dish> showDish() {
+        List<Dish> dishes = dishService.findAll();
+        return dishes;
     }
 }
