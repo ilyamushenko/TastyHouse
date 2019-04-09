@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 // ToDo - добавить в приложение логирование (по возможности и желанию) + еще можно тесты для кода
 // ToDo - повозиться с типами блюд в меню (у нас нет супов, но есть морепродукты и т. д.)
+// https://www.toptal.com/java/rest-security-with-jwt-spring-security-and-java
+// https://blog.sqreen.com/authentication-best-practices-vue/
 
 /**
  * Class with entry point of our app

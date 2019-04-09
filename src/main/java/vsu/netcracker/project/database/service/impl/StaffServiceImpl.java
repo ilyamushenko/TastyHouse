@@ -40,4 +40,9 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> findAll() {
         return staffDAO.findAll();
     }
+
+    @Override
+    public Staff findByLogin(String login) {
+        return staffDAO.findByLogin(login);
+    }
 }

@@ -19,14 +19,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-// ToDo - сделать "оплату потом" в отдельном потоке
-
 /**
  * Controller class for handle waiter requests
  *
  * @author Кушнеренко Виктор
  */
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("waiter")
 public class WaiterController {
