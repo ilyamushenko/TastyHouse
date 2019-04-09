@@ -10,6 +10,8 @@ import java.util.List;
  */
 public interface DishService {
 
+    long count();
+
     Dish addDish(Dish dish);
 
     void delete(Integer id);
@@ -21,4 +23,6 @@ public interface DishService {
     List<Dish> findByTypeDish(TypeDish typeDish);
 
     List<Dish> findAll();
+
+
 }

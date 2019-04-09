@@ -15,5 +15,7 @@ public interface DishDAO extends JpaRepository<Dish, Integer> {
 
     Dish getById(Integer id);
 
+    long count();
+
     List<Dish> findByTypeDish(TypeDish typeDish);
 }

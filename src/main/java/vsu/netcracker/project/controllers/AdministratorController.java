@@ -2,6 +2,7 @@ package vsu.netcracker.project.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,10 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import static org.springframework.data.util.Pair.toMap;
 
 /**
  * Controller class for handle admin requests
@@ -191,7 +196,7 @@ public class AdministratorController {
     public Map<String, String> salesForAllDishes() {
         List<Integer> listOfDishesId = new ArrayList<>();
         dishService.findAll().forEach(dish -> listOfDishesId.add(dish.getId()));
-        return UtilsForAdministrator.GetSalesForAllDishes(listOfDishesId, dishesFromOrderService, orderService, dishService);
+        return UtilsForAdministrator.getSalesForAllDishes(listOfDishesId, dishesFromOrderService, orderService, dishService);
     }
 
 
@@ -199,11 +204,21 @@ public class AdministratorController {
 //    public Map<String, String> getInfoAboutAllDishes() {
 //        UtilsForAdministrator.
 //    }
+
+    @GetMapping("/addDish/notEnoughIngridients")
+    public Map<Ingredient, Double> showNotEnoughIngridientsForTommorow() {
+        return UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
+    }
+
     @GetMapping("/addDish/ingredient")
-    public List<Ingredient> showIngredients() {
+    public Map<Ingredient, Double> showIngredients() {
         List<Ingredient> ingredient = ingredientService.findAll();
+        Map<Ingredient, Double> ingredients = UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
         ingredient.sort(Comparator.comparing(Ingredient::getName));
-        return ingredient;
+        return ingredients.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(ingredientDoubleEntry -> ingredientDoubleEntry.getKey().getName()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, HashMap::new));
     }
     @GetMapping("/addDish/typeDish")
     public List<TypeDish> showTypeDish() {

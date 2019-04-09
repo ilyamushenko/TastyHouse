@@ -24,6 +24,11 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
+    public long count() {
+        return this.dishDAO.count();
+    }
+
+    @Override
     public Dish addDish(Dish dish) {
         return dishDAO.saveAndFlush(dish);
     }
@@ -42,6 +47,8 @@ public class DishServiceImpl implements DishService {
     public Dish getById(Integer id) {
         return dishDAO.getById(id);
     }
+
+
 
     @Override
     public List<Dish> findByTypeDish(TypeDish typeDish) {
