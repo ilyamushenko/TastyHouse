@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vsu.netcracker.project.database.models.*;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 import vsu.netcracker.project.database.service.*;
 import vsu.netcracker.project.subModels.IngredientForTomorrow;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
@@ -239,8 +240,9 @@ public class AdministratorController {
         String nameImg = name.replace(' ', '_');
 
         TypeDish typeDish1 = typeDishService.getById(typeDish);
+        StatusDish statusDish = StatusDish.blocked;
 
-        Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description, false);
+        Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description, statusDish);
         dishService.addDish(dish);
 
         List<Map<String, Object>> list = (List<Map<String, Object>>) json.get("dishIngredients");
@@ -298,4 +300,20 @@ public class AdministratorController {
         List<Dish> dishes = dishService.findAll();
         return dishes;
     }
+
+    @GetMapping("/showStatusDish")
+    public List<Map<String, String>> showStatusDish() {
+        return StatusDish.getAll();
+    }
+
+    @PostMapping("/editDishInStopList")
+    public Dish editDishInStopList(@RequestBody Map<String, Object> json) {
+        StatusDish statusDish = StatusDish.valueOf((String) json.get("statusDish"));
+        Integer id = (Integer) json.get("id");
+        Dish dish = dishService.getById(id);
+        dish.setStatusDish(statusDish);
+        dishService.editDish(dish);
+        return dish;
+    }
+
 }

@@ -59,4 +59,9 @@ public class DishServiceImpl implements DishService {
     public List<Dish> findAll() {
         return dishDAO.findAll();
     }
+
+/*    @Override
+    public List<Dish> findByStopList(Boolean aBoolean) {
+        return dishDAO.findByStopList(aBoolean);
+    }*/
 }

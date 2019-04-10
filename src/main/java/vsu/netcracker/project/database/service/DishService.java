@@ -23,6 +23,4 @@ public interface DishService {
     List<Dish> findByTypeDish(TypeDish typeDish);
 
     List<Dish> findAll();
-
-
 }

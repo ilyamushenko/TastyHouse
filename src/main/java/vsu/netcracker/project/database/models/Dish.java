@@ -4,19 +4,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.ColumnDefault;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
@@ -51,8 +42,10 @@ public class Dish implements Serializable {
     private String imgUrl;
     @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "stopList")
-    private Boolean stopList;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    @ColumnDefault("available")
+    private StatusDish statusDish;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "type_dish_id")
@@ -77,7 +70,7 @@ public class Dish implements Serializable {
 
     }
 
-    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder, List<FoodIngredients> foodIngredients, Boolean stopList) {
+    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder, List<FoodIngredients> foodIngredients, StatusDish statusDish) {
         this.name = name;
         this.price = price;
         this.recipe = recipe;
@@ -86,9 +79,9 @@ public class Dish implements Serializable {
         this.typeDish = typeDish;
         this.dishesFromOrder = dishesFromOrder;
         this.ingredients = foodIngredients;
-        this.stopList = stopList;
+        this.statusDish = statusDish;
     }
-    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, String imgUrl, String description, Boolean stopList) {
+    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, String imgUrl, String description, StatusDish statusDish) {
         this.name = name;
         this.price = price;
         this.recipe = recipe;
@@ -97,7 +90,7 @@ public class Dish implements Serializable {
         this.typeDish = typeDish;
         this.imgUrl = imgUrl;
         this.description = description;
-        this.stopList = stopList;
+        this.statusDish = statusDish;
     }
 
     public String getDescription() {
@@ -196,12 +189,12 @@ public class Dish implements Serializable {
         this.ingredients = ingredients;
     }
 
-    public Boolean getStopList() {
-        return stopList;
+    public StatusDish getStatusDish() {
+        return statusDish;
     }
 
-    public void setStopList(Boolean stopList) {
-        this.stopList = stopList;
+    public void setStatusDish(StatusDish statusDish) {
+        this.statusDish = statusDish;
     }
 
     @Override
@@ -228,11 +221,11 @@ public class Dish implements Serializable {
                 ", preparingTime=" + preparingTime +
                 ", imgUrl='" + imgUrl + '\'' +
                 ", description='" + description + '\'' +
+                ", statusDish=" + statusDish +
                 ", typeDish=" + typeDish +
                 ", dishesFromOrder=" + dishesFromOrder +
                 ", staffList=" + staffList +
                 ", ingredients=" + ingredients +
-                ", stopList=" + stopList +
                 '}';
     }
 }

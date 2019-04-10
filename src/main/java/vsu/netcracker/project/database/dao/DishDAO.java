@@ -18,4 +18,6 @@ public interface DishDAO extends JpaRepository<Dish, Integer> {
     long count();
 
     List<Dish> findByTypeDish(TypeDish typeDish);
+
+    //List<Dish> findByStopList(Boolean aBoolean);
 }
