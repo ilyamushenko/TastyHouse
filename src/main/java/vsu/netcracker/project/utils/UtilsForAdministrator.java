@@ -10,10 +10,12 @@ import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.FoodIngredientsService;
 import vsu.netcracker.project.database.service.IngredientService;
 import vsu.netcracker.project.database.service.OrderService;
+import vsu.netcracker.project.subModels.IngredientForTomorrow;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -189,24 +191,27 @@ public class UtilsForAdministrator {
 
     private static long countDayOfWeeksInNeedMonths() {
         LocalDateTime before = LocalDateTime.now().minusMonths(NEED_MONTHS);
-        LocalDateTime tomorrow = LocalDateTime.now().plusDays(2);
+        LocalDateTime tomorrow = LocalDateTime.now().plusDays(1);
         return ChronoUnit.DAYS.between(before, tomorrow)/7;
     }
 
-    public static Map<Ingredient, Double> getInformationOfIngredientsForTomorrowDay(DishesFromOrderService dishesFromOrderService, OrderService orderService, DishService dishService, IngredientService ingredientService, FoodIngredientsService foodIngredientsService) {
+    public static List<IngredientForTomorrow> getInformationOfIngredientsForTomorrowDay(DishesFromOrderService dishesFromOrderService, OrderService orderService, DishService dishService, IngredientService ingredientService, FoodIngredientsService foodIngredientsService) {
         Map<Integer, Long> idAndSells = getDishesIdAndSellsInNextDayOfWeek(dishesFromOrderService, orderService, dishService);
         Map<Ingredient, Double> ingredientLongMap = new HashMap<>();
+        List<IngredientForTomorrow> ingredientsForTomorrow = new ArrayList<>();
         long countDays = countDayOfWeeksInNeedMonths();
+
         for(Map.Entry<Integer, Long> entry: idAndSells.entrySet()) {
             //ингредиенты в 1 блюдо
             List<FoodIngredients> ingredientsOfDish = foodIngredientsService.findFoodIngredientsByDish(entry.getKey());
-                for(FoodIngredients foodIngredient : ingredientsOfDish) {
+            for(FoodIngredients foodIngredient : ingredientsOfDish) {
                     Ingredient temp = foodIngredient.getIngredient();
                     float quantity = foodIngredient.getQuantity();
                     ingredientLongMap.merge(temp, Math.ceil((quantity * entry.getValue()) / countDays), (a, b) -> a + b);
                 }
         }
-        return ingredientLongMap;
+        ingredientLongMap.forEach((key, value) -> ingredientsForTomorrow.add(new IngredientForTomorrow(key, value)));
+        return ingredientsForTomorrow;
     }
     //за три месяца Map<idБлюда, сколько раз было продано>
     private static Map<Integer, Long> getDishesIdAndSellsInNextDayOfWeek(DishesFromOrderService dishesFromOrderService, OrderService orderService, DishService dishService) {
@@ -214,7 +219,7 @@ public class UtilsForAdministrator {
         Map<Integer, Long> dishIdCountOfSells = new HashMap<>();
         List<Dish> dishes = dishService.findAll();
         long countOfDishes = dishService.count();
-        String tommorowDayOfWeek = getNameOfDayOfWeekByNumber(Timestamp.valueOf(LocalDateTime.now().plusDays(2)).toLocalDateTime().getDayOfWeek().getValue());
+        String tommorowDayOfWeek = getNameOfDayOfWeekByNumber(Timestamp.valueOf(LocalDateTime.now().plusDays(1)).toLocalDateTime().getDayOfWeek().getValue());
         for(Dish dish: dishes) {
             Map<String, String> dayOfWeeks = getInformationAboutDishDayOfTheWeek(dish.getId(), orderService, dishesFromOrderService);
             long sellsInDay = Long.parseLong(dayOfWeeks.get(tommorowDayOfWeek));
@@ -222,7 +227,4 @@ public class UtilsForAdministrator {
         }
         return dishIdCountOfSells;
     }
-//    public static getFullInformationAboutAllDishes() {
-//
-//    }
 }

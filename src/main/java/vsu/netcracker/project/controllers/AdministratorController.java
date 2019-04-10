@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vsu.netcracker.project.database.models.*;
 import vsu.netcracker.project.database.service.*;
+import vsu.netcracker.project.subModels.IngredientForTomorrow;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
 import java.sql.Time;
@@ -205,21 +206,20 @@ public class AdministratorController {
 //        UtilsForAdministrator.
 //    }
 
-    @GetMapping("/addDish/notEnoughIngridients")
-    public Map<Ingredient, Double> showNotEnoughIngridientsForTommorow() {
-        return UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
-    }
+//    @GetMapping("/addDish/notEnoughIngridients")
+//    public Map<Ingredient, Double> showNotEnoughIngridientsForTommorow() {
+//        return UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
+//    }
 
     @GetMapping("/addDish/ingredient")
-    public Map<Ingredient, Double> showIngredients() {
+    public List<IngredientForTomorrow> showIngredients() {
         List<Ingredient> ingredient = ingredientService.findAll();
-        Map<Ingredient, Double> ingredients = UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
+        List<IngredientForTomorrow> ingredients = UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
         ingredient.sort(Comparator.comparing(Ingredient::getName));
-        return ingredients.entrySet()
-                .stream()
-                .sorted(Comparator.comparing(ingredientDoubleEntry -> ingredientDoubleEntry.getKey().getName()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, HashMap::new));
+        ingredients.sort(Comparator.comparing(el -> el.getIngredient().getName()));
+        return ingredients;
     }
+
     @GetMapping("/addDish/typeDish")
     public List<TypeDish> showTypeDish() {
         List<TypeDish> typeDishes = typeDishService.findAll();
