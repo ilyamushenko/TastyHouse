@@ -6,16 +6,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b7d9731-5f57-4e1d-a7af-123ed4e40565" name="Default Changelist" comment="Удаление ингредиента&#10;Вычет количества ингредиентов из запасов, после старта готовки блюда">
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/miss_ceh4top.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/enums/StatusDish.java" afterDir="false" />
+    <list default="true" id="6b7d9731-5f57-4e1d-a7af-123ed4e40565" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Dish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Dish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Kafe_postgres_add_test_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Kafe_postgres_add_test_data.sql" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -117,15 +110,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="74" column="50" selection-start-line="74" selection-start-column="50" selection-end-line="74" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1354">
@@ -134,11 +118,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.3.RELEASE/spring-web-5.1.3.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Kafe_postgres_add_test_data.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="680">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="167">
+              <caret line="107" column="74" selection-start-line="107" selection-start-column="74" selection-end-line="107" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dish">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -285,7 +278,6 @@
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/FoodIngredientsDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/FoodIngredientsServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/FoodIngredientsService.java" />
-        <option value="$PROJECT_DIR$/Kafe_postgres_add_test_data.sql" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/Application.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/Dish.java" />
@@ -295,6 +287,7 @@
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/models/enums/StatusDish.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" />
+        <option value="$PROJECT_DIR$/Kafe_postgres_add_test_data.sql" />
       </list>
     </option>
   </component>
@@ -345,6 +338,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -376,53 +370,6 @@
               <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TastyHouse" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TastyHouse" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -436,7 +383,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -674,7 +620,7 @@
       <workItem from="1554731884800" duration="2487000" />
       <workItem from="1554734537827" duration="16304000" />
       <workItem from="1554843102006" duration="1507000" />
-      <workItem from="1554876747558" duration="2736000" />
+      <workItem from="1554876747558" duration="3034000" />
     </task>
     <task id="LOCAL-00001" summary="Подредактировал в ORM тип рецепта и ингредиента.">
       <created>1548834801915</created>
@@ -739,11 +685,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554733519211</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Статусы блюда для стоп-листа">
+      <created>1554936183486</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1554936183486</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="334245000" />
+    <option name="totallyTimeSpent" value="334543000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -756,8 +709,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4939394" visible="true" weight="0.24432677" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4939394" visible="true" weight="0.24432677" />
       <window_info id="Structure" order="1" sideWeight="0.5060606" side_tool="true" weight="0.26172465" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -799,7 +753,7 @@
       <window_info anchor="right" id="Maven" order="6" weight="0.32980332" />
       <window_info anchor="right" id="Capture Analysis" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info anchor="right" id="Database" order="9" weight="0.25113463" />
+      <window_info active="true" anchor="right" id="Database" order="9" visible="true" weight="0.25113463" />
       <window_info anchor="right" id="Bean Validation" order="10" weight="0.3290469" />
       <window_info anchor="right" id="Coverage" order="11" side_tool="true" />
     </layout>
@@ -929,7 +883,8 @@
     <MESSAGE value="Начало работы стоп-листа блюд&#10;Новые тестовые данные" />
     <MESSAGE value="случайно удалила" />
     <MESSAGE value="..." />
-    <option name="LAST_COMMIT_MESSAGE" value="..." />
+    <MESSAGE value="Статусы блюда для стоп-листа" />
+    <option name="LAST_COMMIT_MESSAGE" value="Статусы блюда для стоп-листа" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -1066,13 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Kafe_postgres_add_test_data.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3043">
-          <caret line="179" column="63" selection-start-line="179" selection-start-column="63" selection-end-line="179" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/WaiterController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1183,13 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dish">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jrt://C:/Users/MISS-CEH4TOP/AppData/Local/JetBrains/Toolbox/apps/IDEA-JDK11/ch-0/191.6183.87/jre64!/java.base/java/util/Map.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1513">
@@ -1293,6 +1234,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1354">
           <caret line="300" column="22" lean-forward="true" selection-start-line="300" selection-start-column="22" selection-end-line="300" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/dish">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Kafe_postgres_add_test_data.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="107" column="74" selection-start-line="107" selection-start-column="74" selection-end-line="107" selection-end-column="74" />
         </state>
       </provider>
     </entry>
