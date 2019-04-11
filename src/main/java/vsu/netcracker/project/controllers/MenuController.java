@@ -81,6 +81,7 @@ public class MenuController {
             for (FoodIngredients ing : foodIngredients) {
                 if (ing.getQuantity() >= ing.getIngredient().getQuantity_in_stock()) {
                     dish.setStatusDish(StatusDish.no_ingredients);
+                    break;
                 }
                 else if(dish.getStatusDish() == StatusDish.no_ingredients) {
                     dish.setStatusDish(StatusDish.available);

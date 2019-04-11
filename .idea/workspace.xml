@@ -8,11 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b7d9731-5f57-4e1d-a7af-123ed4e40565" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishServiceImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -99,38 +95,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="302" selection-start-line="302" selection-end-line="302" />
+            <state relative-caret-position="331">
+              <caret line="305" column="20" lean-forward="true" selection-start-line="305" selection-start-column="20" selection-end-line="305" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/ingredient">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/food_ingredients">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="82" column="66" lean-forward="true" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
+            <state relative-caret-position="252">
+              <caret line="83" column="26" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -248,8 +226,8 @@
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/dao/DishDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/impl/DishServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/database/service/DishService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" />
         <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java" />
       </list>
     </option>
   </component>
@@ -614,7 +592,7 @@
       <workItem from="1554734537827" duration="16304000" />
       <workItem from="1554843102006" duration="1507000" />
       <workItem from="1554876747558" duration="3478000" />
-      <workItem from="1555015288835" duration="4921000" />
+      <workItem from="1555015288835" duration="5035000" />
     </task>
     <task id="LOCAL-00001" summary="Подредактировал в ORM тип рецепта и ингредиента.">
       <created>1548834801915</created>
@@ -693,11 +671,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554936375324</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Проверка на количество ингредиентов">
+      <created>1555023707064</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1555023707064</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="339908000" />
+    <option name="totallyTimeSpent" value="340022000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -727,7 +712,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32872504" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.33947772" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4993573" visible="true" weight="0.49462366" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4993573" weight="0.49462366" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32934928" />
@@ -886,7 +871,8 @@
     <MESSAGE value="..." />
     <MESSAGE value="Статусы блюда для стоп-листа" />
     <MESSAGE value="тестовые данные" />
-    <option name="LAST_COMMIT_MESSAGE" value="тестовые данные" />
+    <MESSAGE value="Проверка на количество ингредиентов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Проверка на количество ингредиентов" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -1231,13 +1217,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="82" column="66" lean-forward="true" selection-start-line="82" selection-start-column="66" selection-end-line="82" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://4d3e448e-69f8-4e5d-85c1-54b47be6ca7e/database/TastyHouse/schema/public/table/food_ingredients">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1254,8 +1233,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/AdministratorController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="302" selection-start-line="302" selection-end-line="302" />
+        <state relative-caret-position="331">
+          <caret line="305" column="20" lean-forward="true" selection-start-line="305" selection-start-column="20" selection-end-line="305" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/vsu/netcracker/project/controllers/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="83" column="26" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
         </state>
       </provider>
     </entry>
