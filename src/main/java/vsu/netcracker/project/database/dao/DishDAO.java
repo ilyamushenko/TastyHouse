@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.TypeDish;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,5 +20,5 @@ public interface DishDAO extends JpaRepository<Dish, Integer> {
 
     List<Dish> findByTypeDish(TypeDish typeDish);
 
-    //List<Dish> findByStopList(Boolean aBoolean);
+    List<Dish> findByStatusDish(StatusDish statusDish);
 }

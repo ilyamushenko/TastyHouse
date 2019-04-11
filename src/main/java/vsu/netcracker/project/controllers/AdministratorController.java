@@ -298,6 +298,19 @@ public class AdministratorController {
     @GetMapping("/showDish")
     public List<Dish> showDish() {
         List<Dish> dishes = dishService.findAll();
+        for (Dish dish : dishes) {
+            List<FoodIngredients> foodIngredients = dish.getIngredients();
+            for (FoodIngredients ing : foodIngredients) {
+                if (ing.getQuantity() >= ing.getIngredient().getQuantity_in_stock()) {
+                    dish.setStatusDish(StatusDish.no_ingredients);
+                    break;
+                }
+                else if(dish.getStatusDish() == StatusDish.no_ingredients) {
+                    dish.setStatusDish(StatusDish.available);
+                }
+            }
+            dishService.editDish(dish);
+        }
         return dishes;
     }
 
