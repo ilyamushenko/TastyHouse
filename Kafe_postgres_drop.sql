@@ -10,3 +10,5 @@ DROP TABLE IF EXISTS restaurant_table;
 DROP TABLE IF EXISTS dishes_and_staff;
 DROP TABLE IF EXISTS table_status;
 DROP TABLE IF EXISTS dish_status;
+DROP TABlE IF EXISTS food_ingredients;
+DROP TABLE IF EXISTS ingredient;

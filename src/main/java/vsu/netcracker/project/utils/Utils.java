@@ -3,54 +3,31 @@ package vsu.netcracker.project.utils;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Order;
-import vsu.netcracker.project.database.models.RestaurantTable;
 
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Class with support functions
  * for help to {@link vsu.netcracker.project.controllers.WaiterController}
+ *
  * @author Кушнеренко Виктор
  */
 public class Utils {
 
     /**
-     * function which converts List of {@link RestaurantTable} into Map with Lists of a certain size
+     * function which converts List into Map with Lists of a certain size
      *
-     * @param list - list of {@link RestaurantTable}, which need to convert
+     * @param list - list of objects, which need to convert
      * @param step - size of every List in result Map
-     * @return returns Map from index and Lists of {@link RestaurantTable} of a certain size
-     * @see Utils#convertListToMap(Order, int)
+     * @return returns Map from index and Lists of objects with certain type of a certain size
      * @see Utils#convertListToMapWithMap(List, int)
      */
-    public static Map<Integer, List<RestaurantTable>> convertListToMap(List<RestaurantTable> list, int step) {
-        LinkedHashMap<Integer, List<RestaurantTable>> map = new LinkedHashMap<>();
-        for (int i = 0; i < list.size(); i += step) {
-            if (i + step < list.size())
-                map.put(i, list.subList(i, i + step));
-            else
-                map.put(i, list.subList(i, list.size()));
-        }
-        return map;
-    }
-
-    /**
-     * function which converts {@link Dish} of object with class {@link Order} into Map with Lists of a certain size
-     *
-     * @param order - order, whose {@link Dish} need to convert
-     * @param step - size of every List in result Map
-     * @return returns Map from index and Lists of {@link Dish} of a certain size
-     * @see Utils#convertListToMap(List, int)
-     * @see Utils#convertListToMapWithMap(List, int)
-     */
-    public static Map<Integer, List<Dish>> convertListToMap(Order order, int step) {
-        LinkedHashMap<Integer, List<Dish>> map = new LinkedHashMap<>();
-        List<DishesFromOrder> dishesFromOrder = order.getDishesFromOrder();
-        List<Dish> list = new ArrayList<>();
-        for (DishesFromOrder dishFromOrder : dishesFromOrder) {
-            list.add(dishFromOrder.getDish());
-        }
+    public static Map<Integer, List<?>> convertListToMap(List<?> list, int step) {
+        LinkedHashMap<Integer, List<?>> map = new LinkedHashMap<>();
         for (int i = 0; i < list.size(); i += step) {
             if (i + step < list.size())
                 map.put(i, list.subList(i, i + step));
@@ -64,10 +41,9 @@ public class Utils {
      * function which converts List of {@link Order} into double Map of {@link DishesFromOrder} with Lists of a certain size
      *
      * @param orders - List of {@link Order} which need to convert
-     * @param step - size of every List in result Map
+     * @param step   - size of every List in result Map
      * @return returns double Map from index and Lists of {@link DishesFromOrder} of a certain size
      * @see Utils#convertListToMap(List, int)
-     * @see Utils#convertListToMap(Order, int)
      */
     public static Map<Integer, Map<Integer, List<DishesFromOrder>>> convertListToMapWithMap(List<Order> orders, int step) {
         LinkedHashMap<Integer, Map<Integer, List<DishesFromOrder>>> map = new LinkedHashMap<>();

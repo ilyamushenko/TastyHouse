@@ -3,7 +3,7 @@ package vsu.netcracker.project.database.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vsu.netcracker.project.database.dao.DishesFromOrderDAO;
-import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.DishStatus;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.service.DishesFromOrderService;
 
@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class DishesFromOrderServiceImpl implements DishesFromOrderService {
 
+    private final DishesFromOrderDAO dishesFromOrderDAO;
+
     @Autowired
-    private DishesFromOrderDAO dishesFromOrderDAO;
+    public DishesFromOrderServiceImpl(DishesFromOrderDAO dishesFromOrderDAO) {
+        this.dishesFromOrderDAO = dishesFromOrderDAO;
+    }
 
     @Override
     public DishesFromOrder addDishFromOrder(DishesFromOrder dishesFromOrder) {
@@ -39,12 +43,17 @@ public class DishesFromOrderServiceImpl implements DishesFromOrderService {
     }
 
     @Override
-    public List<DishesFromOrder> findDishesFromOrderByOrder(Integer orderId) {
-        return dishesFromOrderDAO.findDishesFromOrderById(orderId);
+    public List<DishesFromOrder> findDishesFromOrdersByOrderId(Integer ordId) {
+        return dishesFromOrderDAO.findDishesFromOrdersByOrderId(ordId);
     }
 
     @Override
     public DishesFromOrder getById(Integer id) {
         return dishesFromOrderDAO.getById(id);
+    }
+
+    @Override
+    public List<DishesFromOrder> getByDishStatusIsNot(DishStatus dishStatus) {
+        return dishesFromOrderDAO.getByDishStatusIsNot(dishStatus);
     }
 }

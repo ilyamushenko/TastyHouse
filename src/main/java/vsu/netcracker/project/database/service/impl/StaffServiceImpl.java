@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class StaffServiceImpl implements StaffService {
 
+    private final StaffDAO staffDAO;
+
     @Autowired
-    private StaffDAO staffDAO;
+    public StaffServiceImpl(StaffDAO staffDAO) {
+        this.staffDAO = staffDAO;
+    }
 
     @Override
     public Staff addStaff(Staff staff) {
@@ -30,11 +34,6 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public Staff editStaff(Staff staff) {
         return staffDAO.saveAndFlush(staff);
-    }
-
-    @Override
-    public Staff findByEmail(String email) {
-        return staffDAO.findByEmail(email);
     }
 
     @Override

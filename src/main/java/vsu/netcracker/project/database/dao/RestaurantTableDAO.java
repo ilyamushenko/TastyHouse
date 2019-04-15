@@ -10,6 +10,5 @@ import vsu.netcracker.project.database.models.RestaurantTable;
  */
 public interface RestaurantTableDAO extends JpaRepository<RestaurantTable, Integer> {
 
-    @Query("select rt from RestaurantTable rt where rt.id = :id")
-    RestaurantTable getById(@Param("id") Integer id);
+    RestaurantTable getById(Integer id);
 }

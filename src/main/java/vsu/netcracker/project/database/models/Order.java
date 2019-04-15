@@ -3,7 +3,14 @@ package vsu.netcracker.project.database.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -115,13 +122,20 @@ public class Order implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return getId().equals(order.getId()) &&
-                getType().equals(order.getType()) &&
-                getDateOrders().equals(order.getDateOrders());
+        return id.equals(order.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getDateOrders());
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", dateOrders=" + dateOrders +
+                '}';
     }
 }

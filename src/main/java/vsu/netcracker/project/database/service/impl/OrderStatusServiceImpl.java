@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class OrderStatusServiceImpl implements OrderStatusService {
 
+    private final OrderStatusDAO orderStatusDAO;
+
     @Autowired
-    private OrderStatusDAO orderStatusDAO;
+    public OrderStatusServiceImpl(OrderStatusDAO orderStatusDAO) {
+        this.orderStatusDAO = orderStatusDAO;
+    }
 
     @Override
     public OrderStatus addStatus(OrderStatus status) {

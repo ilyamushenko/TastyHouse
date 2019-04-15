@@ -2,17 +2,23 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.ColumnDefault;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Кушнеренко Виктор
  */
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "dish")
 public class Dish implements Serializable {
 
@@ -26,8 +32,6 @@ public class Dish implements Serializable {
     private String name;
     @Column(name = "price", nullable = false)
     private Float price;
-    @Column(name = "ingredient", nullable = false, columnDefinition = "text")
-    private String ingredient;
     @Column(name = "recipe", nullable = false, columnDefinition = "text")
     private String recipe;
     @Column(name = "mass", nullable = false)
@@ -38,6 +42,10 @@ public class Dish implements Serializable {
     private String imgUrl;
     @Column(name = "description", nullable = false)
     private String description;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    @ColumnDefault("available")
+    private StatusDish statusDish;
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "type_dish_id")
@@ -48,25 +56,41 @@ public class Dish implements Serializable {
     @ManyToMany
     @JoinTable(
             name = "dishes_and_staff",
-            joinColumns = { @JoinColumn(name = "dish_id") },
-            inverseJoinColumns = { @JoinColumn(name = "staff_id") }
+            joinColumns = {@JoinColumn(name = "dish_id")},
+            inverseJoinColumns = {@JoinColumn(name = "staff_id")}
     )
     @JsonManagedReference
     private List<Staff> staffList;
+
+    @OneToMany(mappedBy = "dish")
+    @JsonManagedReference
+    private List<FoodIngredients> ingredients;
 
     public Dish() {
 
     }
 
-    public Dish(String name, Float price, String ingredient, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder) {
+    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, List<DishesFromOrder> dishesFromOrder, List<FoodIngredients> foodIngredients, StatusDish statusDish) {
         this.name = name;
         this.price = price;
-        this.ingredient = ingredient;
         this.recipe = recipe;
         this.mass = mass;
         this.preparingTime = preparingTime;
         this.typeDish = typeDish;
         this.dishesFromOrder = dishesFromOrder;
+        this.ingredients = foodIngredients;
+        this.statusDish = statusDish;
+    }
+    public Dish(String name, Float price, String recipe, String mass, Time preparingTime, TypeDish typeDish, String imgUrl, String description, StatusDish statusDish) {
+        this.name = name;
+        this.price = price;
+        this.recipe = recipe;
+        this.mass = mass;
+        this.preparingTime = preparingTime;
+        this.typeDish = typeDish;
+        this.imgUrl = imgUrl;
+        this.description = description;
+        this.statusDish = statusDish;
     }
 
     public String getDescription() {
@@ -117,14 +141,6 @@ public class Dish implements Serializable {
         this.price = price;
     }
 
-    public String getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
-
     public String getRecipe() {
         return recipe;
     }
@@ -163,5 +179,53 @@ public class Dish implements Serializable {
 
     public void setDishesFromOrder(List<DishesFromOrder> dishesFromOrder) {
         this.dishesFromOrder = dishesFromOrder;
+    }
+
+    public List<FoodIngredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<FoodIngredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public StatusDish getStatusDish() {
+        return statusDish;
+    }
+
+    public void setStatusDish(StatusDish statusDish) {
+        this.statusDish = statusDish;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dish dish = (Dish) o;
+        return id.equals(dish.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", recipe='" + recipe + '\'' +
+                ", mass='" + mass + '\'' +
+                ", preparingTime=" + preparingTime +
+                ", imgUrl='" + imgUrl + '\'' +
+                ", description='" + description + '\'' +
+                ", statusDish=" + statusDish +
+                ", typeDish=" + typeDish +
+                ", dishesFromOrder=" + dishesFromOrder +
+                ", staffList=" + staffList +
+                ", ingredients=" + ingredients +
+                '}';
     }
 }

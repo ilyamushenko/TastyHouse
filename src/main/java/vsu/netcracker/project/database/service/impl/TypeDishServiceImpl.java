@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class TypeDishServiceImpl implements TypeDishService {
 
+    private final TypeDishDAO typeDishDAO;
+
     @Autowired
-    private TypeDishDAO typeDishDAO;
+    public TypeDishServiceImpl(TypeDishDAO typeDishDAO) {
+        this.typeDishDAO = typeDishDAO;
+    }
 
     @Override
     public TypeDish addTypeDish(TypeDish typeDish) {
@@ -35,6 +39,11 @@ public class TypeDishServiceImpl implements TypeDishService {
     @Override
     public TypeDish findByTitle(String title) {
         return typeDishDAO.findByTitle(title);
+    }
+
+    @Override
+    public TypeDish getById(Integer id) {
+        return typeDishDAO.getById(id);
     }
 
     @Override

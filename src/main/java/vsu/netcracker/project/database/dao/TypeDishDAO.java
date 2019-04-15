@@ -10,6 +10,7 @@ import vsu.netcracker.project.database.models.TypeDish;
  */
 public interface TypeDishDAO extends JpaRepository<TypeDish, Integer> {
 
-    @Query("select td from TypeDish td where td.title = :title")
-    TypeDish findByTitle(@Param("title") String title);
+    TypeDish findByTitle(String title);
+
+    TypeDish getById(Integer id);
 }

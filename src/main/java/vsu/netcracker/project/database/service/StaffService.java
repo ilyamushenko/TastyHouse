@@ -15,7 +15,5 @@ public interface StaffService {
 
     Staff editStaff(Staff staff);
 
-    Staff findByEmail(String email);
-
     List<Staff> findAll();
 }

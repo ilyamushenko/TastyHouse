@@ -1,6 +1,8 @@
 package vsu.netcracker.project.database.service;
 
 import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.TypeDish;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 
 import java.util.List;
 
@@ -9,15 +11,20 @@ import java.util.List;
  */
 public interface DishService {
 
+    long count();
+
     Dish addDish(Dish dish);
 
     void delete(Integer id);
 
     Dish editDish(Dish dish);
 
-    Dish getByName(String name);
-
     Dish getById(Integer id);
 
+    List<Dish> findByTypeDish(TypeDish typeDish);
+
     List<Dish> findAll();
+
+    List<Dish> findByStatusDish(StatusDish statusDish);
+
 }

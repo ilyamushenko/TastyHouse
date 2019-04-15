@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vsu.netcracker.project.database.dao.DishDAO;
 import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.TypeDish;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 import vsu.netcracker.project.database.service.DishService;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Кушнеренко Виктор
@@ -14,8 +17,17 @@ import java.util.List;
 @Service
 public class DishServiceImpl implements DishService {
 
+    private final DishDAO dishDAO;
+
     @Autowired
-    private DishDAO dishDAO;
+    public DishServiceImpl(DishDAO dishDAO) {
+        this.dishDAO = dishDAO;
+    }
+
+    @Override
+    public long count() {
+        return this.dishDAO.count();
+    }
 
     @Override
     public Dish addDish(Dish dish) {
@@ -33,17 +45,22 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public Dish getByName(String name) {
-        return dishDAO.findByName(name);
-    }
-
-    @Override
     public Dish getById(Integer id) {
         return dishDAO.getById(id);
     }
 
     @Override
+    public List<Dish> findByTypeDish(TypeDish typeDish) {
+        return dishDAO.findByTypeDish(typeDish);
+    }
+
+    @Override
     public List<Dish> findAll() {
         return dishDAO.findAll();
+    }
+
+    @Override
+    public List<Dish> findByStatusDish(StatusDish statusDish) {
+        return dishDAO.findByStatusDish(statusDish);
     }
 }

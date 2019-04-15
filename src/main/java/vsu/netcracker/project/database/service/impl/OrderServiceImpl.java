@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    private final OrderDAO orderDAO;
+
     @Autowired
-    private OrderDAO orderDAO;
+    public OrderServiceImpl(OrderDAO orderDAO) {
+        this.orderDAO = orderDAO;
+    }
 
     @Override
     public Order addOrder(Order order) {
@@ -31,11 +35,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order editOrder(Order order) {
         return orderDAO.saveAndFlush(order);
-    }
-
-    @Override
-    public Order findByTableNumber(Integer tableNumber) {
-        return orderDAO.findByTableNumber(tableNumber);
     }
 
     @Override

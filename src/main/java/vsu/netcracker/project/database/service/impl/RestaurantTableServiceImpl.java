@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class RestaurantTableServiceImpl implements RestaurantTableService {
 
+    private final RestaurantTableDAO restaurantTableDAO;
+
     @Autowired
-    private RestaurantTableDAO restaurantTableDAO;
+    public RestaurantTableServiceImpl(RestaurantTableDAO restaurantTableDAO) {
+        this.restaurantTableDAO = restaurantTableDAO;
+    }
 
     @Override
     public RestaurantTable addTable(RestaurantTable restaurantTable) {

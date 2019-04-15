@@ -2,7 +2,12 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
@@ -65,13 +70,12 @@ public class RoleStaff implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoleStaff roleStaff = (RoleStaff) o;
-        return getId().equals(roleStaff.getId()) &&
-                getTitle().equals(roleStaff.getTitle());
+        return id.equals(roleStaff.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle());
+        return Objects.hash(id);
     }
 
     @Override
@@ -79,7 +83,6 @@ public class RoleStaff implements Serializable {
         return "RoleStaff{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", persons=" + persons +
                 '}';
     }
 }

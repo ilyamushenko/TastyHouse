@@ -10,6 +10,5 @@ import vsu.netcracker.project.database.models.DishStatus;
  */
 public interface DishStatusDAO extends JpaRepository<DishStatus, Integer> {
 
-    @Query("select ds from DishStatus ds where ds.title = :title")
-    DishStatus findByTitle(@Param("title") String title);
+    DishStatus findByTitle(String title);
 }
