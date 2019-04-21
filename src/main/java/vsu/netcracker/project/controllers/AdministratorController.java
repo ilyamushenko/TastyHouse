@@ -2,12 +2,12 @@ package vsu.netcracker.project.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import vsu.netcracker.project.database.models.*;
 import vsu.netcracker.project.database.models.enums.StatusDish;
@@ -19,10 +19,6 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
-import static org.springframework.data.util.Pair.toMap;
 
 /**
  * Controller class for handle admin requests
@@ -106,7 +102,7 @@ public class AdministratorController {
                 break;
             }
             case "year": {
-                needTime = Timestamp.valueOf(LocalDateTime.now().minusYears(20));
+                needTime = Timestamp.valueOf(LocalDateTime.now().minusYears(1));
                 break;
             }
         }
@@ -195,13 +191,29 @@ public class AdministratorController {
     }
 
     @GetMapping("/rating")
-    public Map<String, String> salesForAllDishes() {
+    public Map<String, Long> salesForAllDishesOneMonth(@RequestParam("need_period") String period) {
+        Timestamp needPeriodInTimestamp;// = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(period);
+        switch (period) {
+            case "oneMonth":
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+                break;
+            case "oneWeek":
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusWeeks(1));
+                break;
+            case "threeMonths":
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusMonths(3));
+                break;
+            default:
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+//                throw new IllegalStateException("Unexpected value: " + period);
+        }
+
         List<Integer> listOfDishesId = new ArrayList<>();
         dishService.findAll().forEach(dish -> listOfDishesId.add(dish.getId()));
-        return UtilsForAdministrator.getSalesForAllDishes(listOfDishesId, dishesFromOrderService, orderService, dishService);
+        return UtilsForAdministrator.getSalesForAllDishes(listOfDishesId, needPeriodInTimestamp, dishesFromOrderService, orderService, dishService);
     }
-
-
 //    @GetMapping()
 //    public Map<String, String> getInfoAboutAllDishes() {
 //        UtilsForAdministrator.
@@ -264,8 +276,11 @@ public class AdministratorController {
         String name = (String) json.get("name");
         String type = (String) json.get("type");
         String unit = (String) json.get("unit");
+        String price = (String) json.get("price");
 
-        Ingredient ingredient = new Ingredient(name, type, 0f, unit);
+
+
+        Ingredient ingredient = new Ingredient(name, type, 0f, unit, Float.valueOf(price));
 
         ingredientService.addIngredient(ingredient);
         return ingredient;
