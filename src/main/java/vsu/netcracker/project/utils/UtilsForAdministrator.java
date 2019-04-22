@@ -1,5 +1,7 @@
 package vsu.netcracker.project.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.FoodIngredients;
@@ -26,16 +28,21 @@ import java.util.Map;
  *
  * @author Илья Мущенко
  */
+@Service
 public class UtilsForAdministrator {
 
-    public static final int NEED_MONTHS     = 3;
-    public static final String MONDAY       = "Понедельник";
-    public static final String TUESDAY      = "Вторник";
-    public static final String WEDNESDAY    = "Среда";
-    public static final String THURSDAY     = "Четверг";
-    public static final String FRIDAY       = "Пятница";
-    public static final String SATURDAY     = "Суббота";
-    public static final String SUNDAY       = "Воскресенье";
+    public static final int     NEED_MONTHS  = 3;
+    public static final String  MONDAY       = "Понедельник";
+    public static final String  TUESDAY      = "Вторник";
+    public static final String  WEDNESDAY    = "Среда";
+    public static final String  THURSDAY     = "Четверг";
+    public static final String  FRIDAY       = "Пятница";
+    public static final String  SATURDAY     = "Суббота";
+    public static final String  SUNDAY       = "Воскресенье";
+
+
+    //ToDO: Придумать, как сделать сервисы @Autowired
+
 
     private static String getNameOfDayOfWeekByNumber(int numberOfDay) {
         String nameOfDayOfWeek = MONDAY;
@@ -199,11 +206,11 @@ public class UtilsForAdministrator {
 
     /**
      *
-     * @param listOfDishesId - list, which contains all dishes id
-     * @param dishesFromOrderService - dfoservice
-     * @param orderService - oservice
-     * @param dishService -dservice
-     * @return Map, which contains
+     * @param listOfDishesId List, which contains all dishes id
+     * @param dishesFromOrderService Dish from order service;
+     * @param orderService Order service
+     * @param dishService Dish service
+     * @return Map, which contains information about sellers of ALL dishes in need period.
      */
     public static Map<String, Long> getSalesForAllDishes(List<Integer> listOfDishesId, Timestamp time, DishesFromOrderService dishesFromOrderService, OrderService orderService, DishService dishService) {
         Map<String, Long> json = new HashMap<>();

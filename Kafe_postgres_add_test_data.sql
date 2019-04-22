@@ -211,50 +211,50 @@ INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, 
 INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, dish_status_id, order_id, dish_id) VALUES (TIME '01:10:00', null, null, 3, 3, 10);
 
 /* Вставка для таблицы ингредиенты */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Чеснок',300,'Овощ','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Салат Романо',150,'Зелень','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Помидор',2000,'Овощ','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Пармезан',1000,'Сыр','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Куриная грудка',5000,'Мясо','гр'); /*5*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Хлеб белый',1000,'Хлеб','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Масло подсолнечное',4000,'Бакалея','мл');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Соль поваренная пищевая',2000,'Специи','гр'); /*8*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Креветки',2000,'Рыба и морепродукты','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Оливковое масло',2000,'Бакалея','мл');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Огурец',2000,'Овощ','гр'); /*11*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Сметана',700,'Молочная продукция','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Перепелиное яйцо',20,'Молочная продукция','шт');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Укроп',100,'Зелень','гр'); /*14*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Зеленый лук',100,'Зелень','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Икра красная ',1000,'Рыба и морепродукты','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Масло сливочное',1000,'Молочная продукция','гр'); /*17*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Молоко ',3000,'Молочная продукция','мл');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Банан',2000,'Фрукт','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Лимон',1000,'Цитрус','гр'); /*20*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Шоколадная стружка',1000,'Бакалея','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Яйцо куриное',50,'Молочная продукция','шт');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Маскарпоне ',1000,'Сыр','гр'); /*23*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Печенье савоярди',1000,'Бакалея','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Сахарная пудра',500,'Бакалея','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Крепкий кофе',500,'Бакалея','гр'); /*26*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Кофейный лике',500,'Ликер','мл');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Какао-порошок',500,'Бакалея','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Ноги куринные',3000,'Мясо','гр'); /*29*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Картофель',10000,'Овощ','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Перец черный',500,'Специи','гр'); /*31*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Майонез','2000','Молочная продукция','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Бекон ',500,'Мясо','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Красный сладкий перец',2000,'Овощ','гр'); /*34*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Морковь ',5000,'Овощ','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Пшеничная мука',5000,'Бакалея','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Растительное масло',2000,'Бакалея','мл'); /*37*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Минтай ',1000,'Рыба','мл');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Шампиньоны ',1000,'Овощ','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Лук репчатый',500,'Овощ','гр'); /*40*/
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Сливки 20%',2000,'Молочная продукция','мл');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Слабосоленая семга',2000,'Рыба и морепродукты','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Батон',700,'Хлеб','гр');
-INSERT INTO ingredient (name, quantity_in_stock, type, unit)  VALUES ('Сливочное мороженое',2000,'Мороженое','гр');/*44*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Чеснок',300,'Овощ','гр',10);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Салат Романо',150,'Зелень','гр', 20);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Помидор',2000,'Овощ','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Пармезан',1000,'Сыр','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Куриная грудка',5000,'Мясо','гр', 15); /*5*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Хлеб белый',1000,'Хлеб','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Масло подсолнечное',4000,'Бакалея','мл', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Соль поваренная пищевая',2000,'Специи','гр', 15); /*8*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Креветки',2000,'Рыба и морепродукты','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Оливковое масло',2000,'Бакалея','мл', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Огурец',2000,'Овощ','гр', 15); /*11*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Сметана',700,'Молочная продукция','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Перепелиное яйцо',20,'Молочная продукция','шт', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Укроп',100,'Зелень','гр', 15); /*14*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Зеленый лук',100,'Зелень','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Икра красная ',1000,'Рыба и морепродукты','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Масло сливочное',1000,'Молочная продукция','гр', 15); /*17*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Молоко ',3000,'Молочная продукция','мл', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Банан',2000,'Фрукт','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Лимон',1000,'Цитрус','гр', 15); /*20*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Шоколадная стружка',1000,'Бакалея','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Яйцо куриное',50,'Молочная продукция','шт', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Маскарпоне ',1000,'Сыр','гр', 15); /*23*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Печенье савоярди',1000,'Бакалея','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Сахарная пудра',500,'Бакалея','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Крепкий кофе',500,'Бакалея','гр', 15); /*26*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Кофейный лике',500,'Ликер','мл', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Какао-порошок',500,'Бакалея','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Ноги куринные',3000,'Мясо','гр', 15); /*29*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Картофель',10000,'Овощ','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Перец черный',500,'Специи','гр', 15); /*31*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Майонез','2000','Молочная продукция','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Бекон ',500,'Мясо','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Красный сладкий перец',2000,'Овощ','гр', 15); /*34*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Морковь ',5000,'Овощ','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Пшеничная мука',5000,'Бакалея','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Растительное масло',2000,'Бакалея','мл', 15); /*37*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Минтай ',1000,'Рыба','мл', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Шампиньоны ',1000,'Овощ','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Лук репчатый',500,'Овощ','гр', 15); /*40*/
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Сливки 20%',2000,'Молочная продукция','мл', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Слабосоленая семга',2000,'Рыба и морепродукты','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Батон',700,'Хлеб','гр', 15);
+INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)  VALUES ('Сливочное мороженое',2000,'Мороженое','гр', 15);/*44*/
 
 /* Вставка для таблицы связи блюдо-ингредиент */
 INSERT INTO food_ingredients (quantity, dish_id, ingredient_id) VALUES (2,1,1);

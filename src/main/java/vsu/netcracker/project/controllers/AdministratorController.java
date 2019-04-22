@@ -193,7 +193,6 @@ public class AdministratorController {
     @GetMapping("/rating")
     public Map<String, Long> salesForAllDishesOneMonth(@RequestParam("need_period") String period) {
         Timestamp needPeriodInTimestamp;// = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(period);
         switch (period) {
             case "oneMonth":
