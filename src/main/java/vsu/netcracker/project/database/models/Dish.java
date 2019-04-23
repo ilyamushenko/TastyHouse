@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.ColumnDefault;
 import vsu.netcracker.project.database.models.enums.StatusDish;
 
 import javax.persistence.*;
@@ -44,7 +43,7 @@ public class Dish implements Serializable {
     private String description;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    @ColumnDefault("available")
+    //@ColumnDefault("available")
     private StatusDish statusDish;
     @ManyToOne
     @JsonManagedReference

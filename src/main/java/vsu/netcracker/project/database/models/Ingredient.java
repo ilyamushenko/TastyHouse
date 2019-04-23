@@ -28,6 +28,8 @@ public class Ingredient implements Serializable {
     private Float quantity_in_stock;
     @Column(name = "unit", nullable = false)
     private String unit;
+    @Column(name="price", nullable = false)
+    private Float price;
 
     @OneToMany(mappedBy = "ingredient")
     @JsonBackReference
@@ -36,12 +38,14 @@ public class Ingredient implements Serializable {
     public Ingredient() {
 
     }
-    public Ingredient(String name, String type, Float quantity_in_stock, String unit) {
+    public Ingredient(String name, String type, Float quantity_in_stock, String unit, Float price) {
         this.name = name;
         this.type = type;
         this.quantity_in_stock = quantity_in_stock;
         this.unit = unit;
+        this.price = price;
     }
+
     public Integer getId() {
         return id;
     }
@@ -90,6 +94,14 @@ public class Ingredient implements Serializable {
         this.dishes = dishes;
     }
 
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,6 +123,7 @@ public class Ingredient implements Serializable {
                 ", type='" + type + '\'' +
                 ", quantity_in_stock=" + quantity_in_stock +
                 ", unit='" + unit + '\'' +
+                ", price=" + price +
                 ", dishes=" + dishes +
                 '}';
     }
