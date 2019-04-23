@@ -72,7 +72,7 @@ public class WaiterController {
         System.out.println(restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id")));
         System.out.println(restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id")));
         Map<Integer, List<?>> mapRestaurantTable;
-        mapRestaurantTable = Utils.convertListToMap(restaurantTables, 4);
+        mapRestaurantTable = Utils.convertListToMap(restaurantTables, 1);
         List<Object> listOfOrderStatus = new ArrayList<>();
         for (RestaurantTable restaurantTable : restaurantTables) {
             switch (restaurantTable.getTableStatus().getTitle()) {
@@ -102,7 +102,7 @@ public class WaiterController {
                     break;
             }
         }
-        Map<Integer, List<?>> statusMap = Utils.convertListToMap(listOfOrderStatus, 4);
+        Map<Integer, List<?>> statusMap = Utils.convertListToMap(listOfOrderStatus, 1);
         return Arrays.asList(mapRestaurantTable, statusMap);
     }
 }
