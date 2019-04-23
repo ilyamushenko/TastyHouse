@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import vsu.netcracker.project.database.models.*;
 import vsu.netcracker.project.database.models.enums.StatusDish;
 import vsu.netcracker.project.database.service.*;
+import vsu.netcracker.project.subModels.DishNameAndPrice;
 import vsu.netcracker.project.subModels.IngredientForTomorrow;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
@@ -277,8 +279,6 @@ public class AdministratorController {
         String unit = (String) json.get("unit");
         String price = (String) json.get("price");
 
-
-
         Ingredient ingredient = new Ingredient(name, type, 0f, unit, Float.valueOf(price));
 
         ingredientService.addIngredient(ingredient);
@@ -343,4 +343,22 @@ public class AdministratorController {
         return dish;
     }
 
+
+    /**
+     * Get request for admin, which help to get information about dishes and their prices,
+     * which derived by ingredients
+     * @return {@link Map} with {@link Dish} and prices
+     */
+
+    @GetMapping("/dishWithPrice")
+    public @ResponseBody  List<DishNameAndPrice>  getDishesAndRealPrice() {
+        List<DishNameAndPrice> list = new ArrayList<>();
+        List<Dish> allDishes = dishService.findAll();
+        allDishes.forEach(dish -> {
+            list.add(new DishNameAndPrice(dish.getName(), dish.getPrice(),
+                    (float) dish.getIngredients().stream().mapToDouble(ingredient ->
+                            ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum()));
+        });
+        return list;
+    }   
 }
