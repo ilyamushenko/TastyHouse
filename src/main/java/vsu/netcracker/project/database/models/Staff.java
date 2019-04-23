@@ -2,6 +2,10 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +18,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
+
+// ToDo - сделать шифрацию данных в бд
+// ToDo - кэширование некоторых данных (блюд например, того что нужно)
+// ToDo - подумать над инфой для залогиненного/незалогиненного пользователя
+// ToDo - эскиз странички пользователя???
 
 /**
  * @author Кушнеренко Виктор
  */
 @Entity
 @Table(name = "staff")
+@Data
+@ToString(exclude = { "roleStaff", "dishesList" })
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"lastName", "firstName", "phone", "email", "password", "login", "roleStaff", "dishesList"})
 public class Staff implements Serializable {
 
     private static final long serialVersionUID = 4L;
@@ -49,10 +61,6 @@ public class Staff implements Serializable {
     @JsonBackReference
     private List<Dish> dishesList;
 
-    public Staff() {
-
-    }
-
     public Staff(String lastName, String firstName, String phone, String email, String password, String login, RoleStaff roleStaff) {
         this.lastName = lastName;
         this.firstName = firstName;
@@ -61,103 +69,5 @@ public class Staff implements Serializable {
         this.password = password;
         this.login = login;
         this.roleStaff = roleStaff;
-    }
-
-    public List<Dish> getDishesList() {
-        return dishesList;
-    }
-
-    public void setDishesList(List<Dish> dishesList) {
-        this.dishesList = dishesList;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public RoleStaff getRoleStaff() {
-        return roleStaff;
-    }
-
-    public void setRoleStaff(RoleStaff roleStaff) {
-        this.roleStaff = roleStaff;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Staff staff = (Staff) o;
-        return id.equals(staff.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Staff{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", login='" + login + '\'' +
-                '}';
     }
 }

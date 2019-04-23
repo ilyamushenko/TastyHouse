@@ -2,8 +2,19 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
@@ -11,6 +22,10 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "food_ingredients")
+@Data
+@ToString(exclude = { "dish", "ingredient" })
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"dish", "ingredient", "quantity"})
 public class FoodIngredients implements Serializable {
     private static final long serialVersionUID = 4L;
 
@@ -29,36 +44,4 @@ public class FoodIngredients implements Serializable {
 
     @Column(name = "quantity", nullable = false)
     private Float quantity;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Dish getDish() {
-        return dish;
-    }
-
-    public void setDish(Dish dish) {
-        this.dish = dish;
-    }
-
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
-    }
-
-    public Float getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Float quantity) {
-        this.quantity = quantity;
-    }
 }

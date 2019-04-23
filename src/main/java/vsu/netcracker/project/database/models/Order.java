@@ -2,6 +2,10 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,13 +19,16 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Кушнеренко Виктор
  */
 @Entity
 @Table(name = "restaurant_order")
+@Data
+@ToString(exclude = { "typePayment", "dishesFromOrder", "orderStatus", "restaurantTable" })
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"type", "dateOrders", "typePayment", "dishesFromOrder", "orderStatus", "restaurantTable"})
 public class Order implements Serializable {
 
     private static final long serialVersionUID = 4L;
@@ -50,92 +57,10 @@ public class Order implements Serializable {
     @JoinColumn(name = "restaurant_table_id")
     private RestaurantTable restaurantTable;
 
-    public Order() {
-
-    }
-
     public Order(String type, Timestamp dateOrders, List<DishesFromOrder> dishesFromOrder, OrderStatus orderStatus) {
         this.type = type;
         this.dateOrders = dateOrders;
         this.dishesFromOrder = dishesFromOrder;
         this.orderStatus = orderStatus;
-    }
-
-    public RestaurantTable getRestaurantTable() {
-        return restaurantTable;
-    }
-
-    public void setRestaurantTable(RestaurantTable restaurantTable) {
-        this.restaurantTable = restaurantTable;
-    }
-
-    public TypePayment getTypePayment() {
-        return typePayment;
-    }
-
-    public void setTypePayment(TypePayment typePayment) {
-        this.typePayment = typePayment;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Timestamp getDateOrders() {
-        return dateOrders;
-    }
-
-    public void setDateOrders(Timestamp dateOrders) {
-        this.dateOrders = dateOrders;
-    }
-
-    public List<DishesFromOrder> getDishesFromOrder() {
-        return dishesFromOrder;
-    }
-
-    public void setDishesFromOrder(List<DishesFromOrder> dishesFromOrder) {
-        this.dishesFromOrder = dishesFromOrder;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return id.equals(order.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", dateOrders=" + dateOrders +
-                '}';
     }
 }

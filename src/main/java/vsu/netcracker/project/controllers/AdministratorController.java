@@ -2,21 +2,35 @@ package vsu.netcracker.project.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vsu.netcracker.project.database.models.*;
-import vsu.netcracker.project.database.service.*;
+import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.DishesFromOrder;
+import vsu.netcracker.project.database.models.FoodIngredients;
+import vsu.netcracker.project.database.models.Ingredient;
+import vsu.netcracker.project.database.models.Order;
+import vsu.netcracker.project.database.models.TypeDish;
+import vsu.netcracker.project.database.service.DishService;
+import vsu.netcracker.project.database.service.DishesFromOrderService;
+import vsu.netcracker.project.database.service.FoodIngredientsService;
+import vsu.netcracker.project.database.service.ImageService;
+import vsu.netcracker.project.database.service.IngredientService;
+import vsu.netcracker.project.database.service.OrderService;
+import vsu.netcracker.project.database.service.TypeDishService;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Controller class for handle admin requests
@@ -29,8 +43,7 @@ import java.util.*;
 public class AdministratorController {
     //5555 5555 5555 4444 01/23 123 36101 ---- для оплаты по карте
 
-    @Autowired
-    private ImageService imageService;
+    private final ImageService imageService;
 
     /**
      * type of {@link Dish}
@@ -64,17 +77,22 @@ public class AdministratorController {
      * service for interaction with {@link FoodIngredients} objects
      */
     private final FoodIngredientsService foodIngredientsService;
+
     /**
      * injecting services with constructor
      */
     @Autowired
-    public AdministratorController(OrderService orderService, DishesFromOrderService dishesFromOrderService, DishService dishService, IngredientService ingredientService, TypeDishService typeDishService, FoodIngredientsService foodIngredientsService) {
+    public AdministratorController(OrderService orderService, DishesFromOrderService dishesFromOrderService,
+                                   DishService dishService, IngredientService ingredientService,
+                                   TypeDishService typeDishService, FoodIngredientsService foodIngredientsService,
+                                   ImageService imageService) {
         this.orderService = orderService;
         this.dishesFromOrderService = dishesFromOrderService;
         this.dishService = dishService;
         this.ingredientService = ingredientService;
         this.typeDishService = typeDishService;
         this.foodIngredientsService = foodIngredientsService;
+        this.imageService = imageService;
     }
 
     /**
@@ -132,6 +150,7 @@ public class AdministratorController {
         double count = UtilsForAdministrator.findMaxValueInMap(counterOfDishes);
 
         Dish dish = dishService.getById(needId);
+
         Map<String, String> json = new HashMap<>();
         json.put("type_dish", dish.getTypeDish().getTitle());
         json.put("name", dish.getName());
@@ -145,10 +164,12 @@ public class AdministratorController {
     @PostMapping("/inform")
     public Map<String, String> getDishesInfo(@RequestBody Map<String, String> needDishMap) {
         String needDish = needDishMap.get("needDish");
+
         System.out.println(needDish);
         int id = Integer.valueOf(needDish);
         Map<String, String> map = UtilsForAdministrator.getFullInfoAboutDish(id, orderService, dishesFromOrderService);
         Dish dish = dishService.getById(Integer.valueOf(needDish));
+
         map.put("name", dish.getName());
         map.put("img", dish.getImgUrl());
         map.put("mass", dish.getMass());
@@ -161,8 +182,6 @@ public class AdministratorController {
     @GetMapping("/inform")
     public Map<String, List<Map<String, String>>> getAllDishes() {
         //Map<ТипБлюда, Map<НазваниеБлюда, НазваниеДляОтправкиОбратно(ID)>>
-
-
         List<Dish> dishes = dishService.findAll();
         Map<String, List<Map<String, String>>> json = new HashMap<>();
         boolean willAdd;
@@ -190,25 +209,30 @@ public class AdministratorController {
 
     @GetMapping("/rating")
     public Map<String, String> salesForAllDishes() {
+
         List<Integer> listOfDishesId = new ArrayList<>();
         dishService.findAll().forEach(dish -> listOfDishesId.add(dish.getId()));
         return UtilsForAdministrator.GetSalesForAllDishes(listOfDishesId, dishesFromOrderService, orderService, dishService);
     }
 
 
-//    @GetMapping()
+    //    @GetMapping()
 //    public Map<String, String> getInfoAboutAllDishes() {
 //        UtilsForAdministrator.
 //    }
     @GetMapping("/addDish/ingredient")
     public List<Ingredient> showIngredients() {
+
         List<Ingredient> ingredient = ingredientService.findAll();
         ingredient.sort(Comparator.comparing(Ingredient::getName));
+
         return ingredient;
     }
+
     @GetMapping("/addDish/typeDish")
     public List<TypeDish> showTypeDish() {
         List<TypeDish> typeDishes = typeDishService.findAll();
+
         return typeDishes;
     }
 
@@ -216,9 +240,9 @@ public class AdministratorController {
     public Dish addDishInMenu(@RequestBody Map<String, Object> json) {
         Integer typeDish = (Integer) json.get("typeDish");
         String name = (String) json.get("name");
-        Float price = Float.valueOf((String) json.get("price")) ;
+        Float price = Float.valueOf((String) json.get("price"));
         String massDish = (String) json.get("massDish");
-        Time preparingTime = (Time.valueOf((String) json.get("preparingTime"))) ;
+        Time preparingTime = (Time.valueOf((String) json.get("preparingTime")));
         String recipe = (String) json.get("recipe");
         String description = (String) json.get("description");
         String img = (String) json.get("img");
@@ -227,16 +251,18 @@ public class AdministratorController {
         TypeDish typeDish1 = typeDishService.getById(typeDish);
 
         Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description, false);
+
         dishService.addDish(dish);
 
         List<Map<String, Object>> list = (List<Map<String, Object>>) json.get("dishIngredients");
         list.forEach(x -> {
-            Integer ingridient = (Integer) x.get("value");
+            Integer ingredient = (Integer) x.get("value");
             Float mass = Float.valueOf((String) x.get("mass"));
             FoodIngredients foodIngredient = new FoodIngredients();
             foodIngredient.setQuantity(mass);
-            foodIngredient.setIngredient(ingredientService.getById(ingridient));
+            foodIngredient.setIngredient(ingredientService.getById(ingredient));
             foodIngredient.setDish(dish);
+
             foodIngredientsService.addFoodIngredients(foodIngredient);
         });
 
@@ -268,13 +294,12 @@ public class AdministratorController {
 
     @PostMapping("/deleteIngredient")
     public boolean deleteIngredient(@RequestBody Integer id) {
-        if (id != null)  {
+        if (id != null) {
             List<FoodIngredients> foodIngredients = foodIngredientsService.findByIngredientId(id);
-            if(foodIngredients.size()==0) {
+            if (foodIngredients.size() == 0) {
                 ingredientService.delete(id);
                 return true;
-            }
-            else return false;
+            } else return false;
         }
         return false;
     }

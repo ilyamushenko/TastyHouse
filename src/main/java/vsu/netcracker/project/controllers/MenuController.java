@@ -3,17 +3,41 @@ package vsu.netcracker.project.controllers;
 import com.stripe.Stripe;
 import com.stripe.model.Charge;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import vsu.netcracker.project.database.models.*;
-import vsu.netcracker.project.database.service.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.DishStatus;
+import vsu.netcracker.project.database.models.DishesFromOrder;
+import vsu.netcracker.project.database.models.Order;
+import vsu.netcracker.project.database.models.RestaurantTable;
+import vsu.netcracker.project.database.models.Staff;
+import vsu.netcracker.project.database.models.TableStatus;
+import vsu.netcracker.project.database.models.TypeDish;
+import vsu.netcracker.project.database.service.DishService;
+import vsu.netcracker.project.database.service.DishStatusService;
+import vsu.netcracker.project.database.service.DishesFromOrderService;
+import vsu.netcracker.project.database.service.OrderService;
+import vsu.netcracker.project.database.service.OrderStatusService;
+import vsu.netcracker.project.database.service.RestaurantTableService;
+import vsu.netcracker.project.database.service.TableStatusService;
+import vsu.netcracker.project.database.service.TypePaymentService;
 
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 /**
  * Controller class for handle menu requests
+ *
  * @author Андрей Стрижко
  */
 @CrossOrigin(origins = "*")

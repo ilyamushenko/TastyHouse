@@ -45,6 +45,7 @@ public class FoodIngredientsServiceImpl implements FoodIngredientsService {
     public List<FoodIngredients> findFoodIngredientsByDish(Integer dishId) {
         return foodIngredientsDAO.findByDishId(dishId);
     }
+
     @Override
     public List<FoodIngredients> findByIngredientId(Integer ingredientId) {
         return foodIngredientsDAO.findByIngredientId(ingredientId);

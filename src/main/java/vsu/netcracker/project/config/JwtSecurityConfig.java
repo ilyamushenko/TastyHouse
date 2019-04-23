@@ -2,6 +2,7 @@ package vsu.netcracker.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,6 +17,15 @@ import vsu.netcracker.project.security.JwtAuthenticationTokenFilter;
 import vsu.netcracker.project.security.JwtSuccessHandler;
 
 import java.util.Collections;
+
+/*
+    ToDo - 1. как в TokenFilter запихнуть несколько урлов? (есть одна идея, но не факт что сработает)
+        2. сделать бы относительные урлы (но тогда появляется OPTIONS 500)
+        3. при неудачной авторизации (при каждом чихе возвращать на страницу логина)
+        4. роли
+        5. разобраться бы в этом коде
+        6. аутентификация нового пользователя + возможно доп. фишки (remember me, смена пароля, регистрация через ВК и т. д.)
+ */
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
@@ -47,12 +57,15 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("http://localhost:8080/kitchen/**",
-                "http://localhost:8080/waiter/**",
-                "http://localhost:8080/admin/**",
-                "http://localhost:8080/",
-                "http://localhost:8080/cart/**",
-                "http://localhost:8080/menu/**").authenticated()
+                .authorizeRequests().antMatchers(
+                "/kitchen/**",
+                "/waiter/**",
+                "/admin/**",
+                "/",
+                "/cart/**",
+                "/menu/**").authenticated()
+                .and()
+                .authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()

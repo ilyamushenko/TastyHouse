@@ -2,6 +2,10 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,13 +18,16 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 /**
  * @author Кушнеренко Виктор
  */
 @Entity
 @Table(name = "dishes_from_order")
+@Data
+@ToString(exclude = { "dishStatus", "order", "dish" })
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"realTime", "beginCookingTime", "endCookingTime", "dishStatus", "order", "dish"})
 public class DishesFromOrder implements Serializable {
 
     private static final long serialVersionUID = 4L;
@@ -48,94 +55,12 @@ public class DishesFromOrder implements Serializable {
     @JoinColumn(name = "dish_id")
     private Dish dish;
 
-
-    public DishesFromOrder() {
-
-    }
-
     public DishesFromOrder(Time realTime, DishStatus dishStatus) {
         this.realTime = realTime;
         this.dishStatus = dishStatus;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Time getRealTime() {
-        return realTime;
-    }
-
-    public void setRealTime(Time realTime) {
-        this.realTime = realTime;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Dish getDish() {
-        return dish;
-    }
-
-    public void setDish(Dish dish) {
-        this.dish = dish;
-    }
-
-    public DishStatus getDishStatus() {
-        return dishStatus;
-    }
-
-    public void setDishStatus(DishStatus dishStatus) {
-        this.dishStatus = dishStatus;
-    }
-
     public Timestamp getTimeOrder() {
         return order.getDateOrders();
-    }
-
-    public Timestamp getBeginCookingTime() {
-        return beginCookingTime;
-    }
-
-    public void setBeginCookingTime(Timestamp beginCookingTime) {
-        this.beginCookingTime = beginCookingTime;
-    }
-
-    public Timestamp getEndCookingTime() {
-        return endCookingTime;
-    }
-
-    public void setEndCookingTime(Timestamp endCookingTime) {
-        this.endCookingTime = endCookingTime;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DishesFromOrder that = (DishesFromOrder) o;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "DishesFromOrder{" +
-                "id=" + id +
-                ", realTime=" + realTime +
-                '}';
     }
 }

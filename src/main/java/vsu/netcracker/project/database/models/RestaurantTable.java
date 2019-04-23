@@ -1,6 +1,10 @@
 package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -16,7 +20,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 // ToDo - добавить еще необходимых атрибутов
 
@@ -27,6 +30,10 @@ import java.util.Objects;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "restaurant_table")
+@Data
+@ToString(exclude = { "ordersList", "tableStatus" })
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"ordersList", "tableStatus"})
 public class RestaurantTable implements Serializable {
 
     private static final long serialVersionUID = 4L;
@@ -45,48 +52,4 @@ public class RestaurantTable implements Serializable {
     @JsonManagedReference
     @JoinColumn(name = "table_status_id")
     private TableStatus tableStatus;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public List<Order> getOrdersList() {
-        return ordersList;
-    }
-
-    public void setOrdersList(List<Order> ordersList) {
-        this.ordersList = ordersList;
-    }
-
-    public TableStatus getTableStatus() {
-        return tableStatus;
-    }
-
-    public void setTableStatus(TableStatus tableStatus) {
-        this.tableStatus = tableStatus;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RestaurantTable that = (RestaurantTable) o;
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "RestaurantTable{" +
-                "id=" + id +
-                '}';
-    }
 }

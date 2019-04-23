@@ -28,7 +28,7 @@ public class JwtValidator {
             staff = new Staff();
             staff.setLogin(body.getSubject());
             staff.setPassword(String.valueOf(body.get("password")));
-            staff.setId((Integer) body.get("id"));
+            // staff.setId((Integer) body.get("id"));
             RoleStaff roleStaff = roleStaffService.findByTitle(String.valueOf(body.get("role")));
             staff.setRoleStaff(roleStaff);
         } catch (Exception e) {

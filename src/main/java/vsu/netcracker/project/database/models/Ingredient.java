@@ -1,18 +1,30 @@
 package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Попова Алина
  */
 @Entity
 @Table(name = "ingredient")
+@Data
+@ToString(exclude = { "dishes" })
+@NoArgsConstructor
+@EqualsAndHashCode(exclude = {"name", "type", "quantity_in_stock", "unit", "dishes"})
 public class Ingredient implements Serializable {
     private static final long serialVersionUID = 4L;
 
@@ -33,85 +45,10 @@ public class Ingredient implements Serializable {
     @JsonBackReference
     private List<FoodIngredients> dishes;
 
-    public Ingredient() {
-
-    }
     public Ingredient(String name, String type, Float quantity_in_stock, String unit) {
         this.name = name;
         this.type = type;
         this.quantity_in_stock = quantity_in_stock;
         this.unit = unit;
-    }
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Float getQuantity_in_stock() {
-        return quantity_in_stock;
-    }
-
-    public void setQuantity_in_stock(Float quantity_in_stock) {
-        this.quantity_in_stock = quantity_in_stock;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public List<FoodIngredients> getDishes() {
-        return dishes;
-    }
-
-    public void setDishes(List<FoodIngredients> dishes) {
-        this.dishes = dishes;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ingredient that = (Ingredient) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Ingredient{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", quantity_in_stock=" + quantity_in_stock +
-                ", unit='" + unit + '\'' +
-                ", dishes=" + dishes +
-                '}';
     }
 }
