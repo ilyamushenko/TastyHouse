@@ -9,6 +9,8 @@ import vsu.netcracker.project.database.models.Staff;
 import vsu.netcracker.project.database.service.StaffService;
 import vsu.netcracker.project.security.JwtGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -25,9 +27,12 @@ public class TokenController {
     }
 
     @PostMapping
-    public String generate(@RequestBody Map<String, Object> json) {
+    public List<Object> generate(@RequestBody Map<String, Object> json) {
         String login = (String) json.get("login");
         Staff staff = staffService.findByLogin(login);
-        return jwtGenerator.generate(staff);
+        List<Object> arr = new ArrayList<>();
+        arr.add(jwtGenerator.generate(staff));
+        arr.add(staff);
+        return arr;
     }
 }
