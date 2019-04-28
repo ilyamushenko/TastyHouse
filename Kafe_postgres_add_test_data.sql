@@ -68,6 +68,10 @@ INSERT INTO role_staff (title)
 VALUES ('Официант'); /* 1 */
 INSERT INTO role_staff (title)
 VALUES ('Повар');
+INSERT INTO role_staff (title)
+VALUES ('Администратор');
+INSERT INTO role_staff (title)
+VALUES ('Пользователь');
 /* 2 */
 
 /* Вставка персонала */
