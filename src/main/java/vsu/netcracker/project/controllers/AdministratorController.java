@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import vsu.netcracker.project.database.models.*;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 import vsu.netcracker.project.database.service.*;
+import vsu.netcracker.project.subModels.DishNameAndPrice;
+import vsu.netcracker.project.subModels.IngredientForTomorrow;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
 import java.sql.Time;
@@ -100,7 +105,7 @@ public class AdministratorController {
                 break;
             }
             case "year": {
-                needTime = Timestamp.valueOf(LocalDateTime.now().minusYears(20));
+                needTime = Timestamp.valueOf(LocalDateTime.now().minusYears(1));
                 break;
             }
         }
@@ -189,23 +194,47 @@ public class AdministratorController {
     }
 
     @GetMapping("/rating")
-    public Map<String, String> salesForAllDishes() {
+    public Map<String, Long> salesForAllDishesOneMonth(@RequestParam("need_period") String period) {
+        Timestamp needPeriodInTimestamp;// = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+        System.out.println(period);
+        switch (period) {
+            case "oneMonth":
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+                break;
+            case "oneWeek":
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusWeeks(1));
+                break;
+            case "threeMonths":
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusMonths(3));
+                break;
+            default:
+                needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+//                throw new IllegalStateException("Unexpected value: " + period);
+        }
+
         List<Integer> listOfDishesId = new ArrayList<>();
         dishService.findAll().forEach(dish -> listOfDishesId.add(dish.getId()));
-        return UtilsForAdministrator.GetSalesForAllDishes(listOfDishesId, dishesFromOrderService, orderService, dishService);
+        return UtilsForAdministrator.getSalesForAllDishes(listOfDishesId, needPeriodInTimestamp, dishesFromOrderService, orderService, dishService);
     }
-
-
 //    @GetMapping()
 //    public Map<String, String> getInfoAboutAllDishes() {
 //        UtilsForAdministrator.
 //    }
+
+//    @GetMapping("/addDish/notEnoughIngridients")
+//    public Map<Ingredient, Double> showNotEnoughIngridientsForTommorow() {
+//        return UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
+//    }
+
     @GetMapping("/addDish/ingredient")
-    public List<Ingredient> showIngredients() {
+    public List<IngredientForTomorrow> showIngredients() {
         List<Ingredient> ingredient = ingredientService.findAll();
+        List<IngredientForTomorrow> ingredients = UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
         ingredient.sort(Comparator.comparing(Ingredient::getName));
-        return ingredient;
+        ingredients.sort(Comparator.comparing(el -> el.getIngredient().getName()));
+        return ingredients;
     }
+
     @GetMapping("/addDish/typeDish")
     public List<TypeDish> showTypeDish() {
         List<TypeDish> typeDishes = typeDishService.findAll();
@@ -225,8 +254,9 @@ public class AdministratorController {
         String nameImg = name.replace(' ', '_');
 
         TypeDish typeDish1 = typeDishService.getById(typeDish);
+        StatusDish statusDish = StatusDish.blocked;
 
-        Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description, false);
+        Dish dish = new Dish(name, price, recipe, massDish, preparingTime, typeDish1, imageService.saveImage(img, nameImg), description, statusDish);
         dishService.addDish(dish);
 
         List<Map<String, Object>> list = (List<Map<String, Object>>) json.get("dishIngredients");
@@ -248,8 +278,9 @@ public class AdministratorController {
         String name = (String) json.get("name");
         String type = (String) json.get("type");
         String unit = (String) json.get("unit");
+        String price = (String) json.get("price");
 
-        Ingredient ingredient = new Ingredient(name, type, 0f, unit);
+        Ingredient ingredient = new Ingredient(name, type, 0f, unit, Float.valueOf(price));
 
         ingredientService.addIngredient(ingredient);
         return ingredient;
@@ -282,6 +313,53 @@ public class AdministratorController {
     @GetMapping("/showDish")
     public List<Dish> showDish() {
         List<Dish> dishes = dishService.findAll();
+        for (Dish dish : dishes) {
+            List<FoodIngredients> foodIngredients = dish.getIngredients();
+            for (FoodIngredients ing : foodIngredients) {
+                if (ing.getQuantity() >= ing.getIngredient().getQuantity_in_stock()) {
+                    dish.setStatusDish(StatusDish.no_ingredients);
+                    break;
+                }
+                else if(dish.getStatusDish() == StatusDish.no_ingredients) {
+                    dish.setStatusDish(StatusDish.available);
+                }
+            }
+            dishService.editDish(dish);
+        }
         return dishes;
     }
+
+    @GetMapping("/showStatusDish")
+    public List<Map<String, String>> showStatusDish() {
+        return StatusDish.getAll();
+    }
+
+    @PostMapping("/editDishInStopList")
+    public Dish editDishInStopList(@RequestBody Map<String, Object> json) {
+        StatusDish statusDish = StatusDish.valueOf((String) json.get("statusDish"));
+        Integer id = (Integer) json.get("id");
+        Dish dish = dishService.getById(id);
+        dish.setStatusDish(statusDish);
+        dishService.editDish(dish);
+        return dish;
+    }
+
+
+    /**
+     * Get request for admin, which help to get information about dishes and their prices,
+     * which derived by ingredients
+     * @return {@link Map} with {@link Dish} and prices
+     */
+
+    @GetMapping("/dishWithPrice")
+    public @ResponseBody  List<DishNameAndPrice>  getDishesAndRealPrice() {
+        List<DishNameAndPrice> list = new ArrayList<>();
+        List<Dish> allDishes = dishService.findAll();
+        allDishes.forEach(dish -> {
+            list.add(new DishNameAndPrice(dish.getName(), dish.getPrice(),
+                    (float) dish.getIngredients().stream().mapToDouble(ingredient ->
+                            ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum()));
+        });
+        return list;
+    }   
 }
