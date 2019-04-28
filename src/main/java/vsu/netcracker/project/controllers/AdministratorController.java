@@ -37,7 +37,7 @@ public class AdministratorController {
     @Autowired
     private ImageService imageService;
 
-    /**
+     /**
      * type of {@link Dish}
      */
     private String type;
