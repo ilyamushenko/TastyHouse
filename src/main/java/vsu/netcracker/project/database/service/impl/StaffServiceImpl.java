@@ -45,4 +45,9 @@ public class StaffServiceImpl implements StaffService {
     public Staff findByLogin(String login) {
         return staffDAO.findByLogin(login);
     }
+
+    @Override
+    public Staff getById(Integer id) {
+        return staffDAO.getById(id);
+    }
 }

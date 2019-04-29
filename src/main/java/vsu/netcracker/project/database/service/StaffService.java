@@ -18,4 +18,6 @@ public interface StaffService {
     List<Staff> findAll();
 
     Staff findByLogin(String login);
+
+    Staff getById(Integer id);
 }

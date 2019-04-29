@@ -9,4 +9,6 @@ import vsu.netcracker.project.database.models.Staff;
 public interface StaffDAO extends JpaRepository<Staff, Integer> {
 
     Staff findByLogin(String login);
+
+    Staff getById(Integer id);
 }
