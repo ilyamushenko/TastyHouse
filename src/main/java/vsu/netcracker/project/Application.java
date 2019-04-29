@@ -2,6 +2,9 @@ package vsu.netcracker.project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,7 +23,8 @@ import java.util.Map;
  * @author Кушнеренко Виктор
  */
 @SpringBootApplication
-public class Application {
+@Controller
+public class Application extends SpringBootServletInitializer {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

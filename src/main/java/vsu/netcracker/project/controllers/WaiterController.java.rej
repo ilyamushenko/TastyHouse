@@ -1,0 +1,10 @@
+diff a/src/main/java/vsu/netcracker/project/controllers/WaiterController.java b/src/main/java/vsu/netcracker/project/controllers/WaiterController.java	(rejected hunks)
+@@ -37,7 +37,7 @@
+         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
+         List<Order> listOrders = restaurantTable.getOrdersList();
+         listOrders.sort(Comparator.comparing(Order::getId));
+-        Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 2);
++        Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 1);
+         List<Integer> listPercentOfReady = Utils.getPercentageOfReady(listOrders);
+         List<Float> listTotalPriceOfDishes = Utils.getTotalPriceOfDishes(listOrders);
+         List<Object> list;

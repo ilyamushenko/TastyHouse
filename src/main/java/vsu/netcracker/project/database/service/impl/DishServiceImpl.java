@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import vsu.netcracker.project.database.dao.DishDAO;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.TypeDish;
+import vsu.netcracker.project.database.models.enums.StatusDish;
 import vsu.netcracker.project.database.service.DishService;
 
 import java.util.List;
@@ -20,6 +21,11 @@ public class DishServiceImpl implements DishService {
     @Autowired
     public DishServiceImpl(DishDAO dishDAO) {
         this.dishDAO = dishDAO;
+    }
+
+    @Override
+    public long count() {
+        return this.dishDAO.count();
     }
 
     @Override
@@ -50,5 +56,10 @@ public class DishServiceImpl implements DishService {
     @Override
     public List<Dish> findAll() {
         return dishDAO.findAll();
+    }
+
+    @Override
+    public List<Dish> findByStatusDish(StatusDish statusDish) {
+        return dishDAO.findByStatusDish(statusDish);
     }
 }

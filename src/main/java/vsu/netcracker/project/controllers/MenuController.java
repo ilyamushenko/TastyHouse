@@ -3,41 +3,19 @@ package vsu.netcracker.project.controllers;
 import com.stripe.Stripe;
 import com.stripe.model.Charge;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import vsu.netcracker.project.database.models.Dish;
-import vsu.netcracker.project.database.models.DishStatus;
-import vsu.netcracker.project.database.models.DishesFromOrder;
-import vsu.netcracker.project.database.models.Order;
-import vsu.netcracker.project.database.models.RestaurantTable;
-import vsu.netcracker.project.database.models.Staff;
-import vsu.netcracker.project.database.models.TableStatus;
-import vsu.netcracker.project.database.models.TypeDish;
-import vsu.netcracker.project.database.service.DishService;
-import vsu.netcracker.project.database.service.DishStatusService;
-import vsu.netcracker.project.database.service.DishesFromOrderService;
-import vsu.netcracker.project.database.service.OrderService;
-import vsu.netcracker.project.database.service.OrderStatusService;
-import vsu.netcracker.project.database.service.RestaurantTableService;
-import vsu.netcracker.project.database.service.TableStatusService;
-import vsu.netcracker.project.database.service.TypePaymentService;
+import org.springframework.web.bind.annotation.*;
+import vsu.netcracker.project.database.models.*;
+import vsu.netcracker.project.database.models.enums.StatusDish;
+import vsu.netcracker.project.database.service.*;
 
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Controller class for handle menu requests
- *
  * @author Андрей Стрижко
  */
 @CrossOrigin(origins = "*")
@@ -96,8 +74,22 @@ public class MenuController {
      */
     @GetMapping("menu/{dishType}")
     public List<Dish> showTables(@PathVariable String dishType) {
-        List<Dish> dishes = dishService.findAll();
+        List<Dish> dishes = dishService.findByStatusDish(StatusDish.available); //findAll();
         List<Dish> selectedDish = new ArrayList<>();
+        for (Dish dish : dishes) {
+            List<FoodIngredients> foodIngredients = dish.getIngredients();
+            for (FoodIngredients ing : foodIngredients) {
+                if (ing.getQuantity() >= ing.getIngredient().getQuantity_in_stock()) {
+                    dish.setStatusDish(StatusDish.no_ingredients);
+                    break;
+                }
+                else if(dish.getStatusDish() == StatusDish.no_ingredients) {
+                    dish.setStatusDish(StatusDish.available);
+                }
+            }
+            dishService.editDish(dish);
+        }
+        dishes = dishes.stream().filter(x -> x.getStatusDish() == StatusDish.available).collect(Collectors.toList());
         for (Dish elem : dishes) {
             TypeDish elemType = elem.getTypeDish();
             if (elemType.getTitle().equals(dishType)) {
@@ -202,7 +194,7 @@ public class MenuController {
         }
 
         if (tmp || pay == 2) {
-            TableStatus tableStatus = tableStatusService.findByTitle("Занят, но не принят");
+            TableStatus tableStatus = tableStatusService.findByTitle("busy_need_to_bring");
             restaurantTable.setTableStatus(tableStatus);
             restaurantTableService.editTable(restaurantTable);
 
@@ -210,7 +202,7 @@ public class MenuController {
                     .mapToInt(dish -> dish.getPreparingTime().toLocalTime().toSecondOfDay())
                     .sum();
             Time preparingTime = new Time(preparingTimeInSecond);
-            DishStatus dishStatus = dishStatusService.findByTitle("В ожидании");
+            DishStatus dishStatus = dishStatusService.findByTitle("busy_need_attention");
             for (Dish dish : cart) {
                 DishesFromOrder dishesFromOrder = new DishesFromOrder(preparingTime, dishStatus);
                 dishesFromOrder.setDish(dish);
