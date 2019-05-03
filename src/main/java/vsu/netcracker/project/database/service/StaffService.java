@@ -16,4 +16,6 @@ public interface StaffService {
     Staff editStaff(Staff staff);
 
     List<Staff> findAll();
+
+    Staff findByLogin(String login);
 }
