@@ -26,8 +26,10 @@ public class RoleStaff implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_staff_id")
     private Integer id;
+    @Column(name = "staff_login", nullable = false, unique = true)
+    private String staffLogin;
     @Column(name = "title", nullable = false, unique = true)
-    private String title;
+    private String title; // зашифровать???
     @OneToMany(mappedBy = "roleStaff")
     @JsonBackReference
     private List<Staff> persons;
@@ -36,7 +38,8 @@ public class RoleStaff implements Serializable {
 
     }
 
-    public RoleStaff(String title, List<Staff> persons) {
+    public RoleStaff(String staffLogin, String title, List<Staff> persons) {
+        this.staffLogin = staffLogin;
         this.title = title;
         this.persons = persons;
     }
@@ -65,6 +68,14 @@ public class RoleStaff implements Serializable {
         this.persons = persons;
     }
 
+    public String getStaffLogin() {
+        return staffLogin;
+    }
+
+    public void setStaffLogin(String staffLogin) {
+        this.staffLogin = staffLogin;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,6 +93,7 @@ public class RoleStaff implements Serializable {
     public String toString() {
         return "RoleStaff{" +
                 "id=" + id +
+                ", staffLogin='" + staffLogin + '\'' +
                 ", title='" + title + '\'' +
                 '}';
     }

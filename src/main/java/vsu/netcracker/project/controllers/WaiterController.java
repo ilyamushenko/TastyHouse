@@ -2,6 +2,7 @@ package vsu.netcracker.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,7 +70,6 @@ public class WaiterController {
     @GetMapping
     public List<Object> showTables() {
         List<RestaurantTable> restaurantTables = restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id"));
-        System.out.println(restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id")));
         System.out.println(restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id")));
         Map<Integer, List<?>> mapRestaurantTable;
         mapRestaurantTable = Utils.convertListToMap(restaurantTables, 1);

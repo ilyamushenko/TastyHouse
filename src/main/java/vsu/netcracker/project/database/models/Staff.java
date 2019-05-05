@@ -16,6 +16,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+// ToDo - зашифровать данные с помощью Jasypt (http://findnerd.com/list/view/Hibernate-Encryption-using-Jasypt/16928/)
+
 /**
  * @author Кушнеренко Виктор
  */
@@ -30,21 +32,23 @@ public class Staff implements Serializable {
     @Column(name = "staff_id")
     private Integer id;
     @Column(name = "last_name", nullable = false)
-    private String lastName;
+    private String lastName; // зашифровать
     @Column(name = "first_name", nullable = false)
-    private String firstName;
+    private String firstName; // зашифровать
     @Column(name = "phone", nullable = false)
-    private String phone;
+    private String phone; // зашифровать
     @Column(name = "email", nullable = false)
-    private String email;
+    private String email; // зашифровать
     @Column(name = "password", nullable = false)
-    private String password;
-    @Column(name = "login", nullable = false)
-    private String login;
+    private String password; // зашифровать
+    @Column(name = "login", nullable = false, unique = true)
+    private String login; // зашифровать
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled;
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "role_staff_id")
-    private RoleStaff roleStaff;
+    @JoinColumn(name = "staff_login")
+    private RoleStaff roleStaff; // зашифровать???
     @ManyToMany(mappedBy = "staffList")
     @JsonBackReference
     private List<Dish> dishesList;
@@ -159,5 +163,13 @@ public class Staff implements Serializable {
                 ", password='" + password + '\'' +
                 ", login='" + login + '\'' +
                 '}';
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
