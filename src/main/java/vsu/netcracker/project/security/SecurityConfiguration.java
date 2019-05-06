@@ -34,17 +34,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
-    // "/kitchen/**", "/waiter/**", "/admin/**", "/", "/cart/**", "/menu/**"
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/kitchen**").access("hasRole('COOK')")
-                .antMatchers("/waiter**").access("hasRole('WAITER')")
-                .antMatchers("/admin**").access("hasRole('ADMIN')")
-                .antMatchers("/", "/cart**", "/menu**").access("hasRole('GUEST')")
-//                .anyRequest()
-//                .authenticated()
+                .antMatchers("/kitchen**").access("hasAuthority('COOK')")
+                .antMatchers("/waiter**").access("hasAuthority('WAITER')")
+                .antMatchers("/admin**").access("hasAuthority('ADMIN')")
+                .antMatchers("/", "/cart**", "/menu**").access("hasAuthority('GUEST')")
                 .and()
                 .formLogin()
                 .permitAll()
@@ -52,10 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .and()
                 .csrf();
-//                .antMatchers("/kitchen/**").access("hasRole('COOK')")
-//                .antMatchers("/waiter/**").access("hasRole('WAITER')")
-//                .antMatchers("/admin/**").access("hasRole('ADMIN')")
-//                .antMatchers("/", "/cart/**", "/menu/**").access("hasRole('GUEST')")
     }
 
     @SuppressWarnings("deprecation")
