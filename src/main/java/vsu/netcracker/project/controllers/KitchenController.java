@@ -1,15 +1,26 @@
 package vsu.netcracker.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vsu.netcracker.project.database.models.*;
-import vsu.netcracker.project.database.service.*;
+import vsu.netcracker.project.database.models.Dish;
+import vsu.netcracker.project.database.models.DishStatus;
+import vsu.netcracker.project.database.models.DishesFromOrder;
+import vsu.netcracker.project.database.models.FoodIngredients;
+import vsu.netcracker.project.database.models.Ingredient;
+import vsu.netcracker.project.database.models.Order;
+import vsu.netcracker.project.database.models.RestaurantTable;
+import vsu.netcracker.project.database.models.TableStatus;
+import vsu.netcracker.project.database.service.DishStatusService;
+import vsu.netcracker.project.database.service.DishesFromOrderService;
+import vsu.netcracker.project.database.service.FoodIngredientsService;
+import vsu.netcracker.project.database.service.IngredientService;
+import vsu.netcracker.project.database.service.RestaurantTableService;
+import vsu.netcracker.project.database.service.TableStatusService;
 
 import java.sql.Timestamp;
 import java.util.Comparator;
@@ -23,7 +34,7 @@ import java.util.Map;
  */
 @CrossOrigin(origins = "*")
 @RestController
-    @RequestMapping("kitchen")
+@RequestMapping("kitchen")
 public class KitchenController {
 
     /**
@@ -54,6 +65,7 @@ public class KitchenController {
      * service for interaction with {@link FoodIngredients} objects
      */
     private final FoodIngredientsService foodIngredientsService;
+
     /**
      * injecting services with constructor
      */
@@ -128,7 +140,7 @@ public class KitchenController {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         DishesFromOrder dishesFromOrder = dishesFromOrderService.getById(id);
         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
-        if(status.equals("Готовится")) {
+        if (status.equals("Готовится")) {
             dishesFromOrder.setBeginCookingTime(timestamp);
             Dish dish = dishesFromOrder.getDish();
             List<FoodIngredients> foodIngredients = foodIngredientsService.findFoodIngredientsByDish(dish.getId());
@@ -137,8 +149,7 @@ public class KitchenController {
                 ingredient.setQuantity_in_stock(ingredient.getQuantity_in_stock() - x.getQuantity());
                 ingredientService.editIngredient(ingredient);
             });
-        }
-        else if(status.equals("Готово")) {
+        } else if (status.equals("Готово")) {
             dishesFromOrder.setEndCookingTime(timestamp);
         }
         DishStatus dishStatus = dishStatusService.findByTitle(status);
