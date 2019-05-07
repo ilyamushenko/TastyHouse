@@ -37,14 +37,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable()
+        httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
+//                .antMatchers("/login**").anonymous()
                 .antMatchers("/kitchen**").access("hasAuthority('COOK')")
                 .antMatchers("/waiter**").access("hasAuthority('WAITER')")
                 .antMatchers("/admin**").access("hasAuthority('ADMIN')")
                 .antMatchers("/", "/cart**", "/menu**").access("hasAuthority('GUEST')")
                 .and()
                 .formLogin()
+                .defaultSuccessUrl("http://localhost:8081/")
                 .permitAll()
                 .and()
                 .logout();
