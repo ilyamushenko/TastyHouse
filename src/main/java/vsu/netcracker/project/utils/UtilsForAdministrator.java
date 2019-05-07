@@ -12,6 +12,7 @@ import vsu.netcracker.project.database.service.DishesFromOrderService;
 import vsu.netcracker.project.database.service.FoodIngredientsService;
 import vsu.netcracker.project.database.service.IngredientService;
 import vsu.netcracker.project.database.service.OrderService;
+import vsu.netcracker.project.subModels.DishNameAndPrice;
 import vsu.netcracker.project.subModels.IngredientForTomorrow;
 
 import java.sql.Timestamp;
@@ -281,5 +282,28 @@ public class UtilsForAdministrator {
             dishIdCountOfSells.put(dish.getId(), sellsInDay);
         }
         return dishIdCountOfSells;
+    }
+
+    public static List<DishNameAndPrice> getRevenueInPeriod(Timestamp period,
+                                                            OrderService orderService,
+                                                            DishesFromOrderService dishesFromOrderService,
+                                                            DishService dishService) {
+
+        List<DishNameAndPrice> list = new ArrayList<>();
+        List<Dish> allDishes = dishService.findAll();
+        allDishes.forEach(dish -> {
+            long sells = getInformationAboutDishInPeriod(period, dish.getId(), orderService, dishesFromOrderService);
+            float costPrice = (float) dish.getIngredients().stream().mapToDouble(ingredient ->
+                    ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum();
+            System.out.println("!!!! НАЗВАНИЕ: " + dish.getName());
+            System.out.println("!!!! ЦЕНА В МЕНЮ: " + dish.getPrice());
+            System.out.println("!!!! ЦЕНА СЕБЕСТОИМОСТЬ: " + costPrice);
+            System.out.println("!!!! ПРОДАЖИ: " + sells);
+
+
+
+            list.add(new DishNameAndPrice(dish.getName(), (dish.getPrice() - costPrice) * sells, costPrice * sells));
+        });
+        return list;
     }
 }

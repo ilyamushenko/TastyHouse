@@ -2,14 +2,7 @@ package vsu.netcracker.project.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.*;
 import vsu.netcracker.project.database.models.enums.StatusDish;
 import vsu.netcracker.project.database.service.*;
@@ -360,5 +353,32 @@ public class AdministratorController {
                             ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum()));
         });
         return list;
-    }   
+    }
+
+    @GetMapping("/revenue/get_dishes/{period}")
+    public @ResponseBody  List<DishNameAndPrice>  QQQQQgetDishesAndRealPrice(@PathVariable String period) {
+        System.out.println("!!!!!!! _ _ _ _ _" + period + " _ _ _ _ _ _ _ !!!!!!!");
+
+        Timestamp now = Timestamp.valueOf(LocalDateTime.now());
+        Timestamp needTime = null;
+        switch (period) {
+            case "day": {
+                needTime = Timestamp.valueOf(LocalDateTime.now().minusDays(1));
+                break;
+            }
+            case "week": {
+                needTime = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+                break;
+            }
+            case "oneMonth": {
+                needTime = Timestamp.valueOf(LocalDateTime.now().minusYears(1));
+                break;
+            }
+            case "threeMonths": {
+                needTime = Timestamp.valueOf(LocalDateTime.now().minusMonths(3));
+                break;
+            }
+        }
+        return UtilsForAdministrator.getRevenueInPeriod(needTime, orderService, dishesFromOrderService, dishService);
+    }
 }
