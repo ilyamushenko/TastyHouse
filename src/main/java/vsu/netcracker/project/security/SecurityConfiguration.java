@@ -8,13 +8,12 @@
 package vsu.netcracker.project.security;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import javax.sql.DataSource;
 
@@ -46,7 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/cart**", "/menu**").access("hasAuthority('GUEST')")
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("http://localhost:8081/")
+                .successHandler(authenticationSuccessHandler())
+                //.defaultSuccessUrl("http://localhost:8081/")
                 .permitAll()
                 .and()
                 .logout();
@@ -56,5 +56,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public static NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return (httpServletRequest, httpServletResponse, authentication) -> {
+            System.out.println(authentication.getPrincipal());
+            httpServletRequest.setAttribute("Staff", authentication.getPrincipal());
+            httpServletResponse.sendRedirect("http://localhost:8081/");
+        };
     }
 }
