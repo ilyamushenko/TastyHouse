@@ -101,5 +101,7 @@
     <orderEntry type="library" name="Maven: com.stripe:stripe-java:5.31.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:4.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.4.3" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf.tool:xmlworker:5.4.3" level="project" />
   </component>
 </module>

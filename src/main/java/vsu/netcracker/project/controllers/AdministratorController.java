@@ -1,6 +1,10 @@
 package vsu.netcracker.project.controllers;
 
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +21,8 @@ import vsu.netcracker.project.subModels.DishNameAndPrice;
 import vsu.netcracker.project.subModels.IngredientForTomorrow;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
+import javax.servlet.ServletContext;
+import java.io.*;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -35,6 +41,9 @@ public class AdministratorController {
 
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private ServletContext servletContext;
+
 
     /**
      * type of {@link Dish}
@@ -360,5 +369,25 @@ public class AdministratorController {
                             ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum()));
         });
         return list;
-    }   
+    }
+
+    @GetMapping("/createPDF")
+    public @ResponseBody  String  createPDF() throws DocumentException, IOException {
+        Document document = new Document();
+        // Создаем writer для записи в pdf
+        String pathPdf = servletContext.getRealPath("/") + "resources/pdf";
+        String name = (new Date()).getTime() + ".pdf";
+        File file = new File(pathPdf  + "/" + name);
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
+        // Открываем для чтения html страничку
+        document.open();
+        // Парсим её и записываем в PDF
+        File fileHtml = new File(pathPdf  + "/pdf.html");
+        XMLWorkerHelper.getInstance().parseXHtml(writer, document, new FileInputStream(fileHtml));
+        document.close();
+        writer.close();
+
+        System.out.println( "Ваш PDF файл - Создан!" );
+        return "http://localhost:8080/resources/pdf/" + name;
+    }
 }

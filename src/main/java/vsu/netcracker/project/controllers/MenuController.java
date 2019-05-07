@@ -173,7 +173,7 @@ public class MenuController {
             if (stripeToken != null) {
                 try {
                     Map<String, Object> params = new HashMap<>();
-                    params.put("amount", Math.round(price / 0.7));
+                    params.put("amount", Math.round(price / 0.6381));
                     params.put("currency", "usd");
                     params.put("description", "Example charge");
                     params.put("source", stripeToken);
