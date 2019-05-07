@@ -347,7 +347,7 @@ VALUES ('Сахарная пудра', 500, 'Бакалея', 'гр', 1);
 INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
 VALUES ('Крепкий кофе', 500, 'Бакалея', 'гр', 2); /*26*/
 INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Кофейный лике', 500, 'Ликер', 'мл', 2);
+VALUES ('Кофейный ликер', 500, 'Ликер', 'мл', 2);
 INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
 VALUES ('Какао-порошок', 500, 'Бакалея', 'гр', 2);
 INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
