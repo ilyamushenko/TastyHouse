@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 @EnableWebSecurity
@@ -38,14 +39,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/kitchen**").access("hasAuthority('COOK')")
-                .antMatchers("/waiter**").access("hasAuthority('WAITER')")
-                .antMatchers("/admin**").access("hasAuthority('ADMIN')")
-                .antMatchers("/", "/cart**", "/menu**").access("hasAuthority('GUEST')")
+                .antMatchers("/kitchen/**", "/kitchen**").access("hasAuthority('COOK')")
+                .antMatchers("/waiter/**", "/waiter**").access("hasAuthority('WAITER')")
+                .antMatchers("/admin/**", "/admin**").access("hasAuthority('ADMIN')")
+                .antMatchers("/", "/cart/**", "/cart**", "/menu/**", "/menu**").access("hasAuthority('GUEST')")
                 .and()
                 .formLogin()
                 .successHandler(authenticationSuccessHandler())
-                //.defaultSuccessUrl("http://localhost:8081/")
                 .permitAll()
                 .and()
                 .logout();
@@ -61,8 +61,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (httpServletRequest, httpServletResponse, authentication) -> {
             System.out.println(authentication.getPrincipal());
-            httpServletRequest.setAttribute("Staff", authentication.getPrincipal());
-            httpServletResponse.sendRedirect("http://localhost:8081/");
+            HttpSession session = httpServletRequest.getSession();
+            session.setAttribute("Staff", authentication.getPrincipal());
+            //httpServletRequest.setAttribute("Staff", authentication.getPrincipal());
+            httpServletResponse.sendRedirect("http://localhost:8081/waiter");
         };
     }
 }
