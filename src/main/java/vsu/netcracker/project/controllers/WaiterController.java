@@ -2,6 +2,7 @@ package vsu.netcracker.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,6 +59,7 @@ public class WaiterController {
         Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 2);
         List<Integer> listPercentOfReady = Utils.getPercentageOfReady(listOrders);
         List<Float> listTotalPriceOfDishes = Utils.getTotalPriceOfDishes(listOrders);
+        //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return Arrays.asList(restaurantTable, mapOrders, listPercentOfReady, listTotalPriceOfDishes);
     }
 
@@ -102,6 +104,7 @@ public class WaiterController {
             }
         }
         Map<Integer, List<?>> statusMap = Utils.convertListToMap(listOfOrderStatus, 1);
-        return Arrays.asList(mapRestaurantTable, statusMap);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return Arrays.asList(mapRestaurantTable, statusMap, principal);
     }
 }
