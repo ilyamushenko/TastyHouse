@@ -7,6 +7,9 @@ public class IngredientForTomorrow extends Ingredient {
     private double quantityIngredientsForTomorrow;
     private Ingredient ingredient;
 
+    public IngredientForTomorrow() {
+    }
+
     public IngredientForTomorrow(Ingredient ingredient, double quantityIngredientsForTomorrow) {
         this.quantityIngredientsForTomorrow = quantityIngredientsForTomorrow;
         this.ingredient = ingredient;
