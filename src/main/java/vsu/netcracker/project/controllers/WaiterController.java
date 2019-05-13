@@ -2,14 +2,14 @@ package vsu.netcracker.project.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import vsu.netcracker.project.database.models.DishStatus;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Order;
 import vsu.netcracker.project.database.models.RestaurantTable;
+import vsu.netcracker.project.database.service.DishStatusService;
+import vsu.netcracker.project.database.service.DishesFromOrderService;
+import vsu.netcracker.project.database.service.OrderService;
 import vsu.netcracker.project.database.service.RestaurantTableService;
 import vsu.netcracker.project.utils.Utils;
 
@@ -43,6 +43,12 @@ public class WaiterController {
     public WaiterController(RestaurantTableService restaurantTableService) {
         this.restaurantTableService = restaurantTableService;
     }
+
+    @Autowired
+    private DishesFromOrderService dishesFromOrderService;
+
+    @Autowired
+    private DishStatusService dishStatusService;
 
     /**
      * get request, which return List of {@link Order} on concrete {@link RestaurantTable}
@@ -104,5 +110,12 @@ public class WaiterController {
         }
         Map<Integer, List<?>> statusMap = Utils.convertListToMap(listOfOrderStatus, 1);
         return Arrays.asList(mapRestaurantTable, statusMap);
+    }
+
+    @GetMapping("/orders/delivery-dish/{dishFromOrderId}")
+    public void deliverDish(@PathVariable Integer dishFromOrderId) {
+        DishesFromOrder dfo = dishesFromOrderService.getById(dishFromOrderId);
+        DishStatus deleveredStatus = dishStatusService.findByTitle("Отнесено");
+        dfo.setDishStatus(deleveredStatus);
     }
 }

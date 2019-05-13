@@ -32,6 +32,8 @@ INSERT INTO dish_status (title)
 VALUES ('Готовится'); /* Готовится */
 INSERT INTO dish_status (title)
 VALUES ('Готово');
+INSERT INTO dish_status (title)
+VALUES ('Отнесено');
 /* Готово */
 
 /* Вставка ресторанных столиков */
