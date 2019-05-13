@@ -104,7 +104,6 @@ public class WaiterController {
             }
         }
         Map<Integer, List<?>> statusMap = Utils.convertListToMap(listOfOrderStatus, 1);
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return Arrays.asList(mapRestaurantTable, statusMap, principal);
+        return Arrays.asList(mapRestaurantTable, statusMap);
     }
 }
