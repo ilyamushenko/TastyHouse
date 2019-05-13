@@ -477,3 +477,19 @@ INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
 VALUES (20, 8, 4);
 INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
 VALUES (15, 8, 12);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (20, 9, 40);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (50, 9, 38);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (15, 9, 32);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (10, 9, 12);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (20, 10, 40);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (15, 10, 39);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (50, 10, 30);
+INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
+VALUES (7, 10, 41);
