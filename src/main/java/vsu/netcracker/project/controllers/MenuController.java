@@ -202,7 +202,7 @@ public class MenuController {
                     .mapToInt(dish -> dish.getPreparingTime().toLocalTime().toSecondOfDay())
                     .sum();
             Time preparingTime = new Time(preparingTimeInSecond);
-            DishStatus dishStatus = dishStatusService.findByTitle("busy_need_attention");
+            DishStatus dishStatus = dishStatusService.findByTitle("В ожидании");
             for (Dish dish : cart) {
                 DishesFromOrder dishesFromOrder = new DishesFromOrder(preparingTime, dishStatus);
                 dishesFromOrder.setDish(dish);

@@ -1,6 +1,16 @@
 package vsu.netcracker.project.controllers;
 
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorkerFontProvider;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.itextpdf.tool.xml.html.head.XML;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import vsu.netcracker.project.database.models.*;
@@ -10,10 +20,18 @@ import vsu.netcracker.project.subModels.DishNameAndPrice;
 import vsu.netcracker.project.subModels.IngredientForTomorrow;
 import vsu.netcracker.project.utils.UtilsForAdministrator;
 
+import javax.servlet.ServletContext;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Controller class for handle admin requests
@@ -28,6 +46,9 @@ public class AdministratorController {
 
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private ServletContext servletContext;
+
 
     /**
      * type of {@link Dish}
@@ -339,6 +360,52 @@ public class AdministratorController {
                             ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum()));
         });
         return list;
+    }
+
+    @PostMapping("/createPDF")
+    public  String  createPDF(@RequestBody List<Map<String, Object>> ingredients) throws DocumentException, IOException {
+
+        List<IngredientForTomorrow> ingredientsList = ingredients.stream().map(o -> {
+            IngredientForTomorrow i = new IngredientForTomorrow();
+            i.setId((Integer) o.get("id"));
+            i.setName((String) o.get("name"));
+            i.setType((String) o.get("type"));
+            i.setPrice(Float.valueOf((Integer) o.get("price")));
+            i.setQuantityIngredientsForTomorrow((Integer) o.get("forTomorrow"));
+            i.setUnit((String) o.get("unit"));
+            return i;
+        }).collect(Collectors.toList());
+
+        Document document = new Document();
+        // Создаем writer для записи в pdf
+        String pathPdf = servletContext.getRealPath("/") + "resources/pdf";
+        String name = (new Date()).getTime() + ".pdf";
+        File file = new File(pathPdf  + "/" + name);
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
+        // Открываем для чтения html страничку
+        document.open();
+        // Парсим её и записываем в PDF
+        String html = new String(Files.readAllBytes(Paths.get(pathPdf  + "/pdf.html")), StandardCharsets.UTF_8);
+        //List<String[]> data = new LinkedList<>();
+
+        /*Вставка данных*/
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateNowHtml= dateFormat.format(new Date());
+        html = html.replaceAll("@Date", dateNowHtml);
+        String dataHtml = "";
+        for (IngredientForTomorrow ingredient: ingredientsList) {
+            dataHtml += String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", ingredient.getId(), ingredient.getName(), ingredient.getType(), ingredient.getQuantityIngredientsForTomorrow() + " " + ingredient.getUnit(), ingredient.getPrice());
+        }
+
+        html = html.replaceAll("@DataColumns", dataHtml);
+
+        XMLWorkerHelper xmlWorkerHelper = XMLWorkerHelper.getInstance();
+        xmlWorkerHelper.parseXHtml(writer, document, new StringReader(html));
+        document.close();
+        writer.close();
+
+        System.out.println( "Ваш PDF файл - Создан!" );
+        return "http://localhost:8080/resources/pdf/" + name;
     }
 
     @GetMapping("/revenue/get_dishes/{period}")
