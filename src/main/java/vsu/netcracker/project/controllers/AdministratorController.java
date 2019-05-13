@@ -179,8 +179,6 @@ public class AdministratorController {
     @GetMapping("/inform")
     public Map<String, List<Map<String, String>>> getAllDishes() {
         //Map<ТипБлюда, Map<НазваниеБлюда, НазваниеДляОтправкиОбратно(ID)>>
-
-
         List<Dish> dishes = dishService.findAll();
         Map<String, List<Map<String, String>>> json = new HashMap<>();
         boolean willAdd;
@@ -208,7 +206,7 @@ public class AdministratorController {
 
     @GetMapping("/rating")
     public Map<String, Long> salesForAllDishesOneMonth(@RequestParam("need_period") String period) {
-        Timestamp needPeriodInTimestamp;// = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
+        Timestamp needPeriodInTimestamp;
         System.out.println(period);
         switch (period) {
             case "oneMonth":
@@ -222,22 +220,11 @@ public class AdministratorController {
                 break;
             default:
                 needPeriodInTimestamp = Timestamp.valueOf(LocalDateTime.now().minusMonths(1));
-//                throw new IllegalStateException("Unexpected value: " + period);
         }
-
         List<Integer> listOfDishesId = new ArrayList<>();
         dishService.findAll().forEach(dish -> listOfDishesId.add(dish.getId()));
         return UtilsForAdministrator.getSalesForAllDishes(listOfDishesId, needPeriodInTimestamp, dishesFromOrderService, orderService, dishService);
     }
-//    @GetMapping()
-//    public Map<String, String> getInfoAboutAllDishes() {
-//        UtilsForAdministrator.
-//    }
-
-//    @GetMapping("/addDish/notEnoughIngridients")
-//    public Map<Ingredient, Double> showNotEnoughIngridientsForTommorow() {
-//        return UtilsForAdministrator.getInformationOfIngredientsForTomorrowDay(dishesFromOrderService, orderService, dishService, ingredientService, foodIngredientsService);
-//    }
 
     @GetMapping("/addDish/ingredient")
     public List<IngredientForTomorrow> showIngredients() {
@@ -250,8 +237,7 @@ public class AdministratorController {
 
     @GetMapping("/addDish/typeDish")
     public List<TypeDish> showTypeDish() {
-        List<TypeDish> typeDishes = typeDishService.findAll();
-        return typeDishes;
+        return typeDishService.findAll();
     }
 
     @PostMapping("/addDishInMenu")
@@ -423,9 +409,7 @@ public class AdministratorController {
     }
 
     @GetMapping("/revenue/get_dishes/{period}")
-    public @ResponseBody  List<DishNameAndPrice>  QQQQQgetDishesAndRealPrice(@PathVariable String period) {
-        System.out.println("!!!!!!! _ _ _ _ _" + period + " _ _ _ _ _ _ _ !!!!!!!");
-
+    public @ResponseBody  List<DishNameAndPrice> getDishesAndRealPrice(@PathVariable String period) {
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
         Timestamp needTime = null;
         switch (period) {
@@ -448,4 +432,7 @@ public class AdministratorController {
         }
         return UtilsForAdministrator.getRevenueInPeriod(needTime, orderService, dishesFromOrderService, dishService);
     }
+
+
+
 }

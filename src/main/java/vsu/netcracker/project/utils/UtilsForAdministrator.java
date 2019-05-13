@@ -1,6 +1,5 @@
 package vsu.netcracker.project.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import vsu.netcracker.project.database.models.Dish;
 import vsu.netcracker.project.database.models.DishesFromOrder;
@@ -18,10 +17,7 @@ import vsu.netcracker.project.subModels.IngredientForTomorrow;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class with support functions
@@ -43,6 +39,19 @@ public class UtilsForAdministrator {
 
 
     //ToDO: Придумать, как сделать сервисы @Autowired
+
+    public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+        List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
+        list.sort(Map.Entry.comparingByValue());
+        Collections.reverse(list);
+
+        Map<K, V> result = new LinkedHashMap<>();
+        for (Map.Entry<K, V> entry : list) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
 
 
     private static String getNameOfDayOfWeekByNumber(int numberOfDay) {
@@ -219,7 +228,8 @@ public class UtilsForAdministrator {
             long salesInMonth = getInformationAboutDishInPeriod(time, id, orderService, dishesFromOrderService);
             if(salesInMonth != 0) json.put(dishService.getById(id).getName(), salesInMonth);
         }
-        return json;
+
+        return sortByValue(json);
     }
 
     /**
@@ -295,15 +305,10 @@ public class UtilsForAdministrator {
             long sells = getInformationAboutDishInPeriod(period, dish.getId(), orderService, dishesFromOrderService);
             float costPrice = (float) dish.getIngredients().stream().mapToDouble(ingredient ->
                     ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum();
-            System.out.println("!!!! НАЗВАНИЕ: " + dish.getName());
-            System.out.println("!!!! ЦЕНА В МЕНЮ: " + dish.getPrice());
-            System.out.println("!!!! ЦЕНА СЕБЕСТОИМОСТЬ: " + costPrice);
-            System.out.println("!!!! ПРОДАЖИ: " + sells);
-
-
-
+            if((dish.getPrice() - costPrice) * sells != 0 || costPrice * sells != 0)
             list.add(new DishNameAndPrice(dish.getName(), (dish.getPrice() - costPrice) * sells, costPrice * sells));
         });
+        list.sort((o1, o2) -> (int) ((o1.getPriceDerivedByIngredients() - o1.getPrice()) - (o2.getPriceDerivedByIngredients() - o2.getPrice())));
         return list;
     }
 }
