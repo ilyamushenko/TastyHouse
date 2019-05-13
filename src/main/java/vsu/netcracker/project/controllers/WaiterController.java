@@ -103,6 +103,7 @@ public class WaiterController {
                     break;
             }
         }
+        
         Map<Integer, List<?>> statusMap = Utils.convertListToMap(listOfOrderStatus, 1);
         return Arrays.asList(mapRestaurantTable, statusMap);
     }
