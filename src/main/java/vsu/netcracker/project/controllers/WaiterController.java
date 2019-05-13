@@ -61,7 +61,7 @@ public class WaiterController {
         RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
         List<Order> listOrders = restaurantTable.getOrdersList();
         listOrders.sort(Comparator.comparing(Order::getId));
-        Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 2);
+        Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 1);
         List<Integer> listPercentOfReady = Utils.getPercentageOfReady(listOrders);
         List<Float> listTotalPriceOfDishes = Utils.getTotalPriceOfDishes(listOrders);
         return Arrays.asList(restaurantTable, mapOrders, listPercentOfReady, listTotalPriceOfDishes);
@@ -117,5 +117,6 @@ public class WaiterController {
         DishesFromOrder dfo = dishesFromOrderService.getById(dishFromOrderId);
         DishStatus deleveredStatus = dishStatusService.findByTitle("Отнесено");
         dfo.setDishStatus(deleveredStatus);
+        dishesFromOrderService.editDishFromOrder(dfo);
     }
 }
