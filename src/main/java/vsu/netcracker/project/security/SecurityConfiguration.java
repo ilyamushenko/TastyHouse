@@ -45,7 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/cart/**", "/cart**", "/menu/**", "/menu**").access("hasAuthority('GUEST')")
                 .and()
                 .formLogin()
-                .successHandler(authenticationSuccessHandler())
                 .permitAll()
                 .and()
                 .logout();
@@ -55,16 +54,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public static NoOpPasswordEncoder passwordEncoder() {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-    }
-
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return (httpServletRequest, httpServletResponse, authentication) -> {
-            System.out.println(authentication.getPrincipal());
-            HttpSession session = httpServletRequest.getSession();
-            session.setAttribute("Staff", authentication.getPrincipal());
-            //httpServletRequest.setAttribute("Staff", authentication.getPrincipal());
-            httpServletResponse.sendRedirect("http://localhost:8081/waiter");
-        };
     }
 }
