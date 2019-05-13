@@ -1,8 +1,11 @@
 package vsu.netcracker.project.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,15 +19,11 @@ import java.util.Map;
  */
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-@RequestMapping("/login")
+@RequestMapping
 public class LoginController {
 
-    @GetMapping
-    public Map<String, Object> getLogin(@RequestParam(value = "error", required = false) String error,
-                                        @RequestParam(value = "logout", required = false) String logout) {
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.put("logout", logout != null);
-        map.put("error", error != null);
-        return map;
+    @GetMapping("/get_user_data")
+    public Object getUserData() {
+        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

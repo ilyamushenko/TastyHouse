@@ -9,7 +9,6 @@ import vsu.netcracker.project.database.models.Order;
 import vsu.netcracker.project.database.models.RestaurantTable;
 import vsu.netcracker.project.database.service.DishStatusService;
 import vsu.netcracker.project.database.service.DishesFromOrderService;
-import vsu.netcracker.project.database.service.OrderService;
 import vsu.netcracker.project.database.service.RestaurantTableService;
 import vsu.netcracker.project.utils.Utils;
 
@@ -64,6 +63,7 @@ public class WaiterController {
         Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 1);
         List<Integer> listPercentOfReady = Utils.getPercentageOfReady(listOrders);
         List<Float> listTotalPriceOfDishes = Utils.getTotalPriceOfDishes(listOrders);
+        //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return Arrays.asList(restaurantTable, mapOrders, listPercentOfReady, listTotalPriceOfDishes);
     }
 
@@ -75,7 +75,6 @@ public class WaiterController {
     @GetMapping
     public List<Object> showTables() {
         List<RestaurantTable> restaurantTables = restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id"));
-        System.out.println(restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id")));
         System.out.println(restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id")));
         Map<Integer, List<?>> mapRestaurantTable;
         mapRestaurantTable = Utils.convertListToMap(restaurantTables, 1);
