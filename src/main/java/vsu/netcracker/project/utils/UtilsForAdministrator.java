@@ -306,9 +306,9 @@ public class UtilsForAdministrator {
             float costPrice = (float) dish.getIngredients().stream().mapToDouble(ingredient ->
                     ingredient.getIngredient().getPrice()*ingredient.getQuantity()).sum();
             if((dish.getPrice() - costPrice) * sells != 0 || costPrice * sells != 0)
-            list.add(new DishNameAndPrice(dish.getName(), (dish.getPrice() - costPrice) * sells, costPrice * sells));
+            list.add(new DishNameAndPrice(dish.getName(), dish.getPrice() * sells, costPrice * sells));
         });
-        list.sort((o1, o2) -> (int) ((o1.getPriceDerivedByIngredients() - o1.getPrice()) - (o2.getPriceDerivedByIngredients() - o2.getPrice())));
+        list.sort((o1, o2) -> (int) ((o1.getPrice() - o1.getPriceDerivedByIngredients()) - (o2.getPrice() - o2.getPriceDerivedByIngredients())));
         return list;
     }
 }
