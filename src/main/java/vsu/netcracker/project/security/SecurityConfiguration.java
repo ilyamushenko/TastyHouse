@@ -39,10 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/kitchen/**", "/kitchen**").access("hasAuthority('COOK')")
-                .antMatchers("/waiter/**", "/waiter**").access("hasAuthority('WAITER')")
+                .antMatchers("/kitchen/**", "/kitchen**").access("hasAnyAuthority('COOK', 'ADMIN')")
+                .antMatchers("/waiter/**", "/waiter**").access("hasAnyAuthority('WAITER', 'ADMIN')")
                 .antMatchers("/admin/**", "/admin**").access("hasAuthority('ADMIN')")
-                .antMatchers("/", "/cart/**", "/cart**", "/menu/**", "/menu**").access("hasAuthority('GUEST')")
+                .antMatchers("/", "/cart/**", "/cart**", "/menu/**", "/menu**").access("hasAnyAuthority('GUEST', 'ADMIN')")
                 .and()
                 .formLogin()
                 .permitAll()
