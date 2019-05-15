@@ -70,6 +70,8 @@ INSERT INTO role_staff (staff_login, title)
 VALUES ('vasya_fedorov', 'WAITER'); /* 1 */
 INSERT INTO role_staff (staff_login, title)
 VALUES ('ivanova', 'COOK');
+INSERT INTO role_staff (staff_login, title)
+VALUES ('admin', 'ADMIN');
 /* 2 */
 
 /* Вставка персонала */
@@ -77,6 +79,8 @@ INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_l
 VALUES ('Федоров', 'Василий', '8-910-249-53-46', 'vasya@tastyhouse.com', 'qwerty', 'vasya_fedorov', 1, true);
 INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_login, enabled)
 VALUES ('Иванова', 'Юлия', '8-950-959-64-75', 'ivanova@tastyhouse.com', 'qwerty', 'ivanova', 2, true);
+INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_login, enabled)
+VALUES ('Кушнеренко', 'Виктор', '8-950-959-64-30', 'vitya@tastyhouse.com', 'qwerty', 'admin', 3, true);
 
 /* Вставка заказов */
 INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id)

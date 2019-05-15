@@ -8,15 +8,22 @@ import org.springframework.stereotype.Controller;
 import java.util.Map;
 
 @Controller
-public class RefreshPagesController {
+public class WebSocketController {
 
     @Autowired
     private SimpMessagingTemplate messageTemplate;
 
     @MessageMapping("/refresh")
     public void greeting(Map whatHappen) throws Exception {
-        System.out.println(whatHappen.get("message"));
-        this.messageTemplate.convertAndSend("topic/messages", "refresh all");
+        String message = (String) whatHappen.get("message");
+        switch (message) {
+            case "bought new dish":
+                this.messageTemplate.convertAndSend("topic/messages", "refresh all");
+                break;
+            case "change dish status on kitchen":
+                this.messageTemplate.convertAndSend("topic/messages/waiter", "refresh");
+                break;
+        }
     }
 
 }
