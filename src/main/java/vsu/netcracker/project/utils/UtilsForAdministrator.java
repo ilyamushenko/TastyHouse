@@ -253,12 +253,20 @@ public class UtilsForAdministrator {
      * @return list of {@link IngredientForTomorrow}, which contains {@link Ingredient} and count
      * of this ingredient for tomorrow
      */
-    public static List<IngredientForTomorrow> getInformationOfIngredientsForTomorrowDay(DishesFromOrderService dishesFromOrderService, OrderService orderService, DishService dishService, IngredientService ingredientService, FoodIngredientsService foodIngredientsService) {
+    public static List<IngredientForTomorrow> getInformationOfIngredientsForTomorrowDay(DishesFromOrderService dishesFromOrderService,
+                                                                                        OrderService orderService,
+                                                                                        DishService dishService,
+                                                                                        IngredientService ingredientService,
+                                                                                        FoodIngredientsService foodIngredientsService) {
         Map<Integer, Long> idAndSells = getDishesIdAndSellsInNextDayOfWeek(dishesFromOrderService, orderService, dishService);
         Map<Ingredient, Double> ingredientLongMap = new HashMap<>();
         List<IngredientForTomorrow> ingredientsForTomorrow = new ArrayList<>();
         long countDays = countDayOfWeeksInNeedMonths();
+///
+        List<Ingredient> allIngredients = ingredientService.findAll();
 
+
+///
         for(Map.Entry<Integer, Long> entry: idAndSells.entrySet()) {
             //ингредиенты в 1 блюдо
             List<FoodIngredients> ingredientsOfDish = foodIngredientsService.findFoodIngredientsByDish(entry.getKey());
@@ -269,6 +277,19 @@ public class UtilsForAdministrator {
                 }
         }
         ingredientLongMap.forEach((key, value) -> ingredientsForTomorrow.add(new IngredientForTomorrow(key, value)));
+        //add ingredients, which are not in list yet, but they are in db. Ingredients, which are not usable in dishes
+        for(Ingredient ingredient: allIngredients) {
+            boolean contains = false;
+            for(IngredientForTomorrow ift: ingredientsForTomorrow) {
+                if(ift.containsIngredient(ingredient)) {
+                    contains = true;
+                    break;
+                }
+            }
+            if (!contains) {
+                ingredientsForTomorrow.add(new IngredientForTomorrow(ingredient, 0));
+            }
+        }
         return ingredientsForTomorrow;
     }
     //за три месяца Map<idБлюда, сколько раз было продано>

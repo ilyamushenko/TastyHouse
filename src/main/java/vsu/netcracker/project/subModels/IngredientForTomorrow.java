@@ -30,4 +30,9 @@ public class IngredientForTomorrow extends Ingredient {
     public void setIngredient(Ingredient ingredient) {
         this.ingredient = ingredient;
     }
+
+    public boolean containsIngredient(Ingredient ingredient) {
+        return this.ingredient == ingredient;
+    }
+
 }
