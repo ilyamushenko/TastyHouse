@@ -21,7 +21,10 @@ public class WebSocketController {
                 this.messageTemplate.convertAndSend("topic/messages", "refresh all");
                 break;
             case "change dish status on kitchen":
-                this.messageTemplate.convertAndSend("topic/messages/waiter", "refresh");
+                this.messageTemplate.convertAndSend("topic/messages/toWaiter", "refresh waiter");
+                break;
+            case "remove ingredients from stock":
+                this.messageTemplate.convertAndSend("topic/messages/toStock", "refresh stock");
                 break;
         }
     }
