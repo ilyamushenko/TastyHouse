@@ -14,6 +14,7 @@ import vsu.netcracker.project.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,6 @@ public class WaiterController {
         Map<Integer, Map<Integer, List<DishesFromOrder>>> mapOrders = Utils.convertListToMapWithMap(listOrders, 1);
         List<Integer> listPercentOfReady = Utils.getPercentageOfReady(listOrders);
         List<Float> listTotalPriceOfDishes = Utils.getTotalPriceOfDishes(listOrders);
-        //Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return Arrays.asList(restaurantTable, mapOrders, listPercentOfReady, listTotalPriceOfDishes);
     }
 
@@ -75,41 +75,9 @@ public class WaiterController {
     @GetMapping
     public List<Object> showTables() {
         List<RestaurantTable> restaurantTables = restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id"));
-        System.out.println(restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id")));
         Map<Integer, List<?>> mapRestaurantTable;
         mapRestaurantTable = Utils.convertListToMap(restaurantTables, 1);
-        List<Object> listOfOrderStatus = new ArrayList<>();
-        for (RestaurantTable restaurantTable : restaurantTables) {
-            switch (restaurantTable.getTableStatus().getTitle()) {
-                case "free":
-                    listOfOrderStatus.add("free");
-                    break;
-                case "busy_need_to_bring":
-                    if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("paid"))) {
-                        listOfOrderStatus.add("busy_need_to_bring_and_paid");
-                    } else if (restaurantTable.getOrdersList().stream().allMatch(s -> s.getOrderStatus().getTitle().equals("not_paid"))) {
-                        listOfOrderStatus.add("busy_need_to_bring_and_not_paid");
-                    }
-                    break;
-                case "busy_need_attention":
-                    if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("paid"))) {
-                        listOfOrderStatus.add("busy_need_attention_and_paid");
-                    } else if (restaurantTable.getOrdersList().stream().allMatch(s -> s.getOrderStatus().getTitle().equals("not_paid"))) {
-                        listOfOrderStatus.add("busy_need_attention_and_not_paid");
-                    }
-                    break;
-                case "busy_no_need_attention":
-                    if (restaurantTable.getOrdersList().stream().anyMatch(s -> s.getOrderStatus().getTitle().equals("paid"))) {
-                        listOfOrderStatus.add("busy_no_need_attention_and_paid");
-                    } else if (restaurantTable.getOrdersList().stream().allMatch(s -> s.getOrderStatus().getTitle().equals("not_paid"))) {
-                        listOfOrderStatus.add("busy_no_need_attention_and_not_paid");
-                    }
-                    break;
-            }
-        }
-        
-        Map<Integer, List<?>> statusMap = Utils.convertListToMap(listOfOrderStatus, 1);
-        return Arrays.asList(mapRestaurantTable, statusMap);
+        return Collections.singletonList(mapRestaurantTable);
     }
 
     @GetMapping("/orders/delivery-dish/{dishFromOrderId}")

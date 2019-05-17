@@ -194,7 +194,7 @@ public class MenuController {
         }
 
         if (tmp || pay == 2) {
-            TableStatus tableStatus = tableStatusService.findByTitle("busy_need_to_bring");
+            TableStatus tableStatus = tableStatusService.findByTitle("busy_need_attention");
             restaurantTable.setTableStatus(tableStatus);
             restaurantTableService.editTable(restaurantTable);
 

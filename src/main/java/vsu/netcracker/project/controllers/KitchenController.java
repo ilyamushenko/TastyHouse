@@ -92,22 +92,20 @@ public class KitchenController {
      */
     private void changeTableStatus(RestaurantTable restaurantTable) {
         TableStatus tableStatus = null;
-        if (!restaurantTable.getTableStatus().getTitle().equals("free")) {
-            if (restaurantTable.getOrdersList().stream().allMatch(
+        if (restaurantTable.getOrdersList().isEmpty()) {
+            tableStatus = tableStatusService.findByTitle("free");
+        } else if (restaurantTable.getOrdersList().stream().allMatch(
                     s -> s.getDishesFromOrder().stream().allMatch(
-                            d -> d.getDishStatus().getTitle().equals("Готово")))) {
-                tableStatus = tableStatusService.findByTitle("busy_no_need_attention");
-            } else if (restaurantTable.getOrdersList().stream().allMatch(
-                    s -> s.getDishesFromOrder().stream().noneMatch(
-                            d -> d.getDishStatus().getTitle().equals("Готово")))) {
-                tableStatus = tableStatusService.findByTitle("busy_need_attention");
-            } else if (restaurantTable.getOrdersList().stream().allMatch(
+                            d -> d.getDishStatus().getTitle().equals("Отнесено")))) {
+            tableStatus = tableStatusService.findByTitle("busy_need_attention");
+        } else if (restaurantTable.getOrdersList().stream().anyMatch(
                     s -> s.getDishesFromOrder().stream().anyMatch(
                             d -> d.getDishStatus().getTitle().equals("Готово")))) {
-                tableStatus = tableStatusService.findByTitle("busy_need_to_bring");
-            }
-        } else {
-            tableStatus = tableStatusService.findByTitle("free");
+            tableStatus = tableStatusService.findByTitle("busy_need_to_bring");
+        } else if (restaurantTable.getOrdersList().stream().anyMatch(
+                s -> s.getDishesFromOrder().stream().anyMatch(
+                        d -> d.getDishStatus().getTitle().equals("Готовится") || d.getDishStatus().getTitle().equals("В ожидании")))) {
+            tableStatus = tableStatusService.findByTitle("busy_no_need_attention");
         }
         restaurantTable.setTableStatus(tableStatus);
         restaurantTableService.editTable(restaurantTable);
@@ -136,10 +134,11 @@ public class KitchenController {
     public void changeDishStatus(@RequestBody Map<String, Object> json) {
         String status = (String) json.get("status");
         Integer id = (Integer) json.get("id");
-        Integer tableNumber = (Integer) json.get("tableNumber");
+        // Integer tableNumber = (Integer) json.get("tableNumber");
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         DishesFromOrder dishesFromOrder = dishesFromOrderService.getById(id);
-        RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
+        // RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
+        RestaurantTable restaurantTable = dishesFromOrder.getOrder().getRestaurantTable();
         if (status.equals("Готовится")) {
             dishesFromOrder.setBeginCookingTime(timestamp);
             Dish dish = dishesFromOrder.getDish();

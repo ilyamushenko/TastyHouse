@@ -47,6 +47,6 @@ public class ImageService {
             e.printStackTrace();
         }
 
-        return "http://localhost:8080/resources/images/" + name + "." + extension;
+        return "http://localhost:8079/resources/images/" + name + "." + extension;
     }
 }
