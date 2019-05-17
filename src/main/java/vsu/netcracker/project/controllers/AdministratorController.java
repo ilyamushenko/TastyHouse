@@ -405,7 +405,7 @@ public class AdministratorController {
         writer.close();
 
         System.out.println( "Ваш PDF файл - Создан!" );
-        return "http://localhost:8080/resources/pdf/" + name;
+        return "http://localhost:8079/resources/pdf/" + name;
     }
 
     @GetMapping("/revenue/get_dishes/{period}")
