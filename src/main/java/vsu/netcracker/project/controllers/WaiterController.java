@@ -7,9 +7,12 @@ import vsu.netcracker.project.database.models.DishStatus;
 import vsu.netcracker.project.database.models.DishesFromOrder;
 import vsu.netcracker.project.database.models.Order;
 import vsu.netcracker.project.database.models.RestaurantTable;
+import vsu.netcracker.project.database.models.TableStatus;
 import vsu.netcracker.project.database.service.DishStatusService;
 import vsu.netcracker.project.database.service.DishesFromOrderService;
+import vsu.netcracker.project.database.service.OrderService;
 import vsu.netcracker.project.database.service.RestaurantTableService;
+import vsu.netcracker.project.database.service.TableStatusService;
 import vsu.netcracker.project.utils.Utils;
 
 import java.util.ArrayList;
@@ -38,16 +41,24 @@ public class WaiterController {
 
     private final DishStatusService dishStatusService;
 
+    private final TableStatusService tableStatusService;
+
+    private final OrderService orderService;
+
     /**
      * injecting services with constructor
      */
     @Autowired
     public WaiterController(RestaurantTableService restaurantTableService,
                             DishesFromOrderService dishesFromOrderService,
-                            DishStatusService dishStatusService) {
+                            DishStatusService dishStatusService,
+                            TableStatusService tableStatusService,
+                            OrderService orderService) {
         this.restaurantTableService = restaurantTableService;
         this.dishesFromOrderService = dishesFromOrderService;
         this.dishStatusService = dishStatusService;
+        this.tableStatusService = tableStatusService;
+        this.orderService = orderService;
     }
 
     /**
@@ -70,8 +81,6 @@ public class WaiterController {
      */
     @GetMapping
     public List<RestaurantTable> showTables() {
-        //        Map<Integer, List<?>> mapRestaurantTable;
-//        mapRestaurantTable = Utils.convertListToMap(restaurantTables, 1);
         return restaurantTableService.findAll(new Sort(Sort.Direction.ASC, "id"));
     }
 
@@ -81,5 +90,21 @@ public class WaiterController {
         DishStatus deliveredStatus = dishStatusService.findByTitle("Отнесено");
         dfo.setDishStatus(deliveredStatus);
         dishesFromOrderService.editDishFromOrder(dfo);
+    }
+
+    @PostMapping("/clear/{tableNumber}")
+    public void clearTableStatus(@PathVariable Integer tableNumber) {
+        RestaurantTable restaurantTable = restaurantTableService.findById(tableNumber);
+        for (Order order : restaurantTable.getOrdersList()) {
+            for (DishesFromOrder dishFromOrder : order.getDishesFromOrder()) {
+                dishesFromOrderService.delete(dishFromOrder.getId());
+            }
+            orderService.delete(order.getId());
+            order.getDishesFromOrder().clear();
+        }
+        restaurantTable.getOrdersList().clear();
+        TableStatus tableStatus = tableStatusService.findByTitle("free");
+        restaurantTable.setTableStatus(tableStatus);
+        restaurantTableService.editTable(restaurantTable);
     }
 }
