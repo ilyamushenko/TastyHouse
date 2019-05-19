@@ -1,6 +1,7 @@
 package vsu.netcracker.project.database.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vsu.netcracker.project.database.dao.RestaurantTableDAO;

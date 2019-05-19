@@ -1,6 +1,7 @@
 package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +27,8 @@ public class RoleStaff implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_staff_id")
     private Integer id;
-    @Column(name = "staff_login", nullable = false, unique = true)
+    @Column(name = "staff_login", nullable = false, unique = true, columnDefinition = "bytea")
+    @ColumnTransformer(forColumn = "staffLogin", read = "pgp_sym_decrypt(staffLogin, 'secretKey')", write = "pgp_sym_encrypt(?, 'secretKey')")
     private String staffLogin;
     @Column(name = "title", nullable = false, unique = true)
     private String title; // зашифровать???

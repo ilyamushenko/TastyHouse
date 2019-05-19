@@ -16,8 +16,6 @@ import java.util.Objects;
  * @author Кушнеренко Виктор
  */
 @Entity
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "dish")
 public class Dish implements Serializable {
 

@@ -3,12 +3,10 @@ package vsu.netcracker.project;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-// ToDo - добавить в приложение логирование (по возможности и желанию) + еще можно тесты для кода
-// ToDo - повозиться с типами блюд в меню (у нас нет супов, но есть морепродукты и т. д.)
 
 /**
  * Class with entry point of our app

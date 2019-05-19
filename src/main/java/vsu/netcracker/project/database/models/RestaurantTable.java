@@ -18,14 +18,10 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-// ToDo - добавить еще необходимых атрибутов
-
 /**
  * @author Кушнеренко Виктор
  */
 @Entity
-@Cacheable
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Table(name = "restaurant_table")
 public class RestaurantTable implements Serializable {
 

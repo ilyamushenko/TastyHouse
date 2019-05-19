@@ -2,6 +2,7 @@ package vsu.netcracker.project.database.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.ColumnTransformer;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,17 +32,23 @@ public class Staff implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staff_id")
     private Integer id;
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name", nullable = false, columnDefinition = "bytea")
+    @ColumnTransformer(forColumn = "lastName", read = "pgp_sym_decrypt(lastName, 'secretKey')", write = "pgp_sym_encrypt(?, 'secretKey')")
     private String lastName; // зашифровать
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false, columnDefinition = "bytea")
+    @ColumnTransformer(forColumn = "firstName", read = "pgp_sym_decrypt(firstName, 'secretKey')", write = "pgp_sym_encrypt(?, 'secretKey')")
     private String firstName; // зашифровать
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone", nullable = false, columnDefinition = "bytea")
+    @ColumnTransformer(forColumn = "phone", read = "pgp_sym_decrypt(phone, 'secretKey')", write = "pgp_sym_encrypt(?, 'secretKey')")
     private String phone; // зашифровать
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, columnDefinition = "bytea")
+    @ColumnTransformer(forColumn = "email", read = "pgp_sym_decrypt(email, 'secretKey')", write = "pgp_sym_encrypt(?, 'secretKey')")
     private String email; // зашифровать
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, columnDefinition = "bytea")
+    @ColumnTransformer(forColumn = "password", read = "pgp_sym_decrypt(password, 'secretKey')", write = "pgp_sym_encrypt(?, 'secretKey')")
     private String password; // зашифровать
-    @Column(name = "login", nullable = false, unique = true)
+    @Column(name = "login", nullable = false, unique = true, columnDefinition = "bytea")
+    @ColumnTransformer(forColumn = "login", read = "pgp_sym_decrypt(login, 'secretKey')", write = "pgp_sym_encrypt(?, 'secretKey')")
     private String login; // зашифровать
     @Column(name = "enabled", nullable = false)
     private Boolean enabled;

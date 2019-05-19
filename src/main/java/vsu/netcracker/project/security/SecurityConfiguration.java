@@ -30,8 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select login,password,enabled from staff where login = ?")
-                .authoritiesByUsernameQuery("select staff_login, title from role_staff where staff_login = ?")
+                .usersByUsernameQuery("select pgp_sym_decrypt(login, 'secretKey'), pgp_sym_decrypt(password, 'secretKey'), enabled from staff where pgp_sym_decrypt(login, 'secretKey') = ?")
+                .authoritiesByUsernameQuery("select pgp_sym_decrypt(staff_login, 'secretKey'), title from role_staff where pgp_sym_decrypt(staff_login, 'secretKey') = ?")
                 .passwordEncoder(passwordEncoder());
     }
 

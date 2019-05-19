@@ -99,8 +99,6 @@ public class MenuController {
         return selectedDish;
     }
 
-    // ToDo - как достать номер столика, с которого заказал посетитель? И если он захочет вдруг пересесть на другой?
-
     /**
      * post request, which add the {@link Dish} to the cart
      *

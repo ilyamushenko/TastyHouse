@@ -1,4 +1,6 @@
-﻿/* Вставка тестовых данных */
+﻿CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+/* Вставка тестовых данных */
 TRUNCATE TABLE type_payment RESTART IDENTITY CASCADE;
 TRUNCATE TABLE order_status RESTART IDENTITY CASCADE;
 TRUNCATE TABLE role_staff RESTART IDENTITY CASCADE;
@@ -67,23 +69,23 @@ VALUES ('not_paid');
 
 /* Вставка роли персонала */
 INSERT INTO role_staff (staff_login, title)
-VALUES ('vasya_fedorov', 'WAITER');
+VALUES (pgp_sym_encrypt('vasya_fedorov', 'secretKey'), 'WAITER');
 INSERT INTO role_staff (staff_login, title)
-VALUES ('ivanova', 'COOK');
+VALUES (pgp_sym_encrypt('ivanova', 'secretKey'), 'COOK');
 INSERT INTO role_staff (staff_login, title)
-VALUES ('admin', 'ADMIN');
+VALUES (pgp_sym_encrypt('admin', 'secretKey'), 'ADMIN');
 INSERT INTO role_staff (staff_login, title)
-VALUES ('guest', 'GUEST');
+VALUES (pgp_sym_encrypt('guest', 'secretKey'), 'GUEST');
 
 /* Вставка персонала */
 INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_login, enabled)
-VALUES ('Федоров', 'Василий', '8-910-249-53-46', 'vasya@tastyhouse.com', 'qwerty', 'vasya_fedorov', 1, true);
+VALUES (pgp_sym_encrypt('Федоров', 'secretKey'), pgp_sym_encrypt('Василий', 'secretKey'), pgp_sym_encrypt('8-910-249-53-46', 'secretKey'), pgp_sym_encrypt('vasya@tastyhouse.com', 'secretKey'), pgp_sym_encrypt('qwerty', 'secretKey'), pgp_sym_encrypt('vasya_fedorov', 'secretKey'), 1, true);
 INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_login, enabled)
-VALUES ('Иванова', 'Юлия', '8-950-959-64-75', 'ivanova@tastyhouse.com', 'qwerty', 'ivanova', 2, true);
+VALUES (pgp_sym_encrypt('Иванова', 'secretKey'), pgp_sym_encrypt('Юлия', 'secretKey'), pgp_sym_encrypt('8-950-959-64-75', 'secretKey'), pgp_sym_encrypt('ivanova@tastyhouse.com', 'secretKey'), pgp_sym_encrypt('qwerty', 'secretKey'), pgp_sym_encrypt('ivanova', 'secretKey'), 2, true);
 INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_login, enabled)
-VALUES ('Кушнеренко', 'Виктор', '8-950-959-64-30', 'vitya@tastyhouse.com', 'qwerty', 'admin', 3, true);
+VALUES (pgp_sym_encrypt('Кушнеренко', 'secretKey'), pgp_sym_encrypt('Виктор', 'secretKey'), pgp_sym_encrypt('8-950-959-64-30', 'secretKey'), pgp_sym_encrypt('vitya@tastyhouse.com', 'secretKey'), pgp_sym_encrypt('qwerty', 'secretKey'), pgp_sym_encrypt('admin', 'secretKey'), 3, true);
 INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_login, enabled)
-VALUES ('Петров', 'Игорь', '8-950-959-64-22', 'guest@tastyhouse.com', 'qwerty', 'guest', 4, true);
+VALUES (pgp_sym_encrypt('Петров', 'secretKey'), pgp_sym_encrypt('Игорь', 'secretKey'), pgp_sym_encrypt('8-950-959-64-22', 'secretKey'), pgp_sym_encrypt('guest@tastyhouse.com', 'secretKey'), pgp_sym_encrypt('qwerty', 'secretKey'), pgp_sym_encrypt('guest', 'secretKey'), 4, true);
 
 /* Вставка заказов */
 INSERT INTO restaurant_order (date_orders, type, order_status_id, type_payment_id, restaurant_table_id)
