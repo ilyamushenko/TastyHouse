@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/kitchen/**", "/kitchen**").hasAnyAuthority("COOK", "ADMIN")
                 .antMatchers("/waiter/**", "/waiter**").hasAnyAuthority("WAITER", "ADMIN")
                 .antMatchers("/admin/**", "/admin**").hasAuthority("ADMIN")
-                .antMatchers(  "/menu/**", "/menu**").hasAnyAuthority("GUEST", "ADMIN").and().anonymous()
+                .antMatchers(  "/menu/**", "/menu**").access("hasRole('ANONYMOUS') or hasAnyAuthority('ADMIN', 'GUEST')")
                 .and()
                 .formLogin()
                 .permitAll()
