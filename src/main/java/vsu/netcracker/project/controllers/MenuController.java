@@ -159,7 +159,7 @@ public class MenuController {
         if (pay == 1) {
             order.setTypePayment(typePaymentService.findByTitle("По карте"));
         } else order.setTypePayment(typePaymentService.findByTitle("Наличными"));
-        order.setOrderStatus(orderStatusService.findByTitle("not_paid"));
+        order.setOrderStatus(orderStatusService.findByTitle("paid"));
         orderService.addOrder(order);
         message = "Оплата наличными. Ожидайте официанта";
 
