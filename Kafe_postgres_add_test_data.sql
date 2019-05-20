@@ -68,6 +68,8 @@ VALUES ('not_paid');
 /* Не оплачено */
 
 /* Вставка роли персонала */
+
+/* Вставка роли персонала */
 INSERT INTO role_staff (staff_login, title)
 VALUES (pgp_sym_encrypt('vasya_fedorov', 'secretKey'), 'WAITER');
 INSERT INTO role_staff (staff_login, title)
@@ -76,7 +78,6 @@ INSERT INTO role_staff (staff_login, title)
 VALUES (pgp_sym_encrypt('admin', 'secretKey'), 'ADMIN');
 INSERT INTO role_staff (staff_login, title)
 VALUES (pgp_sym_encrypt('guest', 'secretKey'), 'GUEST');
-
 /* Вставка персонала */
 INSERT INTO staff (last_name, first_name, phone, email, password, login, staff_login, enabled)
 VALUES (pgp_sym_encrypt('Федоров', 'secretKey'), pgp_sym_encrypt('Василий', 'secretKey'), pgp_sym_encrypt('8-910-249-53-46', 'secretKey'), pgp_sym_encrypt('vasya@tastyhouse.com', 'secretKey'), pgp_sym_encrypt('qwerty', 'secretKey'), pgp_sym_encrypt('vasya_fedorov', 'secretKey'), 1, true);
@@ -328,256 +329,132 @@ INSERT INTO dishes_from_order (real_time, begin_cooking_time, end_cooking_time, 
 VALUES (TIME '01:00:00', null, null, 3, 10, 12);
 
 /* Вставка для таблицы ингредиенты */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Спагетти', 3000, 'Лапша', 'гр', 2); /* 1 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Оливковое масло', 2000, 'Бакалея', 'мл', 4); /* 2 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Чеснок', 300, 'Овощ', 'гр', 1); /* 3 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Ветчина', 4000, 'Мясо', 'гр', 5); /* 4 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Яйцо', 100, 'Молочная продукция', 'шт', 10); /* 5 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Пармезан', 3000, 'Сыр', 'гр', 3); /* 6 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Сливки 10%', 4000, 'Молочная продукция', 'мл', 4); /* 7 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Соль поваренная пищевая', 2000, 'Специи', 'гр', 1); /* 8 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Перец черный', 1000, 'Специи', 'гр', 1); /* 9 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Соевый соус', 500, 'Бакалея', 'мл', 2); /* 10 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Имбирь', 600, 'Специи', 'гр', 2); /* 11 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Мед', 500, 'Сладкое', 'гр', 3); /* 12 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Лосось', 5000, 'Рыба и морепродукты', 'гр', 7); /* 13 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Куриная грудка', 5000, 'Мясо', 'гр', 5); /* 14 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Лук репчатый', 500, 'Овощ', 'гр', 2); /* 15 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Масло сливочное', 2000, 'Молочная продукция', 'гр', 2); /* 16 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Хлеб белый', 2000, 'Хлеб', 'гр', 2); /* 17 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Молоко', 3000, 'Молочная продукция', 'мл', 2); /* 18 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Пшеничная мука', 5000, 'Бакалея', 'гр', 2); /* 19 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Сушеные грибы', 3000, 'Грибы', 'гр', 3); /* 20 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Луковица', 50, 'Овощ', 'шт', 2); /* 21 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Морковь', 5000, 'Овощ', 'гр', 2); /* 22 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Рис', 3000, 'Злаковые', 'гр', 3); /* 23 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Шампиньоны', 1000, 'Грибы', 'гр', 4); /* 24 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Тимьян', 1000, 'Специи', 'гр', 3); /* 25 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Белое сухое вино', 4000, 'Бакалея', 'мл', 5); /* 26 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Подсолнечное масло', 2000, 'Бакалея', 'мл', 2); /* 27 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Красная рыба', 2000, 'Рыба и морепродукты', 'гр', 6); /* 28 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Творог', 3000, 'Молочная продукция', 'гр', 3); /* 29 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Сахар', 2000, 'Специи', 'гр', 2); /* 30 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Желатин', 2000, 'Белок', 'гр', 1); /* 31 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Ванилин', 2500, 'Специи', 'гр', 1); /* 32 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Сахарная пудра', 500, 'Бакалея', 'гр', 1); /* 33 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Овсяное печенье', 1000, 'Бакалея', 'гр', 3); /* 34 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Шоколад', 2000, 'Сладкое', 'гр', 3); /* 35 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Джем', 2000, 'Бакалея', 'гр', 2); /* 36 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Растительное масло', 2000, 'Бакалея', 'мл', 2); /* 37 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Салат Романо', 1500, 'Зелень', 'гр', 3); /* 38 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Помидор Черри', 2000, 'Овощ', 'гр', 4); /* 39 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Авокадо', 2000, 'Фрукт', 'гр', 4); /* 40 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Бекон', 5000, 'Мясо', 'гр', 5); /* 41 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Красный лук', 2000, 'Овощ', 'гр', 2); /* 42 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Горчица', 2000, 'Специи', 'гр', 3); /* 43 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Куриная печень', 5000, 'Мясо', 'гр', 4); /* 44 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Лимон', 100, 'Цитрус', 'шт', 3); /* 45 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Апельсин', 100, 'Цитрус', 'шт', 3); /* 46 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Лук-порей', 1000, 'Овощ', 'гр', 3); /* 47 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Сельдерей', 2000, 'Овощ', 'гр', 4); /* 48 */
-INSERT INTO ingredient (name, quantity_in_stock, type, unit, price)
-VALUES ('Лавровый лист', 2500, 'Специи', 'гр', 1); /* 49 */
 
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (27, 'Подсолнечное масло', 0.15, 2000, 'Бакалея', 'мл');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (11, 'Имбирь', 0.5, 600, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (34, 'Овсяное печенье', 0.1, 1000, 'Бакалея', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (1, 'Спагетти', 0.1, 3000, 'Лапша', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (3, 'Чеснок', 0.03, 300, 'Овощ', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (5, 'Яйцо', 6, 100, 'Молочная продукция', 'шт');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (26, 'Белое сухое вино', 0.7, 4000, 'Бакалея', 'мл');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (14, 'Куриная грудка', 0.2, 5000, 'Мясо', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (7, 'Сливки 10%', 0.175, 4000, 'Молочная продукция', 'мл');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (45, 'Лимон', 0.07, 100, 'Цитрус', 'шт');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (36, 'Джем', 1, 2000, 'Бакалея', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (28, 'Красная рыба', 1.5, 2000, 'Рыба и морепродукты', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (2, 'Оливковое масло', 0.4, 2000, 'Бакалея', 'мл');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (17, 'Хлеб белый', 0.1, 2000, 'Хлеб', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (20, 'Сушеные грибы', 0.2, 3000, 'Грибы', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (43, 'Горчица', 0.1, 2000, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (46, 'Апельсин', 0.05, 100, 'Цитрус', 'шт');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (30, 'Сахар', 0.05, 2000, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (12, 'Мед', 1.5, 500, 'Сладкое', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (25, 'Тимьян', 0.8, 1000, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (31, 'Желатин', 0.2, 2000, 'Белок', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (41, 'Бекон', 1.5, 5000, 'Мясо', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (44, 'Куриная печень', 0.15, 5000, 'Мясо', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (6, 'Пармезан', 1.5, 3000, 'Сыр', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (35, 'Шоколад', 0.5, 2000, 'Сладкое', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (19, 'Пшеничная мука', 0.05, 5000, 'Бакалея', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (49, 'Лавровый лист', 0.7, 2500, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (39, 'Помидор Черри', 0.2, 2000, 'Овощ', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (4, 'Ветчина', 0.6, 4000, 'Мясо', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (9, 'Перец черный', 0.01, 1000, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (42, 'Красный лук', 0.03, 2000, 'Овощ', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (8, 'Соль поваренная пищевая', 0.008, 2000, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (38, 'Салат Романо', 1.2, 1500, 'Зелень', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (18, 'Молоко', 0.06, 3000, 'Молочная продукция', 'мл');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (37, 'Растительное масло', 0.3, 2000, 'Бакалея', 'мл');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (48, 'Сельдерей', 0.3, 2000, 'Овощ', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (16, 'Масло сливочное', 0.5, 2000, 'Молочная продукция', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (47, 'Лук-порей', 0.25, 1000, 'Овощ', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (32, 'Ванилин', 0.3, 2500, 'Специи', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (23, 'Рис', 0.08, 3000, 'Злаковые', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (10, 'Соевый соус', 0.4, 500, 'Бакалея', 'мл');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (24, 'Шампиньоны', 0.21, 1000, 'Грибы', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (21, 'Луковица', 0.03, 50, 'Овощ', 'шт');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (33, 'Сахарная пудра', 0.4, 500, 'Бакалея', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (40, 'Авокадо', 0.5, 2000, 'Фрукт', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (29, 'Творог', 0.8, 3000, 'Молочная продукция', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (22, 'Морковь', 0.04, 5000, 'Овощ', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (15, 'Лук репчатый', 0.03, 500, 'Овощ', 'гр');
+INSERT INTO public.ingredient (ingredient_id, name, price, quantity_in_stock, type, unit) VALUES (13, 'Лосось', 1.5, 5000, 'Рыба и морепродукты', 'гр');
 /* Вставка для таблицы связи блюдо-ингредиент */
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 1, 1);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (12, 1, 2);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (2, 1, 3);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (80, 1, 4);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (1, 1, 5);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (25, 1, 6);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 1, 7);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (10, 1, 8);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (2, 1, 9);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 2, 10);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (10, 2, 11);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 2, 12);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (300, 2, 13);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (400, 3, 14);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 3, 15);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (1, 3, 5);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 3, 16);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 3, 17);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 3, 18);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 3, 8);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 3, 19);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (30, 4, 20);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (2, 4, 21);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 4, 22);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 4, 20);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 4, 25);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 4, 26);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (30, 4, 16);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 4, 7);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 4, 2);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 4, 27);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 5, 27);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (150, 5, 28);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (200, 6, 29);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (1, 6, 5);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 6, 30);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 6, 19);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 6, 8);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (400, 7, 29);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (200, 7, 16);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 7, 31);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 7, 32);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 7, 33);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 7, 34);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (200, 7, 35);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 7, 36);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (1, 8, 5);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 8, 19);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 8, 36);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 8, 30);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 8, 8);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 8, 37);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (150, 8, 35);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 9, 38);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (150, 9, 39);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (75, 9, 40);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 9, 41);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 9, 42);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 9, 43);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (300, 10, 44);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (1, 10, 45);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 10, 43);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (1, 10, 46);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (1, 11, 21);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (30, 11, 16);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 11, 24);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (100, 11, 19);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (2, 12, 22);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 12, 15);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (15, 12, 47);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 12, 48);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 12, 8);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 12, 9);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (50, 12, 49);
-INSERT INTO food_ingredients (quantity, dish_id, ingredient_id)
-VALUES (20, 12, 25);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (1, 100, 1, 1);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (2, 12, 1, 2);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (3, 2, 1, 3);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (4, 80, 1, 4);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (5, 1, 1, 5);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (6, 25, 1, 6);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (7, 20, 1, 7);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (8, 10, 1, 8);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (9, 2, 1, 9);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (10, 50, 2, 10);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (11, 10, 2, 11);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (12, 15, 2, 12);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (14, 400, 3, 14);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (15, 50, 3, 15);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (16, 1, 3, 5);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (17, 50, 3, 16);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (18, 50, 3, 17);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (19, 100, 3, 18);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (20, 20, 3, 8);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (21, 100, 3, 19);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (22, 30, 4, 20);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (23, 2, 4, 21);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (24, 100, 4, 22);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (25, 100, 4, 20);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (26, 50, 4, 25);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (27, 100, 4, 26);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (28, 30, 4, 16);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (29, 100, 4, 7);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (30, 50, 4, 2);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (31, 50, 4, 27);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (32, 50, 5, 27);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (33, 150, 5, 28);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (34, 200, 6, 29);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (35, 1, 6, 5);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (36, 15, 6, 30);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (37, 15, 6, 19);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (38, 15, 6, 8);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (47, 1, 8, 5);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (54, 100, 9, 38);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (55, 150, 9, 39);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (56, 75, 9, 40);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (57, 100, 9, 41);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (58, 50, 9, 42);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (59, 100, 9, 43);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (60, 300, 10, 44);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (61, 1, 10, 45);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (62, 15, 10, 43);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (63, 1, 10, 46);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (64, 1, 11, 21);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (65, 30, 11, 16);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (66, 50, 11, 24);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (67, 100, 11, 19);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (68, 2, 12, 22);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (69, 20, 12, 15);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (70, 15, 12, 47);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (71, 20, 12, 48);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (72, 20, 12, 8);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (73, 20, 12, 9);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (74, 50, 12, 49);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (75, 20, 12, 25);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (13, 450, 2, 13);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (40, 30, 7, 16);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (46, 8, 7, 36);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (44, 8, 7, 34);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (41, 8, 7, 31);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (39, 70, 7, 29);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (45, 30, 7, 35);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (43, 3, 7, 33);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (42, 3, 7, 32);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (52, 5, 8, 37);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (51, 5, 8, 8);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (53, 50, 8, 35);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (49, 30, 8, 36);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (48, 30, 8, 19);
+INSERT INTO public.food_ingredients (food_ingredients_id, quantity, dish_id, ingredient_id) VALUES (50, 7, 8, 30);
 
 
 
